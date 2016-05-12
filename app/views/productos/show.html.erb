@@ -66,27 +66,7 @@
         </div>
       </div>
 
-      <div class="row">
-        <h4 class="m_11"><b>Productos que te podrían interesar</b></h4>
-        <% @related_productos.each do |producto| %>
-          <div class="col-md-4 product1">
-            <a href="<%= producto.id %>">
-              <img src="<%= producto.foto_url %>" class="img-responsive" alt=""/>
-            </a>
-            <div class="shop_desc">
-            <h3><a href="<%= producto.id %>"><%= producto.nombre %></a></h3>
-              <p><%= producto.descripcion[0..35] %> ...</p>
-              <span class="reducedfrom">$<%= producto.precio * 1.2 %></span>
-              <span class="actual">$<%= producto.precio %></span><br>
-              <ul class="buttons">
-                <li class="cart"><%= link_to "Agregar", add_to_cart_path(:product_id => producto.id), :method => :post %></li>
-                <li class="shop_btn"><a href="<%= producto.id %>">Más <%= ENV['config.add.to.cart'] %></a></li>
-                <div class="clear"> </div>
-              </ul>
-            </div>
-          </div>
-        <% end %>
-      </div>
+      <%= render 'otros_productos' %>
     </div>
   </div>
 </div>

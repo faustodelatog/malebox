@@ -66,16 +66,12 @@ class CartController < ApplicationController
     end
 
     if validate email, nombre, telefono, nombre_entrega
-      pedido_id = save_pedido(cart.items, nombre, email, telefono, direccion, nombre_entrega, mensaje)
-      session[:pedido_id] = pedido_id
+      pedido = create_pedido(cart.items, nombre, email, telefono, direccion, nombre_entrega, mensaje)
+      session[:pedido] = pedido.to_json
 
-      PedidosMailer.checkout_email(nombre, email, telefono, direccion, cart).deliver_now
-      flash.now[:alert] = "Mail enviado, nos pondremos en contacto pronto"
-
-      session[:cart_id] = nil
       redirect_to controller: 'checkout', action: 'index'
     else
-      flash.now[:alert] = "Por favor ingrese su email, nombre y telefono"
+      flash[:alert] = "Por favor ingrese su email, nombre y telefono"
       redirect_to controller: 'cart', action: 'index', error: true
     end
 
@@ -92,7 +88,7 @@ class CartController < ApplicationController
     (email =~ /\A[\w+\-.]+@[a-z\d\-]+(\.[a-z]+)*\.[a-z]+\z/i)
   end
 
-  def save_pedido items, nombre, email, telefono, direccion, nombre_entrega, mensaje
+  def create_pedido items, nombre, email, telefono, direccion, nombre_entrega, mensaje
     pedido = Pedido.new
     pedido.fecha = Date.today
     pedido.items = items.to_json
@@ -105,10 +101,6 @@ class CartController < ApplicationController
     pedido.nombre_entrega = nombre_entrega
     #pedido.mensaje = mensaje
 
-    pedido.estado = 'Pendiente'
-
-    pedido.save
-
-    pedido.id
+    pedido
   end
 end

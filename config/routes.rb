@@ -6,6 +6,8 @@ Rails.application.routes.draw do
   get 'pedidos/:id' => 'pedidos_usuario#show', :as => 'pedido_usuario'
 
   get 'checkout' => 'checkout#index'
+  get 'checkout/confirmacion'
+  post 'checkout' => 'checkout#purchase'
 
   scope "/admin" do
     resources :pedidos

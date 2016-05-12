@@ -1,25 +1,16 @@
 <div class="main">
   <div class="shop_top">
     <div class="container">
-      <div class="pedido" style="color: #d58512; border-style: inset; padding: 15px; text-align: center">
-        <h3>Enseguida nos comunicaremos contigo para proceder con el pago y entrega de tu pedido</h3>
-      </div>
       <div class="pedido">
-        <h3>Detalle del Pedido</h3>
+        <h3>Este es tu Pedido</h3>
         <div style="width: 70%; float: left">
           <p style="font-size: smaller">
-            EC-MBG-00<%= @pedido.id %><br />
-            Realizado el <b><%= @pedido.fecha %></b><br />
             Realizado por: <b><%= @pedido.nombre %></b><br />
             Teléfono: <b><%= @pedido.telefono %></b><br />
             <br />
             Dirección Entrega: <b><%= @pedido.direccion_entrega %></b><br />
             Entregar a: <b><%= @pedido.nombre_entrega %></b><br />
           </p>
-        </div>
-        <div class="columna" style=" width: 15%;">
-          <b>ESTADO</b><br />
-          <div class="<%= @pedido.estado.downcase %>_label"><%= @pedido.estado.capitalize %></div>
         </div>
         <div class="cabecera" style="margin: 20px 0;background-color: transparent; border: 1px #EEEEEE solid">
 
@@ -72,8 +63,14 @@
           </div>
         </div>
 
-
       </div>
+      <%= form_tag("/checkout", method: "post") do %>
+        <div class="form-submit">
+          <a href="" onclick="window.history.back();" style="margin-right:20px">Regresar</a>
+          <script>submited=false</script>
+          <input name="submit" type="submit" id="submit" value="Confirmar" onclick="if(submited)return false; {this.value='Confirmando pedido...'; submited=true};"><br>
+        </div>
+      <% end %>
     </div>
   </div>
 </div>
