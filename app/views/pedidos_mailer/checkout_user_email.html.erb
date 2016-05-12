@@ -32,9 +32,11 @@
     </style>
   </head>
   <body>
-  <h1>Tenemos un nuevo pedido (QUE BIEN!!!) </h1>
-  <a href="http://regalosmalebox.com/admin/pedidos/<%= @pedido.id %>"><h2>VER PEDIDO</h2></a>
+  <h1>Hola <%= @pedido.nombre %></h1>
+  <h2>Tu pedido fue realizado con éxito, en un instante nos comunicaremos contigo</h2>
+  <h2>Puedes ver todos tus pedidos <a href="http://regalosmalebox.com/pedidos">aquí</a></h2>
   <h2>Detalle del Pedido</h2>
+  <h2><a href="http://regalosmalebox.com/pedidos/<%= @pedido.id %>">VER PEDIDO</a></h2>
   <div style="width: 70%; float: left; margin-bottom: 20px">
     <p style="font-size: smaller">
       EC-MBG-00<%= @pedido.id %><br />

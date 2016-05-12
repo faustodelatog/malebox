@@ -1,16 +1,14 @@
 class PedidosMailer < ActionMailer::Base
 
-  # def checkout_email (nombre, email, telefono, direccion, pedido)
-  #   @nombre = nombre
-  #   @email = email
-  #   @telefono = telefono
-  #   @direccion = direccion
-  #   @cart = pedido
-  #   info_mail = 'info@maleboxgifts.com'
-  #   mail(subject: "[PEDIDO] #{nombre} - #{telefono} (Que BIEN!!!)", from: info_mail, to: info_mail, reply_to: email)
-  # end
-
   def checkout_email pedido_id
+    @pedido = Pedido.find pedido_id
+    info_mail = 'info@maleboxgifts.com'
+    mail(subject: "[PEDIDO] #{@pedido.nombre} - #{@pedido.telefono} (Que BIEN!!!)", from: info_mail, to: info_mail, reply_to: @pedido.email)
+  end
 
+  def checkout_user_email pedido_id
+    @pedido = Pedido.find pedido_id
+    info_mail = 'info@maleboxgifts.com'
+    mail(subject: "¡¡ Ordenaste una MaleBox !!", from: info_mail, to: @pedido.email, reply_to: 'noreply@regalosmalebox.com')
   end
 end

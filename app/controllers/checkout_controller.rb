@@ -11,7 +11,8 @@ class CheckoutController < ApplicationController
     session[:cart_id] = nil
     session[:pedido] = nil
 
-    PedidosMailer.checkout_email(pedido_id).deliver_now
+    PedidosMailer.checkout_email(pedido_id).deliver_later
+    PedidosMailer.checkout_user_email(pedido_id).deliver_later
 
     redirect_to controller: 'checkout', action: 'confirmacion'
   end
