@@ -1,7 +1,7 @@
 <div class="main">
   <div class="shop_top">
     <div class="container">
-      <h3>CREAR CUENTA</h3><br />
+      <h3>REGISTRO</h3><br />
       <%= form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f| %>
         <%= devise_error_messages! %>
         <div class="col-md-6">
@@ -46,7 +46,7 @@
                 <div class="remember">
                   <%= recaptcha_tags %>
                   <div class="clear"></div><br />
-                  <%= f.submit "Crear Cuenta"  %>
+                  <%= f.submit "Registrar"  %>
 
                 </div>
               </fieldset>
