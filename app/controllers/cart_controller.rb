@@ -99,7 +99,7 @@ class CartController < ApplicationController
 
     pedido.direccion_entrega = direccion
     pedido.nombre_entrega = nombre_entrega
-    #pedido.mensaje = mensaje
+    pedido.mensaje = mensaje
 
     pedido
   end
