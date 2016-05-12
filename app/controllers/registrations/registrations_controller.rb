@@ -1,14 +1,24 @@
 class Registrations::RegistrationsController < Devise::RegistrationsController
+
+  before_filter :configure_permitted_parameters
+
   def create
+    p 'que pasas'
     if verify_recaptcha
       super
     else
       build_resource(sign_up_params)
       clean_up_passwords(resource)
-      flash.now[:alert] = "There was an error with the recaptcha code below. Please re-enter the code."      
+      flash.now[:alert] = "There was an error with the recaptcha code below. Please re-enter the code."
       flash.delete :recaptcha_error
       render :new
     end
+  end
+
+  protected
+
+  def configure_permitted_parameters
+    devise_parameter_sanitizer.for(:sign_up).push(:nombre, :apellido, :fecha_nacimiento)
   end
 
 # before_filter :configure_sign_up_params, only: [:create]
