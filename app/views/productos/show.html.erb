@@ -21,12 +21,14 @@
           <div class="single_right">
             <h3><%= @producto.nombre %> </h3>
             <p class="m_10"><%= @producto.descripcion.html_safe %></p>
-            <p class="m_10">
-            <h3>Forma de Pago<h3> <br/>
-            Aceptamos tarjetas de crédito y transferencias bancarias.
-            <h3>Entrega a Domicilio</h3><br />
-            Costo adicional de $2 por entrega. Aplican restricciones.
-            </p>
+            <div class="social_buttons">
+              <h4>Forma de pago</h4>
+              <p>Aceptamos tarjetas de crédito y transferencias bancarias.</p>
+              <br />
+              <h4>Entrega a Domicilio</h4>
+              <p>Costo adicional de $2 por entrega. Aplican restricciones.</p>
+              <br />
+            </div>
             <div class="social_buttons">
               <h4>Disponible en stock</h4>
             </div>
