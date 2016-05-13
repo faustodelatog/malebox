@@ -18,7 +18,7 @@
                 </span>
               <div class="shop_desc">
                 <h3><a href="productos/<%= producto.id %>"><%= producto.nombre %></a></h3>
-                <p><%= producto.descripcion[0..35] %> ...</p>
+                <p><%= producto.descripcion[0..35].html_safe %> ...</p>
                 <span class="reducedfrom">$<%= producto.precio*1.2 %></span>
                 <span class="actual">$<%= producto.precio %></span><br>
                 <ul class="buttons">
