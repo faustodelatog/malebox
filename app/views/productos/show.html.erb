@@ -20,7 +20,7 @@
           <!-- end product_slider -->
           <div class="single_right">
             <h3><%= @producto.nombre %> </h3>
-            <p class="m_10"><%= @producto.descripcion %></p>
+            <p class="m_10"><%= @producto.descripcion.html_safe %></p>
             <div class="social_buttons">
               <h4>Disponible en stock</h4>
             </div>
