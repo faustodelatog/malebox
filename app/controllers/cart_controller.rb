@@ -105,6 +105,7 @@ class CartController < ApplicationController
     pedido.nombre_entrega = nombre_entrega
     pedido.mensaje = mensaje
     pedido.fecha_entrega = fecha_entrega
+    pedido.costo_entrega = 2.98
 
     pedido
   end
