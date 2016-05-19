@@ -2,9 +2,10 @@
 
 <h1>Listing Productos</h1>
 
-<table>
+<table class="table table-bordered table-striped">
   <thead>
     <tr>
+      <th>Orden</th>
       <th>Nombre</th>
       <th>Descripcion</th>
       <th>Foto url</th>
@@ -16,9 +17,10 @@
   <tbody>
     <% @productos.each do |producto| %>
       <tr>
+        <td><%= producto.orden %></td>
         <td><%= producto.nombre %></td>
-        <td><%= producto.descripcion %></td>
-        <td><%= producto.foto_url %></td>
+        <td><%= producto.descripcion.html_safe %></td>
+        <td><img src="<%= producto.foto_url %>" width="100" /></td>
         <td><%= producto.precio %></td>
         <td><%= link_to 'Show', admin_producto_path(producto) %></td>
         <td><%= link_to 'Edit', edit_admin_producto_path(producto) %></td>

@@ -4,7 +4,7 @@ class Admin::ProductosController < Admin::BaseController
   # GET /admin/productos
   # GET /admin/productos.json
   def index
-    @productos = Producto.all
+    @productos = Producto.all.sort_by { |p| p.orden }
   end
 
   # GET /admin/productos/1
@@ -69,6 +69,6 @@ class Admin::ProductosController < Admin::BaseController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def producto_params
-      params.require(:producto).permit(:nombre, :descripcion, :foto_url, :precio)
+      params.require(:producto).permit(:nombre, :descripcion, :foto_url, :precio, :orden)
     end
 end

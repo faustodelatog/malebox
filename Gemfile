@@ -38,7 +38,6 @@ gem 'activerecord-session_store', github: 'rails/activerecord-session_store'
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
   gem 'byebug'
-   gem "sqlite3"
 end
 
 group :development do
@@ -48,7 +47,7 @@ group :development do
   # Spring speeds up development by keeping your application running in the background. Read more: https://github.com/rails/spring
   gem 'spring'
 
-group :production do
+group :production, :development do
   gem "pg"
 end
 

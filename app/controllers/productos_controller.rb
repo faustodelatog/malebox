@@ -17,7 +17,7 @@ class ProductosController < ApplicationController
         @productos = Producto.all
       end
     end
-
+    @productos = @productos.sort_by { |p| p.orden }
   end
 
   # GET /productos/1
