@@ -30,7 +30,8 @@
               <textarea name="mensaje" value="Mensaje:" onfocus="this.value = '';" onblur="if (this.value == '') {this.value = 'Message';}">Message:</textarea>
               <%= recaptcha_tags %>
               <div class="form-submit">
-                <input name="submit" type="submit" id="submit" value="Submit"><br>
+                <script>submited=false</script>
+                <input name="submit" type="submit" id="submit" value="Enviar" onclick="if(submited)return false; {this.value='Enviando Correo...'; submited=true};"><br>
               </div>
             </div>
             <div class="clear"></div>
