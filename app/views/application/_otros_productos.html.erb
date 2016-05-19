@@ -7,8 +7,9 @@
         </a>
         <div class="shop_desc">
           <h3><a href="/productos/<%= producto.id %>"><%= producto.nombre %></a></h3>
-          <p><%= producto.descripcion[0..35] %> ...</p>
-          <span class="reducedfrom">$<%= producto.precio * 1.2 %></span>
+          <p><%= producto.descripcion[0..35].html_safe %> ...</p>
+          <br />
+          <span class="reducedfrom">$<%= (producto.precio * 1.15).round %></span>
           <span class="actual">$<%= producto.precio %></span><br>
           <ul class="buttons">
             <li class="cart"><%= link_to "Agregar", add_to_cart_path(:product_id => producto.id), :method => :post %></li>

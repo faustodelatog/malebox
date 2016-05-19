@@ -45,7 +45,6 @@ class CartController < ApplicationController
     cart = session[:cart_id]
     if cart
       @cart = Cart.new(cart)
-      @error = params['error']
     end
   end
 
@@ -59,32 +58,26 @@ class CartController < ApplicationController
     mensaje = params['mensaje']
     fecha_entrega = params['fecha_entrega']
 
-    if direccion.eql?("Dirección [opcional]")
-      direccion = ''
-    end
-    if mensaje.eql?("Mensaje [opcional]")
-      mensaje = ''
-    end
-    if fecha_entrega.eql?("Fecha Entrega]")
-      fecha_entrega = nil
-    end
 
-    if validate email, nombre, telefono, nombre_entrega
+    if validate email, nombre, telefono, nombre_entrega, direccion, mensaje, fecha_entrega
       pedido = create_pedido(cart.items, nombre, email, telefono, direccion, nombre_entrega, mensaje, fecha_entrega)
       session[:pedido] = pedido.to_json
 
       redirect_to controller: 'checkout', action: 'index'
     else
-      flash[:alert] = "Por favor ingrese su email, nombre y telefono"
-      redirect_to controller: 'cart', action: 'index', error: true
+      flash[:alert] = "Por favor ingrese toda la información requerida"
+      redirect_to controller: 'cart', action: 'index'
     end
 
   end
 
-  def validate(email, nombre, telefono, nombre_entrega)
+  def validate(email, nombre, telefono, nombre_entrega, direccion, mensaje, fecha_entrega)
     !((!is_a_valid_email?(email)) ||
         (nombre.strip.empty? || nombre.eql?('Nombre')) ||
         (nombre_entrega.strip.empty? || nombre_entrega.eql?('Entregar a')) ||
+        (direccion.strip.empty? || direccion.eql?('Dirección de entrega')) ||
+        (mensaje.strip.empty? || mensaje.eql?('Mensaje de tarjeta')) ||
+        (fecha_entrega.strip.empty?) ||
         (telefono.strip.empty? || telefono.eql?('Teléfono')))
   end
 

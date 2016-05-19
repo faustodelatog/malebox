@@ -2,11 +2,6 @@
   <div class="shop_top" style="padding: 1% 0">
       <div class="container">
         <% if @cart %>
-          <% if @error %>
-            <div style="float: left; color: red; width: 100%; margin-bottom: 15px; text-align: right; font-size: smaller">
-              Por favor ingrese su email, nombre, teléfono y nombre de entrega
-            </div>
-          <% end %>
           <div style="float: left; max-width: 700px">
             <div class="row" style="margin-bottom: 20px; height: 20px; color: gray; font-weight: bold; font-size: smaller">
               <div style="float: left; width: 15%; margin: 0 5% 0 20%">
@@ -102,8 +97,8 @@
                     <input type="text" name="nombre_entrega" class="text" value="Entregar a" onfocus="this.value = '';" onblur="if (this.value == '') {this.value = 'Entregar a';}">
                   </div>
                 <div class="text" style="width: 95%">
-                    <textarea name="direccion" value="Dirección [opcional]" onfocus="if(this.value == 'Dirección [opcional]')this.value = '';" onblur="if (this.value == '') {this.value = 'Dirección [opcional]';}">Dirección [opcional]</textarea>
-                    <textarea name="mensaje" value="Mensaje [opcional]" onfocus="if(this.value == 'Mensaje [opcional]')this.value = '';" onblur="if (this.value == '') {this.value = 'Mensaje [opcional]';}">Mensaje [opcional]</textarea>
+                    <textarea name="direccion" value="Dirección de entrega" onfocus="if(this.value == 'Dirección de entrega')this.value = '';" onblur="if (this.value == '') {this.value = 'Dirección de entrega';}">Dirección de entrega</textarea>
+                    <textarea name="mensaje" value="Mensaje de tarjeta" onfocus="if(this.value == 'Mensaje de tarjeta')this.value = '';" onblur="if (this.value == '') {this.value = 'Mensaje de tarjeta';}">Mensaje de tarjeta</textarea>
                   </div>
                   <div class="form-submit">
                     <script>submited=false</script>
