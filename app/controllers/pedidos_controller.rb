@@ -4,7 +4,14 @@ class PedidosController < AdminController
   # GET /pedidos
   # GET /pedidos.json
   def index
-    @pedidos = Pedido.all
+    @filtro_estado = "#{params['estado']}"
+    if !@filtro_estado.empty?
+      @pedidos = Pedido.where("estado ilike ? ", "%#{@filtro_estado}%")
+    else
+      @pedidos = Pedido.all
+    end
+    @estados = Pedido.select('distinct lower(estado) estado').map(&:estado)
+    @pedidos = @pedidos.sort_by { |p| Date.today - p.fecha }
   end
 
   # GET /pedidos/1

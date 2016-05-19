@@ -1,8 +1,23 @@
 <p id="notice"><%= notice %></p>
 
-<h1>Listing Pedidos</h1>
-
-<table>
+<h1>Listado de Pedidos</h1>
+<div id="filtros">
+  <% @estados.each do |estado| %>
+    <div style="float: left">
+      <%= link_to estado.upcase, "#{pedidos_path}?estado=#{estado}", :class => "btn #{estado.downcase}", :style => "margin: 0 15px 15px 15px" %>
+    </div>
+  <% end %>
+  <div style="float: left">
+    <%= link_to "TODOS", "#{pedidos_path}", :class => "btn btn-default", :style => "margin: 0 15px 15px 15px" %>
+  </div>
+  <br /><br /><br />
+  <% if @filtro_estado.empty? %>
+      <h3>Mostrando todos los  pedidos</h3>
+  <% else %>
+    <h3>Filtrando los pedidos por estado <b class="<%= @filtro_estado.downcase %>_label"><%= @filtro_estado.upcase %></b></h3>
+  <% end %>
+</div>
+<table class="table table-bordered table-striped">
   <thead>
     <tr>
       <th>Fecha</th>
@@ -14,8 +29,8 @@
       <th>Nombre entrega</th>
       <th>Direccion entrega</th>
       <th>Fecha entrega</th>
-      <th>Items</th>
       <th>Estado</th>
+      <th>Items</th>
       <th colspan="3"></th>
     </tr>
   </thead>
@@ -32,16 +47,20 @@
         <td><%= pedido.nombre_entrega %></td>
         <td><%= pedido.direccion_entrega %></td>
         <td><%= pedido.fecha_entrega %></td>
-        <td><%= pedido.items %></td>
-        <td><%= pedido.estado %></td>
-        <td><%= link_to 'Show', pedido %></td>
-        <td><%= link_to 'Edit', edit_pedido_path(pedido) %></td>
-        <td><%= link_to 'Destroy', pedido, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        <td><span class="<%= pedido.estado.downcase %>_label"><%= pedido.estado %></span></td>
+        <td>
+          <% pedido.items_json.each do |item| %>
+          <div>
+            <img src="<%= item.producto.foto_url %>" width="100" /> <%= item.cantidad %> - <%= item.producto.nombre %>
+          </div>
+          <% end %>
+        </td>
+        <td><%= link_to 'Show', pedido, :class => 'btn btn-info' %></td>
+        <td><%= link_to 'Edit', edit_pedido_path(pedido), :class => 'btn btn-info' %></td>
+        <td><%= link_to 'Destroy', pedido, method: :delete, data: { confirm: 'Are you sure?' }, :class => 'btn btn-danger' %></td>
       </tr>
     <% end %>
   </tbody>
 </table>
-
-<br>
-
-<%= link_to 'New Pedido', new_pedido_path %>
+<br />
+<!--<%= link_to 'New Pedido', new_pedido_path, :class => 'btn btn-primary' %>-->
