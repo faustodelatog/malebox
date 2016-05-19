@@ -12,26 +12,26 @@
   <% end %>
 
   <div class="field">
-    <%= f.label :nombre %><br>
-    <%= f.text_field :nombre %>
+    <%= f.label :nombre, :class => 'form-control-label' %><br>
+    <%= f.text_field :nombre, :class => 'form-control' %>
   </div>
   <div class="field">
-    <%= f.label :descripcion %><br>
-    <%= f.text_area :descripcion %>
+    <%= f.label :descripcion, :class => 'form-control-label' %><br>
+    <%= f.text_area :descripcion, :class => 'form-control', :rows => '10' %>
   </div>
   <div class="field">
-    <%= f.label :foto_url %><br>
-    <%= f.text_field :foto_url %>
+    <%= f.label :foto_url, :class => 'form-control-label' %><br>
+    <%= f.text_field :foto_url, :class => 'form-control' %>
   </div>
   <div class="field">
-    <%= f.label :precio %><br>
-    <%= f.text_field :precio %>
+    <%= f.label :precio, :class => 'form-control-label' %><br>
+    <%= f.text_field :precio, :class => 'form-control', :type => 'number', :step => 'any' %>
   </div>
   <div class="field">
-    <%= f.label :orden %><br>
-    <%= f.text_field :orden %>
+    <%= f.label :orden, :class => 'form-control-label' %><br>
+    <%= f.text_field :orden, :class => 'form-control', :type => 'number' %>
   </div>
   <div class="actions">
-    <%= f.submit %>
+    <%= f.submit :class => 'btn btn-primary' %>
   </div>
 <% end %>
