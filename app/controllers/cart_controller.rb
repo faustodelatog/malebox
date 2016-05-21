@@ -57,10 +57,10 @@ class CartController < ApplicationController
     nombre_entrega = params['nombre_entrega']
     mensaje = params['mensaje']
     fecha_entrega = params['fecha_entrega']
-
+    forma_pago = params['forma_pago']
 
     if validate email, nombre, telefono, nombre_entrega, direccion, mensaje, fecha_entrega
-      pedido = create_pedido(cart.items, nombre, email, telefono, direccion, nombre_entrega, mensaje, fecha_entrega)
+      pedido = create_pedido(cart.items, nombre, email, telefono, direccion, nombre_entrega, mensaje, fecha_entrega, forma_pago)
       session[:pedido] = pedido.to_json
 
       redirect_to controller: 'checkout', action: 'index'
@@ -85,7 +85,7 @@ class CartController < ApplicationController
     (email =~ /\A[\w+\-.]+@[a-z\d\-]+(\.[a-z]+)*\.[a-z]+\z/i)
   end
 
-  def create_pedido items, nombre, email, telefono, direccion, nombre_entrega, mensaje, fecha_entrega
+  def create_pedido items, nombre, email, telefono, direccion, nombre_entrega, mensaje, fecha_entrega, forma_pago
     pedido = Pedido.new
     pedido.fecha = Date.today
     pedido.items = items.to_json
@@ -99,6 +99,7 @@ class CartController < ApplicationController
     pedido.mensaje = mensaje
     pedido.fecha_entrega = fecha_entrega
     pedido.costo_entrega = 2.98
+    pedido.forma_pago = forma_pago
 
     pedido
   end

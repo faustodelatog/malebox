@@ -1,71 +1,7 @@
 <div class="main">
   <div class="shop_top">
     <div class="container">
-      <div class="pedido">
-        <h3>Este es tu Pedido</h3>
-        <div style="width: 70%; float: left;margin-bottom: 20px">
-          <p style="font-size: smaller">
-            Realizado por: <b><%= @pedido.nombre %></b><br />
-            Teléfono: <b><%= @pedido.telefono %></b><br />
-            <br />
-            Dirección Entrega: <b><%= @pedido.direccion_entrega %></b><br />
-            Entregar a: <b><%= @pedido.nombre_entrega %></b><br />
-            Fecha solicitada de entrega: <b><%= @pedido.fecha_entrega %></b><br />
-            Mensaje: <b><%= @pedido.mensaje %></b><br />
-          </p>
-        </div>
-        <div class="cabecera" style="margin: 20px 0;background-color: transparent; border: 1px #EEEEEE solid">
-
-          <div style="float: right; text-align: center">
-            <b>RESUMEN</b><br /><br />
-            <div style="text-align: right; float: right; margin: 0 40px;">
-              $ <%= @pedido.total_items %><br />
-              $ <%= @pedido.descuento.to_f %><br />
-              $ <%= @pedido.costo_entrega.to_f %><br />
-              $ 0.0<br />
-              <br /><b>$ <%= @pedido.total %></b>
-            </div>
-            <div style="text-align: left; float: right">
-              Productos:<br />
-              Descuento:<br />
-              Entrega: <br />
-              Impuestos: <br />
-              <br /><b>TOTAL:</b>
-            </div>
-
-          </div>
-          <div class="contenido">
-            <% @pedido.items_json.each do |item| %>
-                <div class="item">
-
-                  <div style="float: left; width: 15%; min-width: 105px">
-                    <a href="/productos/<%= item.producto.id %>">
-                      <img src="<%= item.producto.foto_url %>" style="width: 90%; min-width: 100px"/>
-                    </a>
-                  </div>
-
-                  <div style="float: left; margin-top: 10px">
-                    <div>
-                      <a href="/productos/<%= item.producto.id %>">
-                        <%= item.cantidad %> caja<%if item.cantidad > 1 %>s<% end %> de <%= item.producto.nombre %>
-                      </a>
-                    </div>
-                    <div style="color: grey; font-size: smaller">
-                      u: $ <%= item.producto.precio %>
-                    </div>
-                    <div style="color: black">
-                      t: $ <%= item.producto.precio.to_f * item.cantidad.to_i %>
-                    </div>
-                    <div>
-
-                    </div>
-                  </div>
-                </div>
-            <% end %>
-          </div>
-        </div>
-
-      </div>
+      <%= render 'pedido' %>
       <%= form_tag("/checkout", method: "post") do %>
         <div class="form-submit">
           <a href="" onclick="window.history.back();" style="margin-right:20px">Regresar</a>

@@ -8,6 +8,6 @@ class Pedido < ActiveRecord::Base
   end
 
   def total
-    total_items + costo_entrega.to_f - descuento.to_f
+    (total_items + costo_entrega.to_f - descuento.to_f).round(2)
   end
 end

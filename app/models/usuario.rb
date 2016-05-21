@@ -8,4 +8,8 @@ class Usuario < ActiveRecord::Base
          	:trackable, 
          	:validatable,
 					:confirmable
+
+	def nombre_completo
+		"#{nombre} #{apellido}"
+	end
 end

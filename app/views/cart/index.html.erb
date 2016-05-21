@@ -78,15 +78,22 @@
           <%= form_tag("/cart", method: "post") do %>
               <div style="float:left; max-width:500px; margin-top:30px">
                 <h4>Tus datos</h4>
-                <div class="to" style="width: 100%">
+                <div class="to" style="width: 100%;margin-bottom: 15px">
                   <% if current_usuario %>
                       <input type="text" class="text" value="<%= current_usuario.email %>" disabled>
                       <input type="hidden" name="email" value="<%= current_usuario.email %>">
-                  <% else %>
+                      <input type="text" name="nombre" class="text" value="<%= current_usuario.nombre_completo %>" onfocus="this.value = '';" onblur="if (this.value == '') {this.value = '<%= current_usuario.nombre_completo %>';}">
+                <% else %>
                       <input type="text" name="email" class="text" value="Email" onfocus="this.value = '';" onblur="if (this.value == '') {this.value = 'Email';}">
-                  <% end %>
-                  <input type="text" name="nombre" class="text" value="Nombre" onfocus="this.value = '';" onblur="if (this.value == '') {this.value = 'Nombre';}">
+                      <input type="text" name="nombre" class="text" value="Nombre" onfocus="this.value = '';" onblur="if (this.value == '') {this.value = 'Nombre';}">
+                <% end %>
                   <input type="text" name="telefono" class="text" value="Teléfono" onfocus="this.value = '';" onblur="if (this.value == '') {this.value = 'Teléfono';}">
+                </div>
+                <h4>Forma de Pago</h4>
+                <div class="to" style="width: 100%">
+                  <label class="radio-inline"><input type="radio" name="forma_pago" value="T" checked="checked">Transferencia</label>
+                  <label class="radio-inline"><input type="radio" name="forma_pago" value="D">Depósito</label>
+                  <label class="radio-inline"><input type="radio" name="forma_pago" value="E">Efectivo</label>
                 </div>
               </div>
 

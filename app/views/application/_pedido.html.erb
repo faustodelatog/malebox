@@ -1,8 +1,10 @@
 <div class="pedido">
-  <h2>Detalle del Pedido</h2>
-  <div style="width: 70%; float: left; margin-bottom: 20px">
+  <div style="width: 60%; float: left; margin-bottom: 20px">
+    <h2>Detalle del Pedido</h2>
     <p style="font-size: smaller">
-      EC-MBG-00<%= @pedido.id %><br />
+      <% if @pedido.id %>
+        EC-MBG-00<%= @pedido.id %><br />
+      <% end %>
       Realizado el <b><%= @pedido.fecha %></b><br />
       Realizado por: <b><%= @pedido.nombre %></b><br />
       Teléfono: <b><%= @pedido.telefono %></b><br />
@@ -13,11 +15,44 @@
       Mensaje de la Tarjeta: <b><%= @pedido.mensaje %></b><br />
     </p>
   </div>
-  <div class="columna" style=" width: 15%;">
-    <b>ESTADO</b><br />
-    <div class="<%= @pedido.estado.downcase %>_label"><%= @pedido.estado.capitalize %></div>
-  </div>
+  <% if @pedido.id %>
+    <div class="columna" style="max-width: 300px;">
+      <b>ESTADO</b><br />
+      <div class="<%= @pedido.estado.downcase %>_label"><%= @pedido.estado.capitalize %></div>
+    </div>
+  <% else %>
+    <div class="columna" style="width: 350px; text-align: left; float: left">
+      <% case @pedido.forma_pago
+          when 'T' %>
+          <h2>Transferencia Bancaria</h2>
+          <p>
+            Banco:<b>Pichincha</b><br />
+            Cuenta Ahorros:<b>4898249800</b><br />
+            Nombre:<b>Daniela López</b><br />
+            CI:<b>1720729134</b><br /><br />
+            <i>Envianos un correo confirmando la transferencia a <b>info@maleboxgifts.com</b></i>
+          </p>
+        <% when 'D' %>
+          <h2>Pago mediante Depósito</h2>
+          <p>
+            Banco:<b>Pichincha</b><br />
+            Cuenta Ahorros:<b>4898249800</b><br />
+            Nombre:<b>Daniela López</b><br />
+            CI:<b>1720729134</b><br /><br />
+            <i>Cuando hayas realizado el depósito infórmanos a <b>info@maleboxgifts.com</b> o mediante llamada o mensaje a <b>098 4454 854 - 099 6554 568</b></i>
+          </p>
+        <% when 'E' %>
+          <h2>Pago en Efectivo</h2>
+          <p>
+            Luego de confirmar tu pedido, acércate al punto <b>MaleBox</b> en:<br /><br />
+            Ignacio Asín y Vicente Heredia, Sector San Fernando Edificio Dickens / Quito - Ecuador
+          </p>
+    <% else %>
+          No se ha escogido ninguna forma de pago, por favor llame a malebox
+      <% end %>
 
+    </div>
+  <% end %>
   <div class="cabecera" style="margin: 20px 0;background-color: transparent; border: 1px #EEEEEE solid">
     <div style="float: right; text-align: center">
       <b>RESUMEN</b><br /><br />
