@@ -2,13 +2,34 @@
   <div class="shop_top">
     <div class="container">
       <%= render 'pedido' %>
-      <%= form_tag("/checkout", method: "post") do %>
         <div class="form-submit">
-          <a href="" onclick="window.history.back();" style="margin-right:20px">Regresar</a>
-          <script>submited=false</script>
-          <input name="submit" type="submit" id="submit" value="Confirmar" onclick="if(submited)return false; {this.value='Confirmando pedido...'; submited=true};"><br>
+          <div style="float: left">
+            <a href="" onclick="window.history.back();" style="margin-right:20px">Regresar</a>
+          </div>
+          <div style="float: left">
+            <% if @pedido.forma_pago.eql?('PP') %>
+              <form action="https://www.paypal.com/cgi-bin/webscr" method="post" target="_top">
+                <input type="hidden" name="cmd" value="_xclick">
+                <input type="hidden" name="business" value="info@regalosmalebox.com">
+                <input type="hidden" name="lc" value="EC">
+                <input type="hidden" name="item_name" value="1 Pedido de: <%= @pedido.descripcion %>">
+                <input type="hidden" name="amount" value="<%= @pedido.total %>">
+                <input type="hidden" name="button_subtype" value="services">
+                <input type="hidden" name="no_note" value="0">
+                <input type="hidden" name="currency_code" value="USD">
+                <input type="hidden" name="notify_url" value="http://localhost:3000/checkout/confirmacion">
+                <input type="hidden" name="bn" value="PP-BuyNowBF:btn_buynowCC_LG.gif:NonHostedGuest">
+                <input type="image" src="https://www.paypalobjects.com/en_US/i/btn/btn_buynowCC_LG.gif" border="0" name="submit" alt="PayPal - The safer, easier way to pay online!">
+                <img alt="" border="0" src="https://www.paypalobjects.com/es_XC/i/scr/pixel.gif" width="1" height="1">
+              </form>
+            <% else %>
+              <script>submited=false</script>
+              <%= form_tag("/checkout", method: "post") do %>
+                <input name="submit" type="submit" id="submit" value="Confirmar" onclick="if(submited)return false; {this.value='Confirmando pedido...'; submited=true};"><br>
+              <% end %>
+          <% end %>
+          </div>
         </div>
-      <% end %>
     </div>
   </div>
 </div>
