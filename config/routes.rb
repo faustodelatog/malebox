@@ -8,6 +8,8 @@ Rails.application.routes.draw do
   get 'checkout' => 'checkout#index'
   get 'checkout/confirmacion'
   post 'checkout' => 'checkout#purchase'
+  post '/checkout/paypal' => 'checkout#confirm_paypal', :as => 'confirm_paypal'
+
 
   scope "/admin" do
     resources :pedidos
@@ -53,7 +55,6 @@ Rails.application.routes.draw do
   post '/add_to_cart/:product_id' => 'cart#add_to_cart', :as => 'add_to_cart'
   post '/remove_from_cart/:product_id' => 'cart#remove_from_cart', :as => 'remove_from_cart'
   post '/remove_all_from_cart/:product_id' => 'cart#remove_all_from_cart', :as => 'remove_all_from_cart'
-
 
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".

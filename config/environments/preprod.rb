@@ -96,6 +96,6 @@ Rails.application.configure do
   }
 
   config.paypal_account = "info@regalosmalebox.com"
-  config.paypal_server = "https://www.paypal.com"
-  config.server = "https://www.regalosmalebox.com"
+  config.paypal_server = "https://www.sandbox.paypal.com"
+  config.server = "https://malebox-preprod.herokuapp.com"
 end

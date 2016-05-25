@@ -33,4 +33,10 @@ class CheckoutController < ApplicationController
     pedido.estado = 'Pendiente'
     pedido.save
   end
+
+  def confirm_paypal
+    p '--------------------------------------------------'
+    # p params
+    p '--------------------------------------------------'
+  end
 end

@@ -43,10 +43,11 @@ class CartController < ApplicationController
 
   def index
     @cart = Cart.new(session[:cart_id]) if session[:cart_id]
+    @cart = nil if !@cart.items || @cart.items.empty?
     pedido = Pedido.find(session[:pedido_id]) if session[:pedido_id]
     @fe = pedido ? pedido.fecha_entrega: 'Fecha Entrega'
     @ea = pedido ? pedido.nombre_entrega: 'Entregar a'
-    @de = pedido ? pedido.direccion_entrega: 'Dirección Entrega'
+    @de = pedido ? pedido.direccion_entrega: 'Dirección de entrega'
     @mt = pedido ? pedido.mensaje: 'Mensaje de tarjeta'
     @email = pedido ? pedido.email: 'Email'
     @nombre = pedido ? pedido.nombre: 'Nombre'
@@ -104,7 +105,7 @@ class CartController < ApplicationController
     pedido.nombre_entrega = nombre_entrega
     pedido.mensaje = mensaje
     pedido.fecha_entrega = fecha_entrega
-    pedido.costo_entrega = 2.98
+    pedido.costo_entrega = 2.98 * pedido.numero_items
     pedido.forma_pago = forma_pago
 
     pedido.estado = 'Borrador'

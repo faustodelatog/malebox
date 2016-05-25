@@ -56,4 +56,8 @@ Rails.application.configure do
       authentication:       'plain',
       enable_starttls_auto: true
   }
+
+  config.paypal_account = "paypal-test@regalosmalebox.com"
+  config.paypal_server = "https://www.sandbox.paypal.com"
+  config.server = "http://localhost:3000"
 end
