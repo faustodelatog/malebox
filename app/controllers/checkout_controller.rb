@@ -35,12 +35,10 @@ class CheckoutController < ApplicationController
   end
 
   def confirm_paypal
-    Logger.log( '--------------------------------------------------')
-    Logger.log(params)
-    Logger.log( '--------------------------------------------------')
-
     pedido = Pedido.find params['confirm_pedido_id']
-    pedido.estado = 'Pagado Paypal'
+    pedido.estado = "Pagado Paypal (#{params['txn_id']})"
     pedido.save
+
+    redirect_to controller: 'checkout', action: 'confirmacion', confirm_pedido_id: pedido.id
   end
 end
