@@ -55,7 +55,7 @@
 
     </div>
   <% end %>
-  <% if @pedido.id %>
+  <% if @pedido && !@pedido.estado.eql?('Borrador') %>
       <div class="columna" style="max-width: 300px;">
         <b>ESTADO</b><br />
         <div class="<%= @pedido.estado.downcase %>_label"><%= @pedido.estado.capitalize %></div>
