@@ -9,9 +9,6 @@ class CheckoutController < ApplicationController
     pedido = Pedido.find(pedido_id)
     update_pedido pedido
 
-    session[:cart_id] = nil
-    session[:pedido_id] = nil
-
     PedidosMailer.checkout_email(pedido_id).deliver_later
     PedidosMailer.checkout_user_email(pedido_id).deliver_later
 
@@ -21,6 +18,10 @@ class CheckoutController < ApplicationController
   def confirmacion
     confirm_pedido_id = params['confirm_pedido_id']
     @pedido = Pedido.find(confirm_pedido_id) if confirm_pedido_id
+    if @pedido
+      session[:cart_id] = nil
+      session[:pedido_id] = nil
+    end
     redirect_to controller: 'checkout', action: 'index' if !@pedido
   end
 
