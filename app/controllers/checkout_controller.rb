@@ -1,34 +1,35 @@
 class CheckoutController < ApplicationController
   def index
-    @pedido = JSON.parse(session[:pedido], object_class: Pedido)
+    @pedido = Pedido.find(session[:pedido_id]) if session[:pedido_id]
+    redirect_to controller: 'cart', action: 'index' if !@pedido
   end
 
   def purchase
-    pedido = JSON.parse(session[:pedido], object_class: Pedido)
-    pedido_id = save_pedido pedido
+    pedido_id = session[:pedido_id]
+    pedido = Pedido.find(pedido_id)
+    update_pedido pedido
 
-    session[:pedido_id] = pedido_id
     session[:cart_id] = nil
-    session[:pedido] = nil
+    session[:pedido_id] = nil
 
     PedidosMailer.checkout_email(pedido_id).deliver_later
     PedidosMailer.checkout_user_email(pedido_id).deliver_later
 
-    redirect_to controller: 'checkout', action: 'confirmacion'
+    redirect_to controller: 'checkout', action: 'confirmacion', confirm_pedido_id: pedido_id
   end
 
   def confirmacion
-    pedido_id = session[:pedido_id].to_i
-    @pedido = Pedido.find pedido_id
+    confirm_pedido_id = params['confirm_pedido_id']
+    @pedido = Pedido.find(confirm_pedido_id) if confirm_pedido_id
+    redirect_to controller: 'checkout', action: 'index' if !@pedido
   end
 
   def cancel
     redirect_to controller: 'cart', action: 'index'
   end
 
-  def save_pedido pedido
+  def update_pedido pedido
     pedido.estado = 'Pendiente'
     pedido.save
-    pedido.id
   end
 end

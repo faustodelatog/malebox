@@ -60,8 +60,8 @@ class CartController < ApplicationController
     forma_pago = params['forma_pago']
 
     if validate email, nombre, telefono, nombre_entrega, direccion, mensaje, fecha_entrega
-      pedido = create_pedido(cart.items, nombre, email, telefono, direccion, nombre_entrega, mensaje, fecha_entrega, forma_pago)
-      session[:pedido] = pedido.to_json
+      pedido_id = create_pedido(cart.items, nombre, email, telefono, direccion, nombre_entrega, mensaje, fecha_entrega, forma_pago)
+      session[:pedido_id] = pedido_id
 
       redirect_to controller: 'checkout', action: 'index'
     else
@@ -86,7 +86,8 @@ class CartController < ApplicationController
   end
 
   def create_pedido items, nombre, email, telefono, direccion, nombre_entrega, mensaje, fecha_entrega, forma_pago
-    pedido = Pedido.new
+    pedido = Pedido.find(session[:pedido_id]) if session[:pedido_id]
+    pedido = Pedido.new unless pedido
     pedido.fecha = Date.today
     pedido.items = items.to_json
 
@@ -101,6 +102,10 @@ class CartController < ApplicationController
     pedido.costo_entrega = 2.98
     pedido.forma_pago = forma_pago
 
-    pedido
+    pedido.estado = 'Borrador'
+
+    pedido.save
+
+    pedido.id
   end
 end
