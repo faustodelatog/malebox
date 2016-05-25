@@ -97,5 +97,5 @@ Rails.application.configure do
 
   config.paypal_account = "info@regalosmalebox.com"
   config.paypal_server = "https://www.paypal.com"
-  config.server = "https://www.regalosmalebox.com"
+  config.server = "http://www.regalosmalebox.com"
 end
