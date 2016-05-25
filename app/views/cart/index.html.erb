@@ -79,12 +79,12 @@
               <div style="float:left; max-width:500px; margin-top:30px">
                 <h4>Datos de entrega</h4>
                 <div class="to" style="width: 100%">
-                  <input type="text" name="fecha_entrega" class="text datepicker" value="Fecha Entrega" onfocus="this.value = '';" onblur="if (this.value == '') {this.value = 'Fecha Entrega';}">
-                  <input type="text" name="nombre_entrega" class="text" value="Entregar a" onfocus="this.value = '';" onblur="if (this.value == '') {this.value = 'Entregar a';}">
+                  <input type="text" name="fecha_entrega" class="text datepicker" value="<%= @fe %>" onfocus="this.value = '';" onblur="if (this.value == '') {this.value = 'Fecha Entrega';}">
+                  <input type="text" name="nombre_entrega" class="text" value="<%= @ea %>" onfocus="this.value = '';" onblur="if (this.value == '') {this.value = 'Entregar a';}">
                 </div>
                 <div class="text" style="width: 95%">
-                  <textarea name="direccion" value="Dirección de entrega" onfocus="if(this.value == 'Dirección de entrega')this.value = '';" onblur="if (this.value == '') {this.value = 'Dirección de entrega';}">Dirección de entrega</textarea>
-                  <textarea name="mensaje" value="Mensaje de tarjeta" onfocus="if(this.value == 'Mensaje de tarjeta')this.value = '';" onblur="if (this.value == '') {this.value = 'Mensaje de tarjeta';}">Mensaje de tarjeta</textarea>
+                  <textarea name="direccion" value="<%= @de %>" onfocus="if(this.value == 'Dirección de entrega')this.value = '';" onblur="if (this.value == '') {this.value = 'Dirección de entrega';}"><%= @de %></textarea>
+                  <textarea name="mensaje" value="<%= @mt %>" onfocus="if(this.value == 'Mensaje de tarjeta')this.value = '';" onblur="if (this.value == '') {this.value = 'Mensaje de tarjeta';}"><%= @mt %></textarea>
                 </div>
               </div>
 
@@ -96,10 +96,10 @@
                       <input type="hidden" name="email" value="<%= current_usuario.email %>">
                       <input type="text" name="nombre" class="text" value="<%= current_usuario.nombre_completo %>" onfocus="this.value = '';" onblur="if (this.value == '') {this.value = '<%= current_usuario.nombre_completo %>';}">
                   <% else %>
-                      <input type="text" name="email" class="text" value="Email" onfocus="this.value = '';" onblur="if (this.value == '') {this.value = 'Email';}">
-                      <input type="text" name="nombre" class="text" value="Nombre" onfocus="this.value = '';" onblur="if (this.value == '') {this.value = 'Nombre';}">
+                      <input type="text" name="email" class="text" value="<%= @email %>" onfocus="this.value = '';" onblur="if (this.value == '') {this.value = 'Email';}">
+                      <input type="text" name="nombre" class="text" value="<%= @nombre %>" onfocus="this.value = '';" onblur="if (this.value == '') {this.value = 'Nombre';}">
                   <% end %>
-                  <input type="text" name="telefono" class="text" value="Teléfono" onfocus="this.value = '';" onblur="if (this.value == '') {this.value = 'Teléfono';}">
+                  <input type="text" name="telefono" class="text" value="<%= @telefono %>" onfocus="this.value = '';" onblur="if (this.value == '') {this.value = 'Teléfono';}">
                 </div>
                 <h4>Forma de Pago</h4>
                 <div class="to" style="width: 100%; margin-bottom: 15px">

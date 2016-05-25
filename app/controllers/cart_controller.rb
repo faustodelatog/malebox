@@ -42,10 +42,15 @@ class CartController < ApplicationController
   end
 
   def index
-    cart = session[:cart_id]
-    if cart
-      @cart = Cart.new(cart)
-    end
+    @cart = Cart.new(session[:cart_id]) if session[:cart_id]
+    pedido = Pedido.find(session[:pedido_id]) if session[:pedido_id]
+    @fe = pedido ? pedido.fecha_entrega: 'Fecha Entrega'
+    @ea = pedido ? pedido.nombre_entrega: 'Entregar a'
+    @de = pedido ? pedido.direccion_entrega: 'Dirección Entrega'
+    @mt = pedido ? pedido.mensaje: 'Mensaje de tarjeta'
+    @email = pedido ? pedido.email: 'Email'
+    @nombre = pedido ? pedido.nombre: 'Nombre'
+    @telefono = pedido ? pedido.telefono: 'Teléfono'
   end
 
   def checkout
