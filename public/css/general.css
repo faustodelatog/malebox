@@ -1,6 +1,7 @@
 .pedido{
     margin-bottom: 40px;
     clear: both;
+    float: left;
 }
 
 .cabecera{

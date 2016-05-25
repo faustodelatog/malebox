@@ -23,4 +23,21 @@ class Pedido < ActiveRecord::Base
     descripcion += "**"
     descripcion.gsub('- **', '')
   end
+
+  def forma_pago_str
+    str = 'Sin forma de pago'
+    case forma_pago
+      when 'T'
+        str = 'Transferencia'
+      when 'D'
+        str = 'Depósito'
+      when 'E'
+        str = 'Efectivo'
+      when 'PP'
+        str = 'PayPal'
+      else
+        str = 'Otra forma de pago'
+    end
+    str
+  end
 end

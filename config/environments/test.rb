@@ -1,42 +1,101 @@
 Rails.application.configure do
   # Settings specified here will take precedence over those in config/application.rb.
 
-  # The test environment is used exclusively to run your application's
-  # test suite. You never need to work with it otherwise. Remember that
-  # your test database is "scratch space" for the test suite and is wiped
-  # and recreated between test runs. Don't rely on the data there!
+  # Code is not reloaded between requests.
   config.cache_classes = true
 
-  # Do not eager load code on boot. This avoids loading your whole application
-  # just for the purpose of running a single test. If you are using a tool that
-  # preloads Rails for running tests, you may have to set it to true.
-  config.eager_load = false
+  # Eager load code on boot. This eager loads most of Rails and
+  # your application in memory, allowing both threaded web servers
+  # and those relying on copy on write to perform better.
+  # Rake tasks automatically ignore this option for performance.
+  config.eager_load = true
 
-  # Configure static file server for tests with Cache-Control for performance.
-  config.serve_static_files   = true
-  config.static_cache_control = 'public, max-age=3600'
+  # Full error reports are disabled and caching is turned on.
+  config.consider_all_requests_local       = false
+  config.action_controller.perform_caching = true
 
-  # Show full error reports and disable caching.
-  config.consider_all_requests_local       = true
-  config.action_controller.perform_caching = false
+  # Enable Rack::Cache to put a simple HTTP cache in front of your application
+  # Add `rack-cache` to your Gemfile before enabling this.
+  # For large-scale production use, consider using a caching reverse proxy like
+  # NGINX, varnish or squid.
+  # config.action_dispatch.rack_cache = true
 
-  # Raise exceptions instead of rendering exception templates.
-  config.action_dispatch.show_exceptions = false
+  # Disable serving static files from the `/public` folder by default since
+  # Apache or NGINX already handles this.
+  config.serve_static_files = ENV['RAILS_SERVE_STATIC_FILES'].present?
 
-  # Disable request forgery protection in test environment.
-  config.action_controller.allow_forgery_protection = false
+  # Compress JavaScripts and CSS.
+  config.assets.js_compressor = :uglifier
+  # config.assets.css_compressor = :sass
 
-  # Tell Action Mailer not to deliver emails to the real world.
-  # The :test delivery method accumulates sent emails in the
-  # ActionMailer::Base.deliveries array.
-  config.action_mailer.delivery_method = :test
+  # Do not fallback to assets pipeline if a precompiled asset is missed.
+  config.assets.compile = false
 
-  # Randomize the order test cases are executed.
-  config.active_support.test_order = :random
+  # Asset digests allow you to set far-future HTTP expiration dates on all assets,
+  # yet still be able to expire them through the digest params.
+  config.assets.digest = true
 
-  # Print deprecation notices to the stderr.
-  config.active_support.deprecation = :stderr
+  # `config.assets.precompile` and `config.assets.version` have moved to config/initializers/assets.rb
 
-  # Raises error for missing translations
-  # config.action_view.raise_on_missing_translations = true
+  # Specifies the header that your server uses for sending files.
+  # config.action_dispatch.x_sendfile_header = 'X-Sendfile' # for Apache
+  # config.action_dispatch.x_sendfile_header = 'X-Accel-Redirect' # for NGINX
+
+  # Force all access to the app over SSL, use Strict-Transport-Security, and use secure cookies.
+  # config.force_ssl = true
+
+  # Use the lowest log level to ensure availability of diagnostic information
+  # when problems arise.
+  config.log_level = :debug
+
+  # Prepend all log lines with the following tags.
+  # config.log_tags = [ :subdomain, :uuid ]
+
+  # Use a different logger for distributed setups.
+  # config.logger = ActiveSupport::TaggedLogging.new(SyslogLogger.new)
+
+  # Use a different cache store in production.
+  # config.cache_store = :mem_cache_store
+
+  # Enable serving of images, stylesheets, and JavaScripts from an asset server.
+  # config.action_controller.asset_host = 'http://assets.example.com'
+
+  # Ignore bad email addresses and do not raise email delivery errors.
+  # Set this to true and configure the email server for immediate delivery to raise delivery errors.
+  # config.action_mailer.raise_delivery_errors = false
+
+  # Enable locale fallbacks for I18n (makes lookups for any locale fall back to
+  # the I18n.default_locale when a translation cannot be found).
+  config.i18n.fallbacks = true
+
+  # Send deprecation notices to registered listeners.
+  config.active_support.deprecation = :notify
+
+  # Use default logging formatter so that PID and timestamp are not suppressed.
+  config.log_formatter = ::Logger::Formatter.new
+
+  # Do not dump schema after migrations.
+  config.active_record.dump_schema_after_migration = false
+
+  #devise
+  config.action_mailer.default_url_options = { host: 'maleboxgifts.herokuapp.com'}
+  config.action_mailer.raise_delivery_errors = true
+  config.action_mailer.delivery_method = :smtp
+  config.action_mailer.perform_deliveries = true
+  config.action_mailer.raise_delivery_errors = false
+  config.action_mailer.default :charset => "utf-8"
+
+  config.action_mailer.smtp_settings = {
+    address:              'smtp.zoho.com',
+    port:                 587,
+    domain:               'maleboxgifts.herokuapp.com',
+    user_name:            ENV['MAIL_USERNAME'],
+    password:             ENV['MAIL_PASSWORD'],
+    authentication:       'plain',
+    enable_starttls_auto: true
+  }
+
+  config.paypal_account = "info@regalosmalebox.com"
+  config.paypal_server = "https://www.sandbox.paypal.com"
+  config.server = "https://malebox-preprod.herokuapp.com"
 end

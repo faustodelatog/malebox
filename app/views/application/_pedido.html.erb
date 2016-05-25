@@ -9,6 +9,7 @@
       Realizado por: <b><%= @pedido.nombre %></b><br />
       Email: <b><%= @pedido.email %></b><br />
       Teléfono: <b><%= @pedido.telefono %></b><br />
+      Forma de Pago: <b><%= @pedido.forma_pago_str %></b><br />
       <br />
       Dirección Entrega: <b><%= @pedido.direccion_entrega %></b><br />
       Entregar a: <b><%= @pedido.nombre_entrega %></b><br />
@@ -16,13 +17,8 @@
       Mensaje de la Tarjeta: <b><%= @pedido.mensaje %></b><br />
     </p>
   </div>
-  <% if @pedido.id %>
-    <div class="columna" style="max-width: 300px;">
-      <b>ESTADO</b><br />
-      <div class="<%= @pedido.estado.downcase %>_label"><%= @pedido.estado.capitalize %></div>
-    </div>
-  <% else %>
-    <div class="columna" style="width: 350px; text-align: left; float: left">
+  <% if @pedido.forma_pago && @pedido.estado.eql?('Borrador') %>
+    <div class="columna" style="width: 350px; text-align: left; float: left;margin-bottom: 15px">
       <% case @pedido.forma_pago
           when 'T' %>
           <h2>Transferencia Bancaria</h2>
@@ -58,6 +54,12 @@
       <% end %>
 
     </div>
+  <% end %>
+  <% if @pedido.id %>
+      <div class="columna" style="max-width: 300px;">
+        <b>ESTADO</b><br />
+        <div class="<%= @pedido.estado.downcase %>_label"><%= @pedido.estado.capitalize %></div>
+      </div>
   <% end %>
   <div class="cabecera" style="margin: 20px 0;background-color: transparent; border: 1px #EEEEEE solid;float:left">
     <div style="float: right; text-align: center">

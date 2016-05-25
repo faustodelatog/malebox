@@ -43,7 +43,7 @@ class CartController < ApplicationController
 
   def index
     @cart = Cart.new(session[:cart_id]) if session[:cart_id]
-    @cart = nil if !@cart.items || @cart.items.empty?
+    @cart = nil if @cart && (!@cart.items || @cart.items.empty?)
     pedido = Pedido.find(session[:pedido_id]) if session[:pedido_id]
     @fe = pedido ? pedido.fecha_entrega: 'Fecha Entrega'
     @ea = pedido ? pedido.nombre_entrega: 'Entregar a'
