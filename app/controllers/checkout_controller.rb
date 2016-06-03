@@ -39,6 +39,9 @@ class CheckoutController < ApplicationController
     pedido.estado = "Pagado Paypal (#{params['txn_id']})"
     pedido.save
 
+    PedidosMailer.checkout_email(pedido.id).deliver_later
+    PedidosMailer.checkout_user_email(pedido.id).deliver_later
+
     redirect_to controller: 'checkout', action: 'confirmacion', confirm_pedido_id: pedido.id
   end
 end
