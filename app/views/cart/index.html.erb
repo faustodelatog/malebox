@@ -67,7 +67,7 @@
 
           <div style="float: left; max-width:400px">
             <div>
-              <div class="box-info-product" style:margin-bottom:0px>
+              <div class="box-info-product" style = "margin-bottom:0px">
                 <p class="price2"><label style="font-size: 0.7em; font-weight: 100; margin-right: 10px">Total: </label>$<%= @cart.total %></p>
               </div>
             </div>
@@ -83,7 +83,18 @@
                   <input type="text" name="nombre_entrega" class="text" value="<%= @ea %>" onfocus="this.value = '';" onblur="if (this.value == '') {this.value = 'Entregar a';}">
                 </div>
                 <div class="text" style="width: 95%">
+                  <select name="sector" class="form-control">
+                    <option value="" <% if @se.eql?('')%> selected <% end %>>Sector Entrega</option>
+                    <optgroup label="Quito">
+                      <% Sector::quito.each do |sector| %>
+                        <option <% if @se.eql?(sector.id)%> selected <% end %> value="<%= sector.id %>"><%= sector.nombre %></option>
+                      <% end %>
+                    </optgroup>
+                    <option <% if @se.eql?('O')%> selected <% end %> value="O">Otra Ciudad</option>
+                  </select>
+
                   <textarea name="direccion" value="<%= @de %>" onfocus="if(this.value == 'Dirección de entrega')this.value = '';" onblur="if (this.value == '') {this.value = 'Dirección de entrega';}"><%= @de %></textarea>
+                  <textarea name="instrucciones" value="<%= @ie %>" onfocus="if(this.value == 'Instrucciones de entrega (horario de preferencia, etc.)')this.value = '';" onblur="if (this.value == '') {this.value = 'Instrucciones de entrega (horario de preferencia, etc.)';}"><%= @ie %></textarea>
                   <textarea name="mensaje" value="<%= @mt %>" onfocus="if(this.value == 'Mensaje de tarjeta')this.value = '';" onblur="if (this.value == '') {this.value = 'Mensaje de tarjeta';}"><%= @mt %></textarea>
                 </div>
               </div>

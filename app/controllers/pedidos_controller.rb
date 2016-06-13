@@ -76,6 +76,6 @@ class PedidosController < AdminController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def pedido_params
-      params.require(:pedido).permit(:fecha, :nombre, :email, :telefono, :descuento, :costo_entrega, :nombre_entrega, :direccion_entrega, :fecha_entrega, :items, :estado)
+      params.require(:pedido).permit!
     end
 end

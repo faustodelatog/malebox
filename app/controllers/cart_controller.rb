@@ -48,6 +48,8 @@ class CartController < ApplicationController
     @fe = pedido ? pedido.fecha_entrega: 'Fecha Entrega'
     @ea = pedido ? pedido.nombre_entrega: 'Entregar a'
     @de = pedido ? pedido.direccion_entrega: 'Dirección de entrega'
+    @ie = pedido ? pedido.instrucciones_entrega: 'Instrucciones de entrega (horario de preferencia, etc.)'
+    @se = pedido ? pedido.sector_entrega: ''
     @mt = pedido ? pedido.mensaje: 'Mensaje de tarjeta'
     @email = pedido ? pedido.email: 'Email'
     @nombre = pedido ? pedido.nombre: 'Nombre'
@@ -64,9 +66,11 @@ class CartController < ApplicationController
     mensaje = params['mensaje']
     fecha_entrega = params['fecha_entrega']
     forma_pago = params['forma_pago']
+    instrucciones = params['instrucciones']
+    sector = params['sector']
 
-    if validate email, nombre, telefono, nombre_entrega, direccion, mensaje, fecha_entrega
-      pedido_id = create_pedido(cart.items, nombre, email, telefono, direccion, nombre_entrega, mensaje, fecha_entrega, forma_pago)
+    if validate email, nombre, telefono, nombre_entrega, direccion, mensaje, fecha_entrega, sector
+      pedido_id = create_pedido(cart.items, nombre, email, telefono, direccion, nombre_entrega, mensaje, fecha_entrega, forma_pago, instrucciones, sector)
       session[:pedido_id] = pedido_id
 
       redirect_to controller: 'checkout', action: 'index'
@@ -77,21 +81,22 @@ class CartController < ApplicationController
 
   end
 
-  def validate(email, nombre, telefono, nombre_entrega, direccion, mensaje, fecha_entrega)
+  def validate(email, nombre, telefono, nombre_entrega, direccion, mensaje, fecha_entrega, sector)
     !((!is_a_valid_email?(email)) ||
         (nombre.strip.empty? || nombre.eql?('Nombre')) ||
         (nombre_entrega.strip.empty? || nombre_entrega.eql?('Entregar a')) ||
         (direccion.strip.empty? || direccion.eql?('Dirección de entrega')) ||
         (mensaje.strip.empty? || mensaje.eql?('Mensaje de tarjeta')) ||
         (fecha_entrega.strip.empty?) ||
-        (telefono.strip.empty? || telefono.eql?('Teléfono')))
+        (telefono.strip.empty? || telefono.eql?('Teléfono')) ||
+        (sector.strip.empty? || sector.eql?('Sector')))
   end
 
   def is_a_valid_email?(email)
     (email =~ /\A[\w+\-.]+@[a-z\d\-]+(\.[a-z]+)*\.[a-z]+\z/i)
   end
 
-  def create_pedido items, nombre, email, telefono, direccion, nombre_entrega, mensaje, fecha_entrega, forma_pago
+  def create_pedido items, nombre, email, telefono, direccion, nombre_entrega, mensaje, fecha_entrega, forma_pago, instrucciones, sector
     pedido = Pedido.find(session[:pedido_id]) if session[:pedido_id]
     pedido = Pedido.new unless pedido
     pedido.fecha = Date.today
@@ -105,8 +110,11 @@ class CartController < ApplicationController
     pedido.nombre_entrega = nombre_entrega
     pedido.mensaje = mensaje
     pedido.fecha_entrega = fecha_entrega
-    pedido.costo_entrega = 2.98 * pedido.numero_items
     pedido.forma_pago = forma_pago
+    pedido.instrucciones_entrega = instrucciones
+    pedido.sector_entrega = sector
+
+    pedido.costo_entrega = pedido.calcular_costo sector
 
     pedido.estado = 'Borrador'
 
