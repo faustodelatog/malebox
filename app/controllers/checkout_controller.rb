@@ -37,7 +37,7 @@ class CheckoutController < ApplicationController
   def confirm_paypal
     pedido = Pedido.find params['confirm_pedido_id']
     p "Confirmando pago paypal para pedido #{pedido.id} - #{pedido.estado}"
-    return 201 if pedido.estado.casecmp('Borrador') != 0
+    return 200 if pedido.estado.casecmp('Borrador') != 0
 
     pedido.estado = "Pagado Paypal (#{params['txn_id']})"
     pedido.save
@@ -46,6 +46,6 @@ class CheckoutController < ApplicationController
     PedidosMailer.checkout_user_email(pedido.id).deliver_later
 
     p "Pago con paypal confirmado para pedido #{pedido.id} - #{pedido.estado}"
-    200
+    201
   end
 end
