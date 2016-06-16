@@ -66,14 +66,14 @@
           </div>
 
           <div style="float: left; max-width:400px">
-            <div>
+            <div style="margin-bottom: 20px">
               <div class="box-info-product" style = "margin-bottom:0px">
                 <p class="price2"><label style="font-size: 0.7em; font-weight: 100; margin-right: 10px">Total: </label>$<%= @cart.total %></p>
               </div>
             </div>
+            <%= link_to '¿Quieres más productos?', productos_path %>
           </div>
 <div class="clear"> </div>
-          
           
           <%= form_tag("/cart", method: "post") do %>
               <div style="float:left; max-width:500px; margin-top:30px">
@@ -128,8 +128,9 @@
           <% end %> 
         <% else %>
             No has añadido ningún producto
-            <%= render 'otros_productos' %>
         <% end %>
+        <div style="width: 100%; clear: both" />
+        <%= render 'otros_productos' %>
       </div>
 
   </div>
