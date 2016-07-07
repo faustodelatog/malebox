@@ -13,7 +13,8 @@ class Sector
   def self.quito
     [
       Sector.new('NQ', 'Norte', 2.98),
-      Sector.new('SQ', 'Sur', 4.98),
+      Sector.new('CCQ', 'Carapungo - Calderón', 5.98),
+      Sector.new('SQ', 'Sur', 5.98),
       Sector.new('CQ', 'Centro', 2.98),
       Sector.new('CHQ', 'Los Chillos', 6.98),
       Sector.new('CBQ', 'Cumbayá', 6.98),
