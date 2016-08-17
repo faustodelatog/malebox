@@ -13,9 +13,9 @@
           <div class="col-md-3 shop_box">
             <a href="productos/<%= producto.id %>">
               <img src="<%= producto.foto_url %>" class="img-responsive" alt=""/>
-                <span class="new-box">
+                <!-- <span class="new-box">
                   <span class="new-label">Nuevo</span>
-                </span>
+                </span> -->
               <div class="shop_desc">
                 <h3><a href="productos/<%= producto.id %>"><%= producto.nombre %></a></h3>
                 <p><%= producto.descripcion[0..35].html_safe %> ...</p>
