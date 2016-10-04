@@ -46,6 +46,8 @@
       Forma de Pago: <b><%= @pedido.forma_pago_str %></b><br />
       <br />
       Dirección Entrega: <b><%= @pedido.direccion_entrega %></b><br />
+      Instrucciones de Entrega: <b><%= @pedido.instrucciones_entrega %></b><br />
+      Sector: <b><%= Sector.find(@pedido.sector_entrega).nombre %></b><br />
       Entregar a: <b><%= @pedido.nombre_entrega %></b><br />
       Fecha solicitada de entrega: <b><%= @pedido.fecha_entrega %></b><br />
       Mensaje: <b><%= @pedido.mensaje %></b><br />
