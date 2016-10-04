@@ -99,7 +99,8 @@ class CartController < ApplicationController
   def create_pedido items, nombre, email, telefono, direccion, nombre_entrega, mensaje, fecha_entrega, forma_pago, instrucciones, sector
     pedido = Pedido.find(session[:pedido_id]) if session[:pedido_id]
     pedido = Pedido.new unless pedido
-    pedido.fecha = Date.today
+    pedido.fecha = Time.now.in_time_zone('Quito').to_date
+
     pedido.items = items.to_json
 
     pedido.nombre = nombre
