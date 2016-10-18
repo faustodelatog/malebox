@@ -43,7 +43,7 @@ class Pedido < ActiveRecord::Base
 
   def calcular_costo sector_id
     sector = Sector.find(sector_id)
-    costo = (total_items > 40 && sector.quito?) ? 2.98 : sector.costo
+    costo = (total_items > 100 && sector.quito?) ? 2.98 : sector.costo
     costo * numero_items
   end
 end
