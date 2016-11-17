@@ -75,8 +75,8 @@
     <div style="float: right; text-align: center">
       <b>RESUMEN</b><br /><br />
       <div style="text-align: right; float: right; margin: 0 40px;">
-        $ <%= @pedido.total_items %><br />
-        $ <%= @pedido.descuento.to_f %><br />
+        $ <%= @pedido.total_items.to_f %><br />
+        $ <%= @pedido.total_descuento.to_f %><br />
         $ <%= @pedido.costo_entrega.to_f %><br />
         $ 0.0<br />
         <br /><b>$ <%= @pedido.total %></b>
