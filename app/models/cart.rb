@@ -9,4 +9,8 @@ class Cart
     items.reduce(0) {|sum, item| sum + item.producto.precio*item.cantidad }
   end
 
+  def total_original
+    items.reduce(0) {|sum, item| sum + item.producto.precio_original*item.cantidad }
+  end
+
 end

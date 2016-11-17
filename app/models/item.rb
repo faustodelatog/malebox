@@ -10,4 +10,8 @@ class Item
   def total
     producto.precio*cantidad
   end
+
+  def total_original
+    producto.precio_original*cantidad
+  end
 end

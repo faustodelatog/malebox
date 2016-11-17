@@ -61,7 +61,8 @@
         </div>
         <div class="col-md-3" style="width:20%">
           <div class="box-info-product">
-            <p class="price2">$<%= @producto.precio %></p>
+            <span class="reducedfrom">$<%= @producto.precio_original %></span>
+            <p style="margin-top:15px" class="price2">$<%= @producto.precio %></p>
             <ul class="prosuct-qty">
               <% if false %>
               <span>Quantity:</span>

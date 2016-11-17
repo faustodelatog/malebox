@@ -55,10 +55,12 @@
                   </div>
 
                   <div style="float: left; width: 15%; margin-right: 5%; text-align: center; margin-top: 2%">
+                    <span style="margin-left:10px" class="reducedfrom"><%= item.producto.precio_original %></span>
                     <%= item.producto.precio %>
                   </div>
 
                   <div style="float: left; width: 15%; margin-right: 5%; text-align: center; margin-top: 2%; font-weight: bold">
+                    <span style="margin-left:10px" class="reducedfrom"><%= item.total_original %></span>
                     <%= item.total %>
                   </div>
                 </div>
@@ -68,7 +70,11 @@
           <div style="float: left; max-width:400px">
             <div style="margin-bottom: 20px">
               <div class="box-info-product" style = "margin-bottom:0px">
-                <p class="price2"><label style="font-size: 0.7em; font-weight: 100; margin-right: 10px">Total: </label>$<%= @cart.total %></p>
+                <p class="price2">
+                  <label style="font-size: 0.7em; font-weight: 100; margin-right: 10px">Total: </label>
+                  <span style="margin-left:10px" class="reducedfrom">$<%= cart.total_original %></span>
+                  $<%= @cart.total %>
+                </p>
               </div>
             </div>
             <%= link_to '¿Quieres más productos?', productos_path %>
