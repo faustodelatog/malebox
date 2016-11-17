@@ -5,7 +5,7 @@ class Pedido < ActiveRecord::Base
 
   def total_items
     # items_json.reduce(0) {|sum, item| sum + item.producto.precio_original.to_f*item.cantidad.to_i }.round(2)
-    (total_items_con_descuento*1.15).round(2)
+    (total_items_con_descuento*1.14).round(2)
   end
 
   def total_items_con_descuento
@@ -13,9 +13,9 @@ class Pedido < ActiveRecord::Base
   end
 
   def total_descuento
-    total_con_descuento = 0
+    total_con_descuento = total_items
     total_con_descuento = total_items_con_descuento unless "TC".eql?(forma_pago)
-    (total_items - total_con_descuento) + descuento.to_f 
+    ((total_items - total_con_descuento) + descuento.to_f).round(2) 
   end
 
   def total

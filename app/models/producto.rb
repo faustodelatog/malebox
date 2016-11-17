@@ -4,6 +4,6 @@ class Producto < ActiveRecord::Base
   has_many :categoria, :through => :categoria_productos
 
   def precio_original
-  	(precio * 1.15).round
+  	(precio * 1.14).round(2)
   end
 end
