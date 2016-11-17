@@ -76,14 +76,14 @@
       <b>RESUMEN</b><br /><br />
       <div style="text-align: right; float: right; margin: 0 40px;">
         $ <%= @pedido.total_items.to_f %><br />
-        $ <%= @pedido.total_descuento.to_f %><br />
+        <span style="color:orange">- $ <%= @pedido.total_descuento.to_f %></span><br />
         $ <%= @pedido.costo_entrega.to_f %><br />
         $ 0.0<br />
         <br /><b>$ <%= @pedido.total %></b>
       </div>
       <div style="text-align: left; float: right">
         Productos:<br />
-        Descuento:<br />
+        <span style="color:orange">Descuento:</span><br />
         Entrega: <br />
         Impuestos: <br />
         <br /><b>TOTAL:</b>
