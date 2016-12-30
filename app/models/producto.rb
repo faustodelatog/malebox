@@ -6,4 +6,8 @@ class Producto < ActiveRecord::Base
   def precio_original
   	(precio * 1.14).round(2)
   end
+
+  def nombreCiudadesMismoDia
+  	ciudadesMismoDia.split("-").map {|inicialesCiudad| Ciudad.find(inicialesCiudad)}
+  end
 end
