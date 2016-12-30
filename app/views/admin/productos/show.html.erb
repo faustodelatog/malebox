@@ -20,5 +20,15 @@
   <%= @producto.precio %>
 </p>
 
+<p>
+  <strong>Orden:</strong>
+  <%= @producto.orden %>
+</p>
+
+<p>
+  <strong>Ciudades mismo día:</strong>
+  <%= @producto.ciudadesMismoDia %>
+</p>
+
 <%= link_to 'Edit', edit_admin_producto_path(@producto) %> |
 <%= link_to 'Back', admin_productos_path %>
