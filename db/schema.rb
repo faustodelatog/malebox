@@ -68,9 +68,10 @@ ActiveRecord::Schema.define(version: 20161230005811) do
     t.text     "descripcion"
     t.string   "foto_url"
     t.decimal  "precio"
-    t.datetime "created_at",                  null: false
-    t.datetime "updated_at",                  null: false
-    t.integer  "orden",       default: 10000
+    t.datetime "created_at",                       null: false
+    t.datetime "updated_at",                       null: false
+    t.integer  "orden",            default: 10000
+    t.string   "ciudadesMismoDia", default: "UIO"
   end
 
   create_table "sessions", force: :cascade do |t|
