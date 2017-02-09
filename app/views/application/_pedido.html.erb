@@ -106,12 +106,14 @@
                   <%= item.cantidad %> caja<%if item.cantidad > 1 %>s<% end %> de <%= item.producto.nombre %>
                 </a>
               </div>
-              <!-- <div style="color: grey; font-size: smaller">
-                u: $ <%= item.producto.precio %>
+              <div style="color: grey; font-size: smaller">
+                precio original: $ <%= item.producto.precio_original.to_f * item.cantidad.to_i %>
               </div>
-              <div style="color: black">
-                t: $ <%= item.producto.precio.to_f * item.cantidad.to_i %>
-              </div> -->
+              <% if !@pedido.forma_pago.eql?('TC') %>
+                  <div style="color: black">
+                    precio descuento: $ <%= item.producto.precio.to_f * item.cantidad.to_i %>
+                  </div>
+              <% end %>
               <div>
 
               </div>
