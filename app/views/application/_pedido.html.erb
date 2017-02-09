@@ -1,7 +1,7 @@
 <div class="pedido" style="margin-bottom: 10px">
   <div style="width: 60%; float: left; margin-bottom: 10px">
     <h2>Detalle del Pedido</h2>
-    <p style="font-size: smaller">
+    <p style="font-size: x-small">
       <% if @pedido.id %>
         EC-MBG-00<%= @pedido.id %><br />
       <% end %>
@@ -22,7 +22,7 @@
       <% case @pedido.forma_pago
           when 'T' %>
           <h2>Transferencia Bancaria</h2>
-          <p>
+          <p style="font-size: x-small">
             Banco:<b>Pichincha</b><br />
             Cuenta Ahorros:<b>4898249800</b><br />
             Nombre:<b>Daniela López</b><br />
@@ -31,7 +31,7 @@
           </p>
         <% when 'D' %>
           <h2>Pago mediante Depósito</h2>
-          <p>
+          <p style="font-size: x-small">
             Banco:<b>Pichincha</b><br />
             Cuenta Ahorros:<b>4898249800</b><br />
             Nombre:<b>Daniela López</b><br />
@@ -40,13 +40,13 @@
           </p>
         <% when 'E' %>
           <h2>Pago en Efectivo</h2>
-          <p>
+          <p style="font-size: x-small">
             Luego de confirmar tu pedido, acércate al punto <b>MaleBox</b> en:<br /><br />
             Ignacio Asín y Vicente Heredia, Sector San Fernando Edificio Dickens / Quito - Ecuador
           </p>
         <% when 'TC' %>
           <h2>Pago mediante Tarjeta de Crédito</h2>
-          <p>
+          <p style="font-size: x-small">
             En breves minutos recibirás un <b>E-mail</b> que te permitirá realizar el pago<br />
             Aceptamos<br />
            <img src="https://media.licdn.com/mpr/mpr/shrinknp_100_100/p/7/005/08f/1b0/1427c02.png" alt="Diners Club"><span style="margin-left:3px"></span>
