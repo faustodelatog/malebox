@@ -45,15 +45,17 @@ class CartController < ApplicationController
     @cart = Cart.new(session[:cart_id]) if session[:cart_id]
     @cart = nil if @cart && (!@cart.items || @cart.items.empty?)
     pedido = Pedido.find(session[:pedido_id]) if session[:pedido_id]
-    @fe = pedido ? pedido.fecha_entrega: 'Fecha Entrega'
-    @ea = pedido ? pedido.nombre_entrega: 'Entregar a'
-    @de = pedido ? pedido.direccion_entrega: 'Dirección de entrega'
-    @ie = pedido ? pedido.instrucciones_entrega: 'Instrucciones de entrega (horario de preferencia, etc.)'
-    @se = pedido ? pedido.sector_entrega: ''
-    @mt = pedido ? pedido.mensaje: 'Mensaje de tarjeta'
-    @email = pedido ? pedido.email: 'Email'
-    @nombre = pedido ? pedido.nombre: 'Nombre'
-    @telefono = pedido ? pedido.telefono: 'Teléfono'
+    @fe = pedido ? pedido.fecha_entrega: params['fecha_entrega'] ||= 'Fecha Entrega'
+    @ea = pedido ? pedido.nombre_entrega: params['nombre_entrega'] ||= 'Entregar a'
+    @de = pedido ? pedido.direccion_entrega: params['direccion'] ||= 'Dirección de entrega'
+    @ie = pedido ? pedido.instrucciones_entrega: params['instrucciones'] ||= 'Instrucciones de entrega (horario de preferencia, etc.)'
+    @se = pedido ? pedido.sector_entrega: params['sector'] ||= ''
+    @nde = pedido ? pedido.de: params['nombre_de'] ||= 'De parte de'
+    @npara = pedido ? pedido.para: params['nombre_para'] ||= 'Para'
+    @mt = pedido ? pedido.mensaje: params['mensaje'] ||= 'Mensaje de tarjeta'
+    @email = pedido ? pedido.email: params['email'] ||= 'Email'
+    @nombre = pedido ? pedido.nombre: params['nombre'] ||= 'Nombre'
+    @telefono = pedido ? pedido.telefono: params['telefono'] ||= 'Teléfono'
   end
 
   def checkout
@@ -68,35 +70,45 @@ class CartController < ApplicationController
     forma_pago = params['forma_pago']
     instrucciones = params['instrucciones']
     sector = params['sector']
+    de = params['nombre_de']
+    para = params['nombre_para']
 
-    if validate email, nombre, telefono, nombre_entrega, direccion, mensaje, fecha_entrega, sector
-      pedido_id = create_pedido(cart.items, nombre, email, telefono, direccion, nombre_entrega, mensaje, fecha_entrega, forma_pago, instrucciones, sector)
+    error = validate(email, nombre, telefono, nombre_entrega, direccion, mensaje, fecha_entrega, sector, de, para)
+    if error.empty?
+      pedido_id = create_pedido(cart.items, nombre, email, telefono, direccion, nombre_entrega, mensaje, fecha_entrega, forma_pago, instrucciones, sector, de, para)
       session[:pedido_id] = pedido_id
 
       redirect_to controller: 'checkout', action: 'index'
     else
-      flash[:alert] = "Por favor ingrese toda la información requerida"
-      redirect_to controller: 'cart', action: 'index'
+      flash[:alert] = error
+      redirect_to controller: 'cart', action: 'index', params: params
     end
 
   end
 
-  def validate(email, nombre, telefono, nombre_entrega, direccion, mensaje, fecha_entrega, sector)
-    !((!is_a_valid_email?(email)) ||
-        (nombre.strip.empty? || nombre.eql?('Nombre')) ||
-        (nombre_entrega.strip.empty? || nombre_entrega.eql?('Entregar a')) ||
-        (direccion.strip.empty? || direccion.eql?('Dirección de entrega')) ||
-        (mensaje.strip.empty? || mensaje.eql?('Mensaje de tarjeta')) ||
-        (fecha_entrega.strip.empty?) ||
-        (telefono.strip.empty? || telefono.eql?('Teléfono')) ||
-        (sector.strip.empty? || sector.eql?('Sector')))
+  def validate(email, nombre, telefono, nombre_entrega, direccion, mensaje, fecha_entrega, sector, de, para)
+
+    return 'ingresa una fecha de entrega' if fecha_entrega.strip.empty?
+    return 'ingresa el nombre a quién debe ser entregada la caja' if (nombre_entrega.strip.empty? || nombre_entrega.eql?('Entregar a'))
+    return 'selecciona el sector de entrega ' if (sector.strip.empty? || sector.eql?('Sector'))
+    return 'ingresa la dirección de entrega' if (direccion.strip.empty? || direccion.eql?('Dirección de entrega'))
+
+    return 'ingresa tu email válido para contactarte' if !is_a_valid_email?(email)
+    return 'ingresa tu nombre para contactarte' if (nombre.strip.empty? || nombre.eql?('Nombre'))
+    return 'ingresa tu teléfono para contactarte' if (telefono.strip.empty? || telefono.eql?('Teléfono'))
+
+    return 'ingresa el mensaje de la tarjeta' if (mensaje.strip.empty? || mensaje.eql?('Mensaje de tarjeta'))
+    return 'ingresa el nombre de la persona que entrega la tarjeta (De parte de)' if (de.strip.empty? || de.eql?('De parte de'))
+    return 'ingresa el nombre de la persona que recibe la tarjeta (Para)' if (para.strip.empty? || para.eql?('Para'))
+
+    return ''
   end
 
   def is_a_valid_email?(email)
     (email =~ /\A[\w+\-.]+@[a-z\d\-]+(\.[a-z]+)*\.[a-z]+\z/i)
   end
 
-  def create_pedido items, nombre, email, telefono, direccion, nombre_entrega, mensaje, fecha_entrega, forma_pago, instrucciones, sector
+  def create_pedido items, nombre, email, telefono, direccion, nombre_entrega, mensaje, fecha_entrega, forma_pago, instrucciones, sector, de, para
     pedido = Pedido.find(session[:pedido_id]) if session[:pedido_id]
     pedido = Pedido.new unless pedido
     pedido.fecha = Time.now.in_time_zone('Quito').to_date
@@ -109,11 +121,14 @@ class CartController < ApplicationController
 
     pedido.direccion_entrega = direccion
     pedido.nombre_entrega = nombre_entrega
-    pedido.mensaje = mensaje
     pedido.fecha_entrega = fecha_entrega
     pedido.forma_pago = forma_pago
     pedido.instrucciones_entrega = instrucciones
     pedido.sector_entrega = sector
+
+    pedido.de = de
+    pedido.para = para
+    pedido.mensaje = mensaje
 
     pedido.costo_entrega = pedido.calcular_costo sector
 

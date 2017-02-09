@@ -40,17 +40,22 @@
   <div style="width: 70%; float: left; margin-bottom: 20px">
     <p style="font-size: smaller">
       EC-MBG-00<%= @pedido.id %><br />
-      Realizado el <b><%= @pedido.fecha %></b><br />
-      Realizado por: <b><%= @pedido.nombre %></b><br />
-      Teléfono: <b><%= @pedido.telefono %></b><br />
+      Pedido realizado el <b><%= @pedido.fecha %></b>
+      por <b><%= @pedido.nombre %></b><br />
+      Contacto <b><%= @pedido.email %></b> -
+      <b><%= @pedido.telefono %></b><br />
       Forma de Pago: <b><%= @pedido.forma_pago_str %></b><br />
       <br />
-      Dirección Entrega: <b><%= @pedido.direccion_entrega %></b><br />
+      Entregar el pedido a <b><%= @pedido.nombre_entrega %></b>
+      el <b><%= @pedido.fecha_entrega %></b><br />
+      en la dirección: <b><%= @pedido.direccion_entrega %></b>
+      en el sector: <b><%= Sector.find(@pedido.sector_entrega).nombre %></b><br />
       Instrucciones de Entrega: <b><%= @pedido.instrucciones_entrega %></b><br />
-      Sector: <b><%= Sector.find(@pedido.sector_entrega).nombre %></b><br />
-      Entregar a: <b><%= @pedido.nombre_entrega %></b><br />
-      Fecha solicitada de entrega: <b><%= @pedido.fecha_entrega %></b><br />
-      Mensaje: <b><%= @pedido.mensaje %></b><br />
+      <br/>
+      Tarjeta:
+      De parte de <b><%= @pedido.de %></b>
+      Para <b><%= @pedido.para %></b> <br />
+      <b><%= @pedido.mensaje %></b>
     </p>
   </div>
   <div class="columna" sstyle="max-width: 300px;">
@@ -95,7 +100,7 @@
                 </a>
               </div>
               <div style="color: grey; font-size: smaller">
-                precio: $ <%= item.producto.precio.to_f * 1.14 * item.cantidad.to_i %>
+                precio: $ <%= item.producto.precio.to_f * 1.14 * item.cantidad.to_i.round(2) %>
               </div>
               <% if !@pedido.forma_pago.eql?('TC') %>
                   <div style="color: black">

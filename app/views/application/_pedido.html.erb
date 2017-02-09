@@ -5,16 +5,20 @@
       <% if @pedido.id %>
         EC-MBG-00<%= @pedido.id %><br />
       <% end %>
-      Realizado el <b><%= @pedido.fecha %></b><br />
-      Realizado por: <b><%= @pedido.nombre %></b><br />
-      Email: <b><%= @pedido.email %></b><br />
-      Teléfono: <b><%= @pedido.telefono %></b><br />
+      Pedido realizado el <b><%= @pedido.fecha %></b>
+      por <b><%= @pedido.nombre %></b><br />
+      Contacto: <b><%= @pedido.email %></b> -
+      <b><%= @pedido.telefono %></b><br />
       Forma de Pago: <b><%= @pedido.forma_pago_str %></b><br />
       <br />
-      Dirección Entrega: <b><%= @pedido.direccion_entrega %></b><br />
-      Entregar a: <b><%= @pedido.nombre_entrega %></b><br />
-      Fecha de entrega: <b><%= @pedido.fecha_entrega %></b><br />
-      Mensaje de la Tarjeta: <b><%= @pedido.mensaje %></b><br />
+      Entregar el pedido a <b><%= @pedido.nombre_entrega %></b>
+      el <b><%= @pedido.fecha_entrega %></b><br />
+      en la dirección <b><%= @pedido.direccion_entrega %></b><br />
+      <br />
+      Tarjeta:
+      De parte de <b><%= @pedido.de %></b>
+      Para <b><%= @pedido.para %></b> <br />
+      <b><%= @pedido.mensaje %></b>
     </p>
   </div>
   <% if @pedido.forma_pago && @pedido.estado.eql?('Borrador') %>
@@ -107,7 +111,7 @@
                 </a>
               </div>
               <div style="color: grey; font-size: smaller">
-                precio: $ <%= item.producto.precio.to_f * 1.14 * item.cantidad.to_i %>
+                precio: $ <%= (item.producto.precio.to_f * 1.14 * item.cantidad.to_i).round(2) %>
               </div>
               <% if !@pedido.forma_pago.eql?('TC') %>
                   <div style="color: black">

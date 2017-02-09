@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20161230005811) do
+ActiveRecord::Schema.define(version: 20170209205716) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -61,6 +61,8 @@ ActiveRecord::Schema.define(version: 20161230005811) do
     t.string   "forma_pago",            default: "T"
     t.text     "instrucciones_entrega"
     t.string   "sector_entrega"
+    t.text     "de"
+    t.text     "para"
   end
 
   create_table "productos", force: :cascade do |t|
@@ -68,10 +70,9 @@ ActiveRecord::Schema.define(version: 20161230005811) do
     t.text     "descripcion"
     t.string   "foto_url"
     t.decimal  "precio"
-    t.datetime "created_at",                       null: false
-    t.datetime "updated_at",                       null: false
-    t.integer  "orden",            default: 10000
-    t.string   "ciudadesMismoDia", default: "UIO"
+    t.datetime "created_at",                  null: false
+    t.datetime "updated_at",                  null: false
+    t.integer  "orden",       default: 10000
   end
 
   create_table "sessions", force: :cascade do |t|
