@@ -1,5 +1,5 @@
-<div class="pedido">
-  <div style="width: 60%; float: left; margin-bottom: 20px">
+<div class="pedido" style="margin-bottom: 10px">
+  <div style="width: 60%; float: left; margin-bottom: 10px">
     <h2>Detalle del Pedido</h2>
     <p style="font-size: smaller">
       <% if @pedido.id %>
@@ -18,7 +18,7 @@
     </p>
   </div>
   <% if @pedido.forma_pago && @pedido.estado.eql?('Borrador') %>
-    <div class="columna" style="width: 350px; text-align: left; float: left;margin-bottom: 15px">
+    <div class="columna" style="width: 350px; text-align: left; float: left;margin-bottom: 10px">
       <% case @pedido.forma_pago
           when 'T' %>
           <h2>Transferencia Bancaria</h2>
@@ -71,7 +71,7 @@
         <div class="<%= @pedido.estado.downcase %>_label"><%= @pedido.estado.capitalize %></div>
       </div>
   <% end %>
-  <div class="cabecera" style="margin: 20px 0;background-color: transparent; border: 1px #EEEEEE solid;float:left">
+  <div class="cabecera" style="background-color: transparent; border: 1px #EEEEEE solid;float:left;padding-bottom: 0">
     <div style="float: right; text-align: center">
       <b>RESUMEN</b><br /><br />
       <div style="text-align: right; float: right; margin: 0 40px;">
@@ -90,7 +90,7 @@
       </div>
 
     </div>
-    <div class="contenido">
+    <div class="contenido" style="padding-bottom: 0">
       <% @pedido.items_json.each do |item| %>
           <div class="item">
 
