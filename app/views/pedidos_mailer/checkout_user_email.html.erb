@@ -95,11 +95,11 @@
                 </a>
               </div>
               <div style="color: grey; font-size: smaller">
-                precio original: $ <%= item.producto.precio_original.to_f * item.cantidad.to_i %>
+                precio: $ <%= item.producto.precio.to_f * 1.14 * item.cantidad.to_i %>
               </div>
               <% if !@pedido.forma_pago.eql?('TC') %>
                   <div style="color: black">
-                    precio descuento: $ <%= item.producto.precio.to_f * item.cantidad.to_i %>
+                    con descuento: $ <%= item.producto.precio.to_f * item.cantidad.to_i %>
                   </div>
               <% end %>
               <div>
