@@ -90,7 +90,7 @@ class CartController < ApplicationController
 
     return 'ingresa una fecha de entrega' if fecha_entrega.strip.empty?
     lunes = Date.new(2017,2,20)
-    return "regalo disponible a partir del lunes 20 de febrero" if fecha_entrega < lunes
+    return "regalo disponible a partir del lunes 20 de febrero" if Date.parse(fecha_entrega) < lunes
     return 'ingresa el nombre a quién debe ser entregada la caja' if (nombre_entrega.strip.empty? || nombre_entrega.eql?('Entregar a'))
     return 'selecciona el sector de entrega ' if (sector.strip.empty? || sector.eql?('Sector'))
     return 'ingresa la dirección de entrega' if (direccion.strip.empty? || direccion.eql?('Dirección de entrega'))
