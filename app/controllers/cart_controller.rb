@@ -89,8 +89,8 @@ class CartController < ApplicationController
   def validate(email, nombre, telefono, nombre_entrega, direccion, mensaje, fecha_entrega, sector, de, para)
 
     return 'ingresa una fecha de entrega' if fecha_entrega.strip.empty? || fecha_entrega.eql?('Fecha Entrega')
-    lunes = Date.new(2017,2,20)
-    return "regalo disponible a partir del lunes 20 de febrero" if Date.parse(fecha_entrega) < lunes
+    lunes = Date.new(2017,3,01)
+    return "regalo disponible a partir del miércoles 1 de marzo" if Date.parse(fecha_entrega) < lunes
     return 'ingresa el nombre a quién debe ser entregada la caja' if (nombre_entrega.strip.empty? || nombre_entrega.eql?('Entregar a'))
     return 'selecciona el sector de entrega ' if (sector.strip.empty? || sector.eql?('Sector'))
     return 'ingresa la dirección de entrega' if (direccion.strip.empty? || direccion.eql?('Dirección de entrega'))
