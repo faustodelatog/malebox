@@ -27,12 +27,15 @@
       <th>Descuento</th>
       <th>Costo entrega</th>
       <th>Nombre entrega</th>
+      <th>De</th>
+      <th>Para</th>
       <th>Mensaje</th>
       <th>Sector entrega</th>
       <th>Direccion entrega</th>
       <th>Instrucciones entrega</th>
       <th>Fecha entrega</th>
       <th>Forma de Pago</th>
+      <th>Precio</th>
       <th>Estado</th>
       <th>Items</th>
       <th colspan="3"></th>
@@ -49,12 +52,15 @@
         <td><%= pedido.descuento %></td>
         <td><%= pedido.costo_entrega %></td>
         <td><%= pedido.nombre_entrega %></td>
+        <td><%= pedido.de %></td>
+        <td><%= pedido.para %></td>
         <td><%= pedido.mensaje %></td>
         <td><%= pedido.sector_entrega %></td>
         <td><%= pedido.direccion_entrega %></td>
         <td><%= pedido.instrucciones_entrega %></td>
         <td><%= pedido.fecha_entrega %></td>
         <td><%= pedido.forma_pago_str %></td>
+        <td><%= pedido.total %></td>
         <td><span class="<%= pedido.estado.downcase %>_label"><%= pedido.estado %></span></td>
         <td>
           <% pedido.items_json.each do |item| %>
