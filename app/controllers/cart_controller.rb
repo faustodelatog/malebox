@@ -50,6 +50,7 @@ class CartController < ApplicationController
     @de = pedido ? pedido.direccion_entrega: params['direccion'] ||= 'Dirección de entrega'
     @ie = pedido ? pedido.instrucciones_entrega: params['instrucciones'] ||= 'Instrucciones de entrega (horario de preferencia, etc.)'
     @se = pedido ? pedido.sector_entrega: params['sector'] ||= ''
+    @he = pedido ? pedido.horario_entrega: params['horarioEntrega'] ||= ''
     @nde = pedido ? pedido.de: params['nombre_de'] ||= 'De parte de'
     @npara = pedido ? pedido.para: params['nombre_para'] ||= 'Para'
     @mt = pedido ? pedido.mensaje: params['mensaje'] ||= 'Mensaje de tarjeta'

@@ -99,8 +99,16 @@
                     <option <% if @se.eql?('O')%> selected <% end %> value="O">Otra Ciudad</option>
                   </select>
 
+                  <select name="horarioEntrega" class="form-control">
+                    <option value="" <% if @he.eql?('')%> selected <% end %>>Horario Entrega</option>
+                    <% HorarioEntrega::todos.each do |horario| %>
+                      <option <% if @he.eql?(horario.id)%> selected <% end %> value="<%= horario.id %>"><%= horario.nombre %></option>
+                    <% end %>
+                  </select>
+
+
                   <textarea name="direccion" value="<%= @de %>" onfocus="if(this.value == 'Dirección de entrega')this.value = '';" onblur="if (this.value == '') {this.value = 'Dirección de entrega';}"><%= @de %></textarea>
-                  <textarea name="instrucciones" value="<%= @ie %>" onfocus="if(this.value == 'Instrucciones de entrega (Horario de preferencia: 8:00 - 10:00 / 10:00 - 12:00 etc.)')this.value = '';" onblur="if (this.value == '') {this.value = 'Instrucciones de entrega (Horario de preferencia: 8:00 - 10:00 / 10:00 - 12:00 etc.)';}"><%= @ie %></textarea>
+                  <textarea name="instrucciones" value="<%= @ie %>" onfocus="if(this.value == 'Instrucciones de entrega')this.value = '';" onblur="if (this.value == '') {this.value = 'Instrucciones de entrega (Horario de preferencia: 8:00 - 10:00 / 10:00 - 12:00 etc.)';}"><%= @ie %></textarea>
                 </div>
                   <h4>Información para la tarjeta</h4>
                   <div class="to" style="width: 100%">
