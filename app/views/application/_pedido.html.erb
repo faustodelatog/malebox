@@ -14,6 +14,7 @@
       Entregar el pedido a <b><%= @pedido.nombre_entrega %></b>
       el <b><%= @pedido.fecha_entrega %></b><br />
       en la dirección <b><%= @pedido.direccion_entrega %></b><br />
+      entre las <b><%= HorarioEntrega.find(@pedido.horario_entrega).nombre %></b> horas
       <br />
       Tarjeta:
       De parte de <b><%= @pedido.de %></b>

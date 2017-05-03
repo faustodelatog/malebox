@@ -48,7 +48,7 @@ class CartController < ApplicationController
     @fe = pedido ? pedido.fecha_entrega: params['fecha_entrega'] ||= 'Fecha Entrega'
     @ea = pedido ? pedido.nombre_entrega: params['nombre_entrega'] ||= 'Entregar a'
     @de = pedido ? pedido.direccion_entrega: params['direccion'] ||= 'Dirección de entrega'
-    @ie = pedido ? pedido.instrucciones_entrega: params['instrucciones'] ||= 'Instrucciones de entrega (horario de preferencia, etc.)'
+    @ie = pedido ? pedido.instrucciones_entrega: params['instrucciones'] ||= 'Instrucciones de entrega'
     @se = pedido ? pedido.sector_entrega: params['sector'] ||= ''
     @he = pedido ? pedido.horario_entrega: params['horario_entrega'] ||= ''
     @nde = pedido ? pedido.de: params['nombre_de'] ||= 'De parte de'

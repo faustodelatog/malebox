@@ -48,6 +48,7 @@
       el <b><%= @pedido.fecha_entrega %></b><br />
       en la dirección: <b><%= @pedido.direccion_entrega %></b>
       en el sector: <b><%= Sector.find(@pedido.sector_entrega).nombre %></b><br />
+      entre las <b><%= HorarioEntrega.find(@pedido.horario_entrega).nombre %></b> horas
       Instrucciones de Entrega: <b><%= @pedido.instrucciones_entrega %></b><br />
       <br/>
       Tarjeta:
