@@ -50,7 +50,7 @@ class CartController < ApplicationController
     @de = pedido ? pedido.direccion_entrega: params['direccion'] ||= 'Dirección de entrega'
     @ie = pedido ? pedido.instrucciones_entrega: params['instrucciones'] ||= 'Instrucciones de entrega (horario de preferencia, etc.)'
     @se = pedido ? pedido.sector_entrega: params['sector'] ||= ''
-    @he = pedido ? pedido.horario_entrega: params['horarioEntrega'] ||= ''
+    @he = pedido ? pedido.horario_entrega: params['horario_entrega'] ||= ''
     @nde = pedido ? pedido.de: params['nombre_de'] ||= 'De parte de'
     @npara = pedido ? pedido.para: params['nombre_para'] ||= 'Para'
     @mt = pedido ? pedido.mensaje: params['mensaje'] ||= 'Mensaje de tarjeta'
@@ -71,12 +71,13 @@ class CartController < ApplicationController
     forma_pago = params['forma_pago']
     instrucciones = params['instrucciones']
     sector = params['sector']
+    horario_entrega = params['horario_entrega']
     de = params['nombre_de']
     para = params['nombre_para']
 
     error = validate(email, nombre, telefono, nombre_entrega, direccion, mensaje, fecha_entrega, sector, de, para)
     if error.empty?
-      pedido_id = create_pedido(cart.items, nombre, email, telefono, direccion, nombre_entrega, mensaje, fecha_entrega, forma_pago, instrucciones, sector, de, para)
+      pedido_id = create_pedido(cart.items, nombre, email, telefono, direccion, nombre_entrega, mensaje, fecha_entrega, forma_pago, instrucciones, sector, de, para, horario_entrega)
       session[:pedido_id] = pedido_id
 
       redirect_to controller: 'checkout', action: 'index'
@@ -111,7 +112,7 @@ class CartController < ApplicationController
     (email =~ /\A[\w+\-.]+@[a-z\d\-]+(\.[a-z]+)*\.[a-z]+\z/i)
   end
 
-  def create_pedido items, nombre, email, telefono, direccion, nombre_entrega, mensaje, fecha_entrega, forma_pago, instrucciones, sector, de, para
+  def create_pedido items, nombre, email, telefono, direccion, nombre_entrega, mensaje, fecha_entrega, forma_pago, instrucciones, sector, de, para, horarioEntrega
     pedido = Pedido.find(session[:pedido_id]) if session[:pedido_id]
     pedido = Pedido.new unless pedido
     pedido.fecha = Time.now.in_time_zone('Quito').to_date
@@ -128,6 +129,7 @@ class CartController < ApplicationController
     pedido.forma_pago = forma_pago
     pedido.instrucciones_entrega = instrucciones
     pedido.sector_entrega = sector
+    pedido.horario_entrega = horarioEntrega
 
     pedido.de = de
     pedido.para = para
