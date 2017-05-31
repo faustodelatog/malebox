@@ -9,7 +9,7 @@ namespace :deploy do
 
   desc "Deploy web server"
   task web: :environment do
-  	sh "rails s"
+  	sh "rails s -b 0.0.0.0"
   end
 
   desc "Deploy the migrations to db"

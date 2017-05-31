@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Selecciona tu ciudad</title>
+	<link href="/css/bootstrap.css" rel='stylesheet' type='text/css' />
+
+	<script src="/js/jquery.min.js"></script>
+	<script src="/js/bootstrap.min.js"></script>
+</head>
+<body style="background-color: black">
+	<div style="text-align: center; padding-top: 50px;">
+		<div style="max-width: 500px; margin: auto; color: white">
+			<img src="/images/logo.png" alt=""/>
+			<br /><br />
+			<h3 class="m_3">¿En qué ciudad te encuentras?</h3>
+			<%= form_tag("/city", method: "post") do %>
+				<select name="ciudad" class="form-control" style="margin-top: 10px">
+					<option value="UIO">QUITO</option>
+					<option value="CNC">CUENCA</option>
+				</select>
+				<br />
+				<input style="width: 100%; background-color: lightslategray; border-color: darkgrey" class="btn btn-primary btn-lg" name="submit" type="submit" id="submit" value="Continuar" onclick="if(submited)return false; {this.value='Cambiando ciudad...'; submited=true};">
+			<% end %>
+		</div>
+	</div>
+</body>
+</html>

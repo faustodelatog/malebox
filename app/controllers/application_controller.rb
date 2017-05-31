@@ -5,8 +5,14 @@ class ApplicationController < ActionController::Base
   skip_before_filter  :verify_authenticity_token
 
   before_action :set_locale
+  before_action :verify_selected_city
 
   def set_locale
     I18n.locale = params[:locale] || :es
+  end
+
+  def verify_selected_city
+  	city = session[:selected_city]
+    redirect_to controller: 'city', action: 'index' unless city
   end
 end
