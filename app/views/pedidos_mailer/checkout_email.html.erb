@@ -99,7 +99,7 @@
                 </a>
               </div>
               <div style="color: grey; font-size: smaller">
-                precio: $ <%= (item.producto.precio.to_f * 1.14 * item.cantidad.to_i).round(2) %>
+                precio: $ <%= (item.producto.precio.to_f * 1.12 * item.cantidad.to_i).round(2) %>
               </div>
               <% if !@pedido.forma_pago.eql?('TC') %>
                   <div style="color: black">

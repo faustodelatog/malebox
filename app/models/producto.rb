@@ -4,7 +4,7 @@ class Producto < ActiveRecord::Base
   has_many :categoria, :through => :categoria_productos
 
   def precio_original
-  	(precio * 1.14).round(2)
+  	(precio * 1.12).round(2)
   end
 
   def nombreCiudadesMismoDia

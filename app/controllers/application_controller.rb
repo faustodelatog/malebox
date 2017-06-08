@@ -12,7 +12,8 @@ class ApplicationController < ActionController::Base
   end
 
   def verify_selected_city
-  	city = session[:selected_city]
+  	session[:selected_city] = 'UIO'
+    city = session[:selected_city]
     redirect_to controller: 'city', action: 'index' unless city
   end
 end
