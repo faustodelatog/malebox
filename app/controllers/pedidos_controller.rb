@@ -11,7 +11,7 @@ class PedidosController < AdminController
       @pedidos = Pedido.all
     end
     @estados = Pedido.select('distinct lower(estado) estado').map(&:estado)
-    @pedidos = @pedidos.sort_by { |p| Date.today - p.fecha }
+    @pedidos = @pedidos.sort_by { |p| p.id }.reverse
   end
 
   # GET /pedidos/1
