@@ -58,7 +58,7 @@
         <td><%= pedido.sector_entrega %></td>
         <td><%= pedido.direccion_entrega %></td>
         <td><%= pedido.instrucciones_entrega %></td>
-        <td><%= pedido.fecha_entrega %></td>
+        <td><%= pedido.fecha_entrega.to_s %></td>
         <td><%= pedido.forma_pago_str %></td>
         <td><%= pedido.total %></td>
         <td><span class="<%= pedido.estado.downcase %>_label"><%= pedido.estado %></span></td>
