@@ -10,6 +10,12 @@ class PedidosController < AdminController
     else
       @pedidos = Pedido.all
     end
+    
+    @filtro_fecha_entrega = "#{params['estado']}"
+    if @filtro_fecha_entrega
+      @pedidos = @pedidos.select{|p| p.fecha_entrega.to_s == @filtro_fecha_entrega}
+    end
+    
     @estados = Pedido.select('distinct lower(estado) estado').map(&:estado)
     @pedidos = @pedidos.sort_by { |p| p.id }.reverse
   end
