@@ -12,7 +12,7 @@
   </div>
   <br /><br /><br />
   <% if @filtro_estado.empty? %>
-      <h3>Mostrando todos los  pedidos</h3>
+      <h3>Mostrando <%= @pedidos.size %>  pedidos</h3>
   <% else %>
     <h3>Filtrando los pedidos por estado <b class="<%= @filtro_estado.downcase %>_label"><%= @filtro_estado.upcase %></b></h3>
   <% end %>
