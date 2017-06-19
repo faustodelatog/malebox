@@ -12,7 +12,7 @@ class PedidosController < AdminController
     end
     
     @filtro_fecha_entrega = "#{params['fecha_entrega']}"
-    if @filtro_fecha_entrega
+    if !@filtro_fecha_entrega.empty?
       @pedidos = @pedidos.select{|p| p.fecha_entrega.to_s == @filtro_fecha_entrega}
     end
     
