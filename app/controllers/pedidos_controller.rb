@@ -11,7 +11,7 @@ class PedidosController < AdminController
       @pedidos = Pedido.all
     end
     
-    @filtro_fecha_entrega = "#{params['estado']}"
+    @filtro_fecha_entrega = "#{params['fecha_entrega']}"
     if @filtro_fecha_entrega
       @pedidos = @pedidos.select{|p| p.fecha_entrega.to_s == @filtro_fecha_entrega}
     end
