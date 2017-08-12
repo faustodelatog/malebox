@@ -95,7 +95,7 @@ Rails.application.configure do
       enable_starttls_auto: true
   }
 
-  config.paypal_account = "info@regalosmalebox.com"
+  config.paypal_account = "informacion@regalosmalebox.com"
   config.paypal_server = "https://www.paypal.com"
   config.server = "http://www.regalosmalebox.com"
 end
