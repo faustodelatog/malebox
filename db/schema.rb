@@ -64,7 +64,7 @@ ActiveRecord::Schema.define(version: 20171116204144) do
     t.text     "de"
     t.text     "para"
     t.string   "horario_entrega"
-    t.string   "punto_entrega"
+    t.string   "punto_entrega", default:"0;0"
   end
 
   create_table "productos", force: :cascade do |t|
