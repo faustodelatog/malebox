@@ -132,6 +132,7 @@ class CartController < ApplicationController
     pedido.instrucciones_entrega = instrucciones
     pedido.sector_entrega = sector
     pedido.horario_entrega = horarioEntrega
+    pedido.punto_entrega = punto_entrega
 
     pedido.de = de
     pedido.para = para
