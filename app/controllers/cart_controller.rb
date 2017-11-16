@@ -74,10 +74,11 @@ class CartController < ApplicationController
     horario_entrega = params['horario_entrega']
     de = params['nombre_de']
     para = params['nombre_para']
+    punto_entrega = params['punto_entrega']
 
-    error = validate(email, nombre, telefono, nombre_entrega, direccion, mensaje, fecha_entrega, sector, de, para)
+    error = validate(email, nombre, telefono, nombre_entrega, direccion, mensaje, fecha_entrega, sector, de, para, punto_entrega)
     if error.empty?
-      pedido_id = create_pedido(cart.items, nombre, email, telefono, direccion, nombre_entrega, mensaje, fecha_entrega, forma_pago, instrucciones, sector, de, para, horario_entrega)
+      pedido_id = create_pedido(cart.items, nombre, email, telefono, direccion, nombre_entrega, mensaje, fecha_entrega, forma_pago, instrucciones, sector, de, para, horario_entrega, punto_entrega)
       session[:pedido_id] = pedido_id
 
       redirect_to controller: 'checkout', action: 'index'
@@ -88,7 +89,7 @@ class CartController < ApplicationController
 
   end
 
-  def validate(email, nombre, telefono, nombre_entrega, direccion, mensaje, fecha_entrega, sector, de, para)
+  def validate(email, nombre, telefono, nombre_entrega, direccion, mensaje, fecha_entrega, sector, de, para, punto_entrega)
 
     return 'ingresa una fecha de entrega' if fecha_entrega.strip.empty? || fecha_entrega.eql?('Fecha Entrega')
     dia_padre = Date.new(2017,6,18)
@@ -104,6 +105,7 @@ class CartController < ApplicationController
     return 'ingresa el mensaje de la tarjeta' if (mensaje.strip.empty? || mensaje.eql?('Mensaje de tarjeta'))
     return 'ingresa el nombre de la persona que entrega la tarjeta (De parte de)' if (de.strip.empty? || de.eql?('De parte de'))
     return 'ingresa el nombre de la persona que recibe la tarjeta (Para)' if (para.strip.empty? || para.eql?('Para'))
+    return 'ubica el punto de entrega en el mapa' if (punto_entrega.strip.empty?)
 
     return ''
   end
@@ -112,7 +114,7 @@ class CartController < ApplicationController
     (email =~ /\A[\w+\-.]+@[a-z\d\-]+(\.[a-z]+)*\.[a-z]+\z/i)
   end
 
-  def create_pedido items, nombre, email, telefono, direccion, nombre_entrega, mensaje, fecha_entrega, forma_pago, instrucciones, sector, de, para, horarioEntrega
+  def create_pedido items, nombre, email, telefono, direccion, nombre_entrega, mensaje, fecha_entrega, forma_pago, instrucciones, sector, de, para, horarioEntrega, punto_entrega
     pedido = Pedido.find(session[:pedido_id]) if session[:pedido_id]
     pedido = Pedido.new unless pedido
     pedido.fecha = Time.now.in_time_zone('Quito').to_date
