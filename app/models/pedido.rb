@@ -61,4 +61,9 @@ class Pedido < ActiveRecord::Base
     # costo * numero_items
     costo
   end
+
+  def ubicacion
+    return "https://www.google.com/maps/search/#{punto_entrega}.gsub(';', ',')" if punto_entrega
+    "https://www.google.com/maps/search/0,0"
+  end
 end

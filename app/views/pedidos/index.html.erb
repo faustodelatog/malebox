@@ -56,7 +56,7 @@
         <td><%= pedido.para %></td>
         <td><%= pedido.mensaje %></td>
         <td><%= pedido.sector_entrega %></td>
-        <td><%= pedido.direccion_entrega %> <a href="https://www.google.com/maps/search/<%= pedido.punto_entrega.gsub(';', ',') %>" >Ver en mapa</a> </td>
+        <td><%= pedido.direccion_entrega %> <a href="<%= pedido.ubicacion %>" >Ver en mapa</a> </td>
         <td><%= pedido.instrucciones_entrega %></td>
         <td><%= pedido.fecha_entrega.to_s %></td>
         <td><%= pedido.forma_pago_str %></td>
