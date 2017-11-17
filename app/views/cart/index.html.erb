@@ -133,6 +133,10 @@
             <div class="text" style="width: 95%">
               <textarea name="mensaje" value="<%= @mt %>" onfocus="if(this.value == 'Mensaje de tarjeta')this.value = '';" onblur="if (this.value == '') {this.value = 'Mensaje de tarjeta';}"><%= @mt %></textarea>
             </div>
+            <div style="width: 100%">
+              <label style="margin:0 20px 20px 0; font-size=0.85em; font-weight:normal; color:gray">Tapa Personalizada ($5 adicional)</label>
+              <input type="checkbox" name="con_tapa_personalizada" data-toggle="toggle">
+            <div>
             <h4>Tus datos</h4>
             <div class="to" style="width: 100%;margin-bottom: 15px">
               <% if current_usuario %>
