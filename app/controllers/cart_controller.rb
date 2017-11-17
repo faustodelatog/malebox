@@ -57,7 +57,7 @@ class CartController < ApplicationController
     @email = pedido ? pedido.email: params['email'] ||= 'Email'
     @nombre = pedido ? pedido.nombre: params['nombre'] ||= 'Nombre'
     @telefono = pedido ? pedido.telefono: params['telefono'] ||= 'Teléfono'
-    @tapa = pedido ? pedido.con_tapa_personalizada: params['con_tapa_personalizada'] ||= false
+    @tapa = pedido ? pedido.con_tapa_personalizada: 'on'.eql?(params['con_tapa_personalizada']) ? true : false
   end
 
   def checkout
@@ -76,7 +76,7 @@ class CartController < ApplicationController
     de = params['nombre_de']
     para = params['nombre_para']
     punto_entrega = params['punto_entrega']
-    con_tapa_personalizada = params['con_tapa_personalizada']
+    con_tapa_personalizada = 'on'.eql?(params['con_tapa_personalizada']) ? true : false
 
     error = validate(email, nombre, telefono, nombre_entrega, direccion, mensaje, fecha_entrega, sector, de, para, punto_entrega)
     if error.empty?
@@ -134,7 +134,7 @@ class CartController < ApplicationController
     pedido.instrucciones_entrega = instrucciones
     pedido.sector_entrega = sector
     pedido.horario_entrega = horarioEntrega
-    pedido.punto_entrega = con_tapa_personalizada
+    pedido.punto_entrega = punto_entrega
     pedido.con_tapa_personalizada = con_tapa_personalizada
 
     pedido.de = de
