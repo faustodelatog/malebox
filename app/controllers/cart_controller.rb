@@ -58,6 +58,7 @@ class CartController < ApplicationController
     @nombre = pedido ? pedido.nombre: params['nombre'] ||= 'Nombre'
     @telefono = pedido ? pedido.telefono: params['telefono'] ||= 'Teléfono'
     @tapa = pedido ? pedido.con_tapa_personalizada: 'on'.eql?(params['con_tapa_personalizada']) ? true : false
+    @ubicacion = pedido ? pedido.punto_entrega: params['punto_entrega'] ||= ''
   end
 
   def checkout

@@ -113,7 +113,7 @@
                 onblur="if (this.value == '') {this.value = 'Instrucciones de entrega';}"><%= @ie %></textarea>
 
               <div style="height:400px; display:block">
-                <input type="hidden" id="punto_entrega" name="punto_entrega" style="width:500px">
+                <input type="hidden" value="<%= @ubicacion %>" id="punto_entrega" name="punto_entrega" style="width:500px">
                 <input id="pac-input" class="controls" type="text" placeholder="Ubica el punto de entrega">
                 <div id="mapPin"></div>
                 <div id="map"></div>
@@ -270,7 +270,7 @@
 
 
     // var marker = new google.maps.Marker({
-    //     position: quito,
+    //     position: pos,
     //     map: map
     // });
 
@@ -315,20 +315,26 @@
 
   function initMap() {
     var quito = { lat: -0.1807, lng: -78.4678 };
-
-    if (navigator.geolocation) {
-      navigator.geolocation.getCurrentPosition(function (position) {
-        var pos = {
-          lat: position.coords.latitude,
-          lng: position.coords.longitude
-        };
-        initMapWithPosition(pos);
-      }, function onError(error) {
-        initMapWithPosition(quito);
-      });
+    var ubicacion = document.getElementById('punto_entrega').value;
+    
+    if(ubicacion != ''){
+      var pos = { lat: ubicacion.split(';')[0], lng: ubicacion.split(';')[1] }
+      initMapWithPosition(pos);
     } else {
-      initMapWithPosition(quito);
-    }
+      if (navigator.geolocation) {
+        navigator.geolocation.getCurrentPosition(function (position) {
+          var pos = {
+            lat: position.coords.latitude,
+            lng: position.coords.longitude
+          };
+          initMapWithPosition(pos);
+        }, function onError(error) {
+          initMapWithPosition(quito);
+        });
+      } else {
+        initMapWithPosition(quito);
+      }
+    }    
   }
 
   function stopEnterKey(evt) {
