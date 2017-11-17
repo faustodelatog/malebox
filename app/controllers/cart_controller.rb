@@ -57,6 +57,7 @@ class CartController < ApplicationController
     @email = pedido ? pedido.email: params['email'] ||= 'Email'
     @nombre = pedido ? pedido.nombre: params['nombre'] ||= 'Nombre'
     @telefono = pedido ? pedido.telefono: params['telefono'] ||= 'Teléfono'
+    @tapa = pedido ? pedido.con_tapa_personalizada: params['con_tapa_personalizada'] ||= false
   end
 
   def checkout
@@ -133,7 +134,7 @@ class CartController < ApplicationController
     pedido.instrucciones_entrega = instrucciones
     pedido.sector_entrega = sector
     pedido.horario_entrega = horarioEntrega
-    pedido.punto_entrega = punto_entrega
+    pedido.punto_entrega = con_tapa_personalizada
     pedido.con_tapa_personalizada = con_tapa_personalizada
 
     pedido.de = de
