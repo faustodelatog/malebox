@@ -46,7 +46,7 @@
       <br />
       Entregar el pedido a <b><%= @pedido.nombre_entrega %></b>
       el <b><%= @pedido.fecha_entrega %></b><br />
-      en la dirección: <b><%= @pedido.direccion_entrega %></b>
+      en la dirección: <b><%= @pedido.direccion_entrega %> <a target="_blank" href="<%= pedido.ubicacion %>" >Ver en mapa</a> </b>
       en el sector: <b><%= Sector.find(@pedido.sector_entrega).nombre %></b><br />
       entre las <b><%= HorarioEntrega.find(@pedido.horario_entrega).nombre %></b> horas
       Instrucciones de Entrega: <b><%= @pedido.instrucciones_entrega %></b><br />
