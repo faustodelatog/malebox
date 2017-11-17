@@ -18,8 +18,12 @@ class Pedido < ActiveRecord::Base
     ((total_items - total_con_descuento) + descuento.to_f).round(2) 
   end
 
+  def total_tapas
+    con_tapa_personalizada ? (5 * numero_items).to_f.round(2) : 0.00;
+  end
+
   def total
-    (total_items + costo_entrega.to_f - total_descuento).round(2)
+    (total_items + total_tapas + costo_entrega.to_f - total_descuento).round(2)
   end
 
   def numero_items
