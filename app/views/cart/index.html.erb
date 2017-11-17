@@ -318,7 +318,7 @@
     var ubicacion = document.getElementById('punto_entrega').value;
     
     if(ubicacion != ''){
-      var pos = { lat: ubicacion.split(';')[0], lng: ubicacion.split(';')[1] }
+      var pos = { lat: parseFloat(ubicacion.split(';')[0]), lng: parseFloat(ubicacion.split(';')[1]) }
       initMapWithPosition(pos);
     } else {
       if (navigator.geolocation) {
