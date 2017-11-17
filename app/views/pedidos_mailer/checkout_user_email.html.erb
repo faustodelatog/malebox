@@ -71,6 +71,9 @@
         $ <%= @pedido.total_items %><br />
         $ <%= @pedido.total_descuento.to_f %><br />
         $ <%= @pedido.costo_entrega.to_f %><br />
+        <% if @pedido.total_tapas.to_f > 0 %>
+          $ <%= @pedido.total_tapas.to_f %><br />
+        <% end %>
         $ 0.0<br />
         <br /><b>$ <%= @pedido.total %></b>
       </div>
@@ -78,6 +81,9 @@
         Productos:<br />
         Descuento:<br />
         Entrega: <br />
+        <% if @pedido.total_tapas.to_f > 0 %>
+          Tapas Personalizadas: <br />
+        <% end %>
         Impuestos: <br />
         <br /><b>TOTAL:</b>
       </div>
