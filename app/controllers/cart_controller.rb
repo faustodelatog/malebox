@@ -75,10 +75,11 @@ class CartController < ApplicationController
     de = params['nombre_de']
     para = params['nombre_para']
     punto_entrega = params['punto_entrega']
+    con_tapa_personalizada = params['con_tapa_personalizada']
 
     error = validate(email, nombre, telefono, nombre_entrega, direccion, mensaje, fecha_entrega, sector, de, para, punto_entrega)
     if error.empty?
-      pedido_id = create_pedido(cart.items, nombre, email, telefono, direccion, nombre_entrega, mensaje, fecha_entrega, forma_pago, instrucciones, sector, de, para, horario_entrega, punto_entrega)
+      pedido_id = create_pedido(cart.items, nombre, email, telefono, direccion, nombre_entrega, mensaje, fecha_entrega, forma_pago, instrucciones, sector, de, para, horario_entrega, punto_entrega, con_tapa_personalizada)
       session[:pedido_id] = pedido_id
 
       redirect_to controller: 'checkout', action: 'index'
@@ -114,7 +115,7 @@ class CartController < ApplicationController
     (email =~ /\A[\w+\-.]+@[a-z\d\-]+(\.[a-z]+)*\.[a-z]+\z/i)
   end
 
-  def create_pedido items, nombre, email, telefono, direccion, nombre_entrega, mensaje, fecha_entrega, forma_pago, instrucciones, sector, de, para, horarioEntrega, punto_entrega
+  def create_pedido items, nombre, email, telefono, direccion, nombre_entrega, mensaje, fecha_entrega, forma_pago, instrucciones, sector, de, para, horarioEntrega, punto_entrega, con_tapa_personalizada
     pedido = Pedido.find(session[:pedido_id]) if session[:pedido_id]
     pedido = Pedido.new unless pedido
     pedido.fecha = Time.now.in_time_zone('Quito').to_date
@@ -133,6 +134,7 @@ class CartController < ApplicationController
     pedido.sector_entrega = sector
     pedido.horario_entrega = horarioEntrega
     pedido.punto_entrega = punto_entrega
+    pedido.con_tapa_personalizada = con_tapa_personalizada
 
     pedido.de = de
     pedido.para = para
