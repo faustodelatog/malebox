@@ -97,7 +97,7 @@ class CartController < ApplicationController
     return 'ingresa una fecha de entrega' if fecha_entrega.strip.empty? || fecha_entrega.eql?('Fecha Entrega')
     noche_buena = Date.new(2017,12,24)
     navidad = Date.new(2017,12,25)
-    return "por favor selecciona una fecha anterior a noche buena o posterior a navidad" if (Date.parse(fecha_entrega) == navidad || Date.parse(fecha_entrega) == noche_buena)
+    return "Oops! Planifica tus entregas hasta el 23 de diciembre o luego de navidad" if (Date.parse(fecha_entrega) == navidad || Date.parse(fecha_entrega) == noche_buena)
     return 'ingresa el nombre a quién debe ser entregada la caja' if (nombre_entrega.strip.empty? || nombre_entrega.eql?('Entregar a'))
     return 'selecciona el sector de entrega ' if (sector.strip.empty? || sector.eql?('Sector'))
     return 'ingresa la dirección de entrega' if (direccion.strip.empty? || direccion.eql?('Dirección de entrega'))
