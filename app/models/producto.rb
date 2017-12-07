@@ -12,7 +12,7 @@ class Producto < ActiveRecord::Base
   end
 
   def permite_tapa_personalizada
-    categorias = CategoriaProducto.where("producto_id = ?", id).map{ |cp| cp.categoria }
+    categorias = CategoriaProducto.where("producto_id = ?", id).map{ |cp| cp.categorium }
     return categorias.any?{|c| c.id == 4}
   end
 end
