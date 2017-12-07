@@ -13,6 +13,7 @@ class Producto < ActiveRecord::Base
 
   def permite_tapa_personalizada
     categorias = CategoriaProducto.where("producto_id = ?", id).map{ |cp| cp.categorium }
-    return categorias.any?{|c| c.id == 4}
+    # se permite tapa personalizada para wood box (categoria 4) y cajas específicas 
+    return categorias.any?{|c| c.id == 4} && ![249, 114, 149, 69, 244, 216].include?(id)
   end
 end
