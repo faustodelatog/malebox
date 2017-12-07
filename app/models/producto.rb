@@ -10,4 +10,9 @@ class Producto < ActiveRecord::Base
   def nombreCiudadesMismoDia
   	ciudadesMismoDia.split("-").map {|inicialesCiudad| Ciudad.find(inicialesCiudad)}
   end
+
+  def permite_tapa_personalizada
+    categorias = CategoriaProducto.where("producto_id = ?", id).map{ |cp| cp.categoria }
+    return categorias.any?{|c| c.id == 4}
+  end
 end

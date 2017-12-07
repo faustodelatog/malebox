@@ -13,4 +13,7 @@ class Cart
     items.reduce(0) {|sum, item| sum + item.producto.precio_original*item.cantidad }
   end
 
+  def permite_tapa_personalizada
+    items.any? { |item| item.producto.permite_tapa_personalizada}
+  end
 end
