@@ -133,7 +133,8 @@
             <div class="text" style="width: 95%">
               <textarea name="mensaje" value="<%= @mt %>" onfocus="if(this.value == 'Mensaje de tarjeta')this.value = '';" onblur="if (this.value == '') {this.value = 'Mensaje de tarjeta';}"><%= @mt %></textarea>
               </div>
-              <% if @cart.permite_tapa_personalizada %>
+              <!-- <% if @cart.permite_tapa_personalizada %> -->
+              <% if false %>
                 <div style="width: 100%">
                   <label style="margin:0 20px 20px 0; font-size:0.85em; font-weight:normal; color:gray">Personaliza tu tapa por $5</label>
                   <% if @tapa %>
