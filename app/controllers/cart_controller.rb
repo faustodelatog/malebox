@@ -95,10 +95,8 @@ class CartController < ApplicationController
   def validate(email, nombre, telefono, nombre_entrega, direccion, mensaje, fecha_entrega, sector, de, para, punto_entrega)
 
     return 'ingresa una fecha de entrega' if fecha_entrega.strip.empty? || fecha_entrega.eql?('Fecha Entrega')
-    dic_23 = Date.new(2017,12,23)
-    noche_buena = Date.new(2017,12,24)
-    navidad = Date.new(2017,12,25)
-    return "Oops! Planifica tus entregas hasta el 22 de diciembre o luego de navidad" if (Date.parse(fecha_entrega) == navidad || Date.parse(fecha_entrega) == dic_23 || Date.parse(fecha_entrega) == noche_buena)
+    feb_14 = Date.new(2018,02,14)
+    return "Por favor escoge una fecha de entrega posterior al 14 de febrero" if (Date.parse(fecha_entrega) == feb_14)
     return 'ingresa el nombre a quién debe ser entregada la caja' if (nombre_entrega.strip.empty? || nombre_entrega.eql?('Entregar a'))
     return 'selecciona el sector de entrega ' if (sector.strip.empty? || sector.eql?('Sector'))
     return 'ingresa la dirección de entrega' if (direccion.strip.empty? || direccion.eql?('Dirección de entrega'))
