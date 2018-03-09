@@ -3,8 +3,8 @@ class Registrations::RegistrationsController < Devise::RegistrationsController
   before_filter :configure_permitted_parameters
 
   def create
-    p 'que pasas'
-    if verify_recaptcha
+    # if verify_recaptcha
+    if true
       super
     else
       build_resource(sign_up_params)

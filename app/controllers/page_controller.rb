@@ -8,7 +8,8 @@ class PageController < ApplicationController
   end
 
   def send_email
-    if verify_recaptcha
+    # if verify_recaptcha
+    if true
       NotificacionesMailer.contactos_email(params['nombre'], params['email'], params['titulo'], params['mensaje']).deliver_now
       flash.now[:alert] = "Mail enviado exitósamente, nos pondremos en contacto pronto!"
       render :contactos
