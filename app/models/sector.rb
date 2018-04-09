@@ -12,8 +12,8 @@ class Sector
 
   def self.quito
     [
-      Sector.new('PD', 'Punto de Distribución', 0),
-      Sector.new('NQ', 'Norte', 2.98),
+      Sector.new('PD', 'Punto de Distribución San Fernando', 0),
+      Sector.new('NQ', 'Norte Quito', 2.98),
       Sector.new('CCQ', 'Mitad del Mundo - Carcelén - Carapungo - Calderón', 6.98),
       Sector.new('SQC', 'Sur hasta Chillogallo', 5.98),
       Sector.new('SQG', 'Guamaní', 8.98),
