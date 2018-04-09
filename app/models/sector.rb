@@ -14,13 +14,15 @@ class Sector
     [
       Sector.new('PD', 'Punto de Distribución', 0),
       Sector.new('NQ', 'Norte', 2.98),
-      Sector.new('CCQ', 'Mitad del Mundo - Carcelén - Carapungo - Calderón', 5.98),
-      Sector.new('SQ', 'Sur', 5.98),
-      Sector.new('CQ', 'Centro', 2.98),
-      Sector.new('CHQ', 'Los Chillos', 5.98),
-      Sector.new('CBQ', 'Cumbayá - Tumbaco', 5.98),
-      Sector.new('AQ', 'Tababela', 9.98),
-      Sector.new('AMG', 'Amaguaña', 9.98),
+      Sector.new('CCQ', 'Mitad del Mundo - Carcelén - Carapungo - Calderón', 6.98),
+      Sector.new('SQC', 'Sur hasta Chillogallo', 5.98),
+      Sector.new('SQG', 'Guamaní', 8.98),
+      Sector.new('CQ', 'Centro Histórico', 5.98),
+      Sector.new('CHQ', 'Los Chillos - Sangolquí', 8.98),
+      Sector.new('CBQ', 'Nayon - Cumbayá - Tumbaco', 6.98),
+      Sector.new('CVQ', 'Conocoto - San Rafael', 6.98),
+      Sector.new('AQ', 'Tababela', 15.98),
+      Sector.new('AMG', 'Amaguaña', 15.98),
     ]
   end
 
