@@ -94,9 +94,12 @@ class CartController < ApplicationController
 
   def validate(email, nombre, telefono, nombre_entrega, direccion, mensaje, fecha_entrega, sector, de, para, punto_entrega)
 
-    return 'ingresa una fecha de entrega' if fecha_entrega.strip.empty? || fecha_entrega.eql?('Fecha Entrega')
-    feb_14 = Date.new(2018,02,14)
-    return "Por favor escoge una fecha de entrega posterior al 14 de febrero" if (Date.parse(fecha_entrega) == feb_14)
+  day_names = ['domingo','lunes','martes','miercoles','jueves','viernes','sabado','domingo']
+  month_names = [nil, 'Enero', 'Febrero', 'Marzo', 'Abril', 'Mayo', 'Junio', 'Julio', 'Agosto', 'Septiembre', 'Octubre', 'Noviembre', 'Diciembre']
+  return 'ingresa una fecha de entrega' if fecha_entrega.strip.empty? || fecha_entrega.eql?('Fecha Entrega')
+    afer_tomorrow = Time.now - Time.now.gmt_offset - 5*3600 + 48*3600
+    mensaje_fecha_entrega = "Estamos copados por el momento, realiza tu pedido el #{day_names[afer_tomorrow.wday]} #{afer_tomorrow.day} de #{month_names[afer_tomorrow.month]}"
+    return mensaje_fecha_entrega if (Date.parse(fecha_entrega) < afer_tomorrow)
     return 'ingresa el nombre a quién debe ser entregada la caja' if (nombre_entrega.strip.empty? || nombre_entrega.eql?('Entregar a'))
     return 'selecciona el sector de entrega ' if (sector.strip.empty? || sector.eql?('Sector'))
     return 'ingresa la dirección de entrega' if (direccion.strip.empty? || direccion.eql?('Dirección de entrega'))
