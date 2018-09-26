@@ -99,7 +99,7 @@ class CartController < ApplicationController
   return 'ingresa una fecha de entrega' if fecha_entrega.strip.empty? || fecha_entrega.eql?('Fecha Entrega')
     afer_tomorrow = DateTime.now.new_offset("-05:00").to_date + 2
     mensaje_fecha_entrega = "Oops! Tenemos entregas copadas para el dia requerido, realiza tu pedido para el #{day_names[afer_tomorrow.wday]} #{afer_tomorrow.day} de #{month_names[afer_tomorrow.month]}"
-    return mensaje_fecha_entrega if (Date.parse(fecha_entrega) < afer_tomorrow)
+    return mensaje_fecha_entrega if false # (Date.parse(fecha_entrega) < afer_tomorrow)
     return 'ingresa el nombre a quién debe ser entregada la caja' if (nombre_entrega.strip.empty? || nombre_entrega.eql?('Entregar a'))
     return 'selecciona el sector de entrega ' if (sector.strip.empty? || sector.eql?('Sector'))
     return 'ingresa la dirección de entrega' if (direccion.strip.empty? || direccion.eql?('Dirección de entrega'))
