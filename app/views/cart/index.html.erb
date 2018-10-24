@@ -91,7 +91,7 @@
               <input type="text" name="nombre_entrega" class="text" value="<%= @ea %>" onfocus="this.value = '';" onblur="if (this.value == '') {this.value = 'Entregar a';}">
             </div>
             <div class="text" style="width: 95%">
-              <select name="sector" class="form-control">
+              <select id ="sectorSelect" name="sector" class="form-control" onchange="changeSector()">
                     <option value="" <% if @se.eql?('')%> selected <% end %>>Sector Entrega</option>
                     <optgroup label="Quito">
                       <% Sector::quito.each do |sector| %>
@@ -101,7 +101,7 @@
                     <option <% if @se.eql?('O')%> selected <% end %> value="O">Otra Ciudad</option>
                   </select>
 
-              <select name="horario_entrega" class="form-control" style="margin-top: 10px">
+              <select id="horarioEntregaSelect" name="horario_entrega" class="form-control" style="margin-top: 10px">
                     <option value="" <% if @he.eql?('')%> selected <% end %>>Horario Entrega</option>
                     <% HorarioEntrega::todos.each do |horario| %>
                       <option <% if @he.eql?(horario.id)%> selected <% end %> value="<%= horario.id %>"><%= horario.nombre %></option>
@@ -243,6 +243,17 @@
 </style>
 
 <script>
+  function changeSector(){
+    if ($('#sectorSelect').val() === 'O') { 
+      $('#horarioEntregaSelect').val('')
+      $('#horarioEntregaSelect').css("visibility", "hidden"); 
+    }
+    else 
+      $('#horarioEntregaSelect').css("visibility", "visible")
+  }
+
+  changeSector();
+
   $('.datepicker').datepicker({
     dateFormat: 'yy-mm-dd'
   });
