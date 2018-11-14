@@ -11,21 +11,13 @@ class PedidosController < AdminController
     p "filtering by from: #{@from} & to: #{@to} & estado: #{@estado}"
    
     @pedidos = Pedido.all
-    p "pedidos: #{@pedidos.size}"
-    if @from
-      @pedidos = @pedidos.where("fecha_entrega >= (?)", @from)
-      p "from: #{@pedidos.size}"
-    end
-    if @to
-      @pedidos = @pedidos.where("fecha_entrega <= (?)", @to)
-      p "to: #{@pedidos.size}"
-    end
-    if @estado
-      @pedidos = @pedidos.where("estado ilike ? ", "%#{@estado}%")
-      p "estado: #{@pedidos.size}"
-    end
+    @pedidos = @pedidos.where("fecha_entrega >= (?)", @from) if @from
+    @pedidos = @pedidos.where("fecha_entrega <= (?)", @to) if @to
+    @pedidos = @pedidos.where("estado ilike ? ", "%#{@estado}%") if @estado
     
     @estados = Pedido.select('distinct lower(estado) estado').map(&:estado)
+    @estados = @estados.select{|e| !e.include?('Pagado Paypal')}
+    @estados.push('Pagado Paypal')
     @pedidos = @pedidos.sort_by { |p| [p.fecha_entrega ? 0 : 1, p.fecha_entrega || 0]}.reverse
   end
 
