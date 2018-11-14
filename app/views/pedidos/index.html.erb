@@ -31,10 +31,11 @@
   <thead>
     <tr>
       <th scope="col">Fecha</th>
+      <th scope="col">Fecha entrega</th>
+      <th scope="col">Horario de entrega</th>*
       <th scope="col">Nombre</th>
       <th scope="col">Email</th>
       <th scope="col">Telefono</th>
-      <th scope="col">Horario de entrega</th>*
       <th scope="col">Costo entrega</th>
       <th scope="col">Nombre entrega</th>
       <th scope="col">De</th>
@@ -43,7 +44,6 @@
       <th scope="col">Sector entrega</th>
       <th scope="col">Direccion entrega</th>
       <th scope="col">Instrucciones entrega</th>
-      <th scope="col">Fecha entrega</th>
       <th scope="col">Forma de Pago</th>
       <th scope="col">Precio</th>
       <th scope="col">Estado</th>
@@ -56,10 +56,11 @@
     <% @pedidos.each do |pedido| %>
       <tr>
         <td class="col-md-1"><%= pedido.fecha %></td>
+        <td class="col-md-1"><%= pedido.fecha_entrega.to_s %></td>
+        <td class="col-md-1"><%= pedido.horario_entrega %></td>
         <td class="col-md-1"><%= pedido.nombre %></td>
         <td class="col-md-1"><%= pedido.email %></td>
         <td class="col-md-1"><%= pedido.telefono %></td>
-        <td class="col-md-1"><%= pedido.horario_entrega %></td>
         <td class="col-md-1"><%= pedido.costo_entrega %></td>
         <td class="col-md-1"><%= pedido.nombre_entrega %></td>
         <td class="col-md-1"><%= pedido.de %></td>
@@ -68,7 +69,6 @@
         <td class="col-md-1"><%= pedido.sector_entrega %></td>
         <td class="col-md-1"><%= pedido.direccion_entrega %></td>
         <td class="col-md-1"><%= pedido.instrucciones_entrega %></td>
-        <td class="col-md-1"><%= pedido.fecha_entrega.to_s %></td>
         <td class="col-md-1"><%= pedido.forma_pago_str %></td>
         <td class="col-md-1"><%= pedido.total %></td>
         <td class="col-md-1"><span class="<%= pedido.estado.downcase %>_label"><%= pedido.estado %></span></td>
