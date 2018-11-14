@@ -87,7 +87,7 @@
           <div style="float:left; max-width:500px; margin-top:30px">
             <h4>Datos de entrega</h4>
             <div class="to" style="width: 100%">
-              <input type="text" name="fecha_entrega" class="text datepicker" value="<%= @fe %>" onfocus="this.value = '';" onblur="if (this.value == '') {this.value = 'Fecha Entrega';}">
+              <input type="text" autocomplete="off" name="fecha_entrega" class="text datepicker" value="<%= @fe %>" onfocus="this.value = '';" onblur="if (this.value == '') {this.value = 'Fecha Entrega';}">
               <input type="text" name="nombre_entrega" class="text" value="<%= @ea %>" onfocus="this.value = '';" onblur="if (this.value == '') {this.value = 'Entregar a';}">
             </div>
             <div class="text" style="width: 95%">

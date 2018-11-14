@@ -111,7 +111,7 @@ class CartController < ApplicationController
     return 'ingresa el mensaje de la tarjeta' if (mensaje.strip.empty? || mensaje.eql?('Mensaje de tarjeta'))
     return 'ingresa el nombre de la persona que entrega la tarjeta (De parte de)' if (de.strip.empty? || de.eql?('De parte de'))
     return 'ingresa el nombre de la persona que recibe la tarjeta (Para)' if (para.strip.empty? || para.eql?('Para'))
-    return 'ubica el punto de entrega en el mapa' if (punto_entrega.strip.empty?)
+    # return 'ubica el punto de entrega en el mapa' if (punto_entrega.strip.empty?)
 
     return ''
   end
