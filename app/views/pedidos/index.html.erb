@@ -7,7 +7,7 @@
       <div class="col-md-4">
         <label class="col-form-label-sm">Estado</label>
         <select class="form-control" name="estado">
-            <option value="">TODOS></option>
+            <option value="">TODOS</option>
           <% @estados.each do |estado| %>
             <option value="<%= estado.upcase %>"><%= estado.upcase %></option>
           <% end %>
@@ -30,24 +30,24 @@
 <table class="table table-bordered table-striped">
   <thead>
     <tr>
-      <th>Fecha</th>
-      <th>Nombre</th>
-      <th>Email</th>
-      <th>Telefono</th>
-      <th>Horario de entrega</th>*
-      <th>Costo entrega</th>
-      <th>Nombre entrega</th>
-      <th>De</th>
-      <th>Para</th>
-      <th>Mensaje</th>
-      <th>Sector entrega</th>
-      <th>Direccion entrega</th>
-      <th>Instrucciones entrega</th>
-      <th>Fecha entrega</th>
-      <th>Forma de Pago</th>
-      <th>Precio</th>
-      <th>Estado</th>
-      <th>Items</th>
+      <th scope="col" class="col-md-1">Fecha</th>
+      <th scope="col" class="col-md-1">Nombre</th>
+      <th scope="col" class="col-md-1">Email</th>
+      <th scope="col" class="col-md-1">Telefono</th>
+      <th scope="col" class="col-md-1">Horario de entrega</th>*
+      <th scope="col" class="col-md-1">Costo entrega</th>
+      <th scope="col" class="col-md-1">Nombre entrega</th>
+      <th scope="col" class="col-md-1">De</th>
+      <th scope="col" class="col-md-1">Para</th>
+      <th scope="col" class="col-md-1">Mensaje</th>
+      <th scope="col" class="col-md-1">Sector entrega</th>
+      <th scope="col" class="col-md-1">Direccion entrega</th>
+      <th scope="col" class="col-md-1">Instrucciones entrega</th>
+      <th scope="col" class="col-md-1">Fecha entrega</th>
+      <th scope="col" class="col-md-1">Forma de Pago</th>
+      <th scope="col" class="col-md-1">Precio</th>
+      <th scope="col" class="col-md-1">Estado</th>
+      <th scope="col" class="col-md-1">Items</th>
       <th colspan="3"></th>
     </tr>
   </thead>
@@ -66,7 +66,7 @@
         <td><%= pedido.para %></td>
         <td><%= pedido.mensaje %></td>
         <td><%= pedido.sector_entrega %></td>
-        <td><%= pedido.direccion_entrega %> <a target="_blank" href="<%= pedido.ubicacion %>" >Ver en mapa</a> </td>
+        <td><%= pedido.direccion_entrega %></td>
         <td><%= pedido.instrucciones_entrega %></td>
         <td><%= pedido.fecha_entrega.to_s %></td>
         <td><%= pedido.forma_pago_str %></td>
