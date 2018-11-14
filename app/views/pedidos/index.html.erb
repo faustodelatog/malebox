@@ -5,7 +5,7 @@
 <div id="filtros">
   <form action="<%= pedidos_path %>" autocomplete="off">
       <div class="col-md-4">
-        <label class="col-form-label-sm">Estado</label>
+        <label class="col-form-label-sm">Estado (<%= estado.upcase %>)</label>
         <select class="form-control" name="estado">
             <option value="">TODOS</option>
           <% @estados.each do |estado| %>
@@ -22,8 +22,8 @@
         <input class="form-control datepicker" type="text" name="to" value="<%= @to %>" />
       </div>
       <div class="col-md-12">
-          <label class="col-form-label-sm"></label>
-        <button type="submit" class="btn btn-primary btn-block">Filtrar</button>
+          <label class="col-form-label-sm bg-green"></label>
+        <button type="submit" class="btn btn-success btn-block">VER</button>
       </div>
   </form>
 </div>
