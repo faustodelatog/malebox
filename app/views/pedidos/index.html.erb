@@ -5,7 +5,7 @@
 <div id="filtros">
   <form action="<%= pedidos_path %>" autocomplete="off">
       <div class="col-md-4">
-        <label class="col-form-label-sm">Estado (<%= estado.upcase %>)</label>
+        <label class="col-form-label-sm">Estado (<%= @estado.upcase %>)</label>
         <select class="form-control" name="estado">
             <option value="">TODOS</option>
           <% @estados.each do |estado| %>
