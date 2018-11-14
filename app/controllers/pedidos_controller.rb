@@ -25,7 +25,7 @@ class PedidosController < AdminController
       p "estado: #{@pedidos.size}"
     end
     
-    @estados = Pedidos.select('distinct lower(estado) estado').map(&:estado)
+    @estados = Pedido.select('distinct lower(estado) estado').map(&:estado)
     @pedidos = @pedidos.sort_by { |p| [p.fecha_entrega ? 0 : 1, p.fecha_entrega || 0]}.reverse
   end
 
