@@ -7,18 +7,26 @@ class PedidosController < AdminController
     @from = "#{params['from']}".to_date rescue nil
     @to = "#{params['to']}".to_date rescue nil
     @estado = "#{params['estado']}"
+
+    p "filtering by from: #{@from} & to: #{@to} & estado: #{@estado}"
    
     @pedidos = Pedido.all
+    p "pedidos: #{@pedidos.size}"
     if @from
       @pedidos = @pedidos.where("fecha_entrega >= (?)", @from)
-    elsif @to
+      p "from: #{@pedidos.size}"
+    end
+    if @to
       @pedidos = @pedidos.where("fecha_entrega <= (?)", @to)
-    elsif @estado
+      p "to: #{@pedidos.size}"
+    end
+    if @estado
       @pedidos = @pedidos.where("estado ilike ? ", "%#{@estado}%")
+      p "estado: #{@pedidos.size}"
     end
     
-    @estados = @pedidos.select('distinct lower(estado) estado').map(&:estado)
-    @pedidos = @pedidos.sort_by { |p| p.fecha_entrega }.reverse
+    @estados = Pedidos.select('distinct lower(estado) estado').map(&:estado)
+    @pedidos = @pedidos.sort_by { |p| [p.fecha_entrega ? 0 : 1, p.fecha_entrega || 0]}.reverse
   end
 
   # GET /pedidos/1
