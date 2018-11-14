@@ -5,11 +5,11 @@
 <div id="filtros">
   <form action="<%= pedidos_path %>" autocomplete="off">
       <div class="col-md-4">
-        <label class="col-form-label-sm">Estado (<%= @estado.upcase %>)</label>
+        <label class="col-form-label-sm">Estado</label>
         <select class="form-control" name="estado">
             <option value="">TODOS</option>
           <% @estados.each do |estado| %>
-            <option value="<%= estado.upcase %>"><%= estado.upcase %></option>
+            <option <% if @estado.eql?(estado)%> selected <% end %> value="<%= estado.upcase %>"><%= estado.upcase %></option>
           <% end %>
           </select>
       </div>
@@ -57,7 +57,7 @@
       <tr>
         <td class="col-md-1"><%= pedido.fecha %></td>
         <td class="col-md-1"><%= pedido.fecha_entrega.to_s %></td>
-        <td class="col-md-1"><%= pedido.horario_entrega %></td>
+        <td class="col-md-1"><%= HorarioEntrega.find(pedido.horario_entrega).nombre %></td>
         <td class="col-md-1"><%= pedido.nombre %></td>
         <td class="col-md-1"><%= pedido.email %></td>
         <td class="col-md-1"><%= pedido.telefono %></td>
