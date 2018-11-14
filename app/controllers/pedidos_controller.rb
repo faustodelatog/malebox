@@ -16,8 +16,8 @@ class PedidosController < AdminController
     @pedidos = @pedidos.where("estado ilike ? ", "%#{@estado}%") if @estado
     
     @estados = Pedido.select('distinct lower(estado) estado').map(&:estado)
-    @estados = @estados.select{|e| !e.include?('Pagado Paypal')}
-    @estados.push('Pagado Paypal')
+    @estados = @estados.select{|e| !e.include?('pagado paypal')}
+    @estados.push('pagado paypal')
     @pedidos = @pedidos.sort_by { |p| [p.fecha_entrega ? 0 : 1, p.fecha_entrega || 0]}.reverse
   end
 
