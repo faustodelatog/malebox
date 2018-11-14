@@ -4,20 +4,21 @@ class PedidosController < AdminController
   # GET /pedidos
   # GET /pedidos.json
   def index
-    @filtro_estado = "#{params['estado']}"
-    if !@filtro_estado.empty?
-      @pedidos = Pedido.where("estado ilike ? ", "%#{@filtro_estado}%")
-    else
-      @pedidos = Pedido.all
+    @from = "#{params['from']}"&.to_date
+    @to = "#{params['to']}"&.to_date
+    @estado = "#{params['estado']}"
+   
+    @pedidos = Pedido.all
+    if @from
+      @pedidos = @pedidos.where("fecha_entrega >= (?)", @from)
+    elsif @to
+      @pedidos = @pedidos.where("fecha_entrega <= (?)", @to)
+    elsif @estado
+      @pedidos = @pedidos.where("estado ilike ? ", "%#{@estado}%")
     end
     
-    @filtro_fecha_entrega = "#{params['fecha_entrega']}"
-    if !@filtro_fecha_entrega.empty?
-      @pedidos = @pedidos.select{|p| p.fecha_entrega.to_s == @filtro_fecha_entrega}
-    end
-    
-    @estados = Pedido.select('distinct lower(estado) estado').map(&:estado)
-    @pedidos = @pedidos.sort_by { |p| p.id }.reverse
+    @estados = @pedidos.select('distinct lower(estado) estado').map(&:estado)
+    @pedidos = @pedidos.sort_by { |p| p.fecha_entrega }.reverse
   end
 
   # GET /pedidos/1

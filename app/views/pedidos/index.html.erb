@@ -1,21 +1,30 @@
 <p id="notice"><%= notice %></p>
 
 <h1>Listado de Pedidos</h1>
+
 <div id="filtros">
-  <% @estados.each do |estado| %>
-    <div style="float: left">
-      <%= link_to estado.upcase, "#{pedidos_path}?estado=#{estado}", :class => "btn #{estado.downcase}", :style => "margin: 0 15px 15px 15px" %>
-    </div>
-  <% end %>
-  <div style="float: left">
-    <%= link_to "TODOS", "#{pedidos_path}", :class => "btn btn-default", :style => "margin: 0 15px 15px 15px" %>
-  </div>
-  <br /><br /><br />
-  <% if @filtro_estado.empty? %>
-      <h3>Mostrando <%= @pedidos.size %>  pedidos</h3>
-  <% else %>
-    <h3>Filtrando los pedidos por estado <b class="<%= @filtro_estado.downcase %>_label"><%= @filtro_estado.upcase %></b></h3>
-  <% end %>
+  <form action="<%= pedidos_path %>">
+      <div class="col-md-4">
+        <label class="col-form-label-sm">Estado</label>
+        <select class="form-control" name="estado">
+          <% @estados.each do |estado| %>
+            <option disabled selected value> TODOS </option>
+            <option value="<%= estado.upcase %>"><%= estado.upcase %></option>
+          <% end %>
+          </select>
+      </div>
+      <div class="col-md-4">
+        <label class="col-form-label-sm">Desde</label>
+        <input class="form-control" type="text" name="from">
+      </div>
+      <div class="col-md-4">
+        <label class="col-form-label-sm">Hasta</label>
+        <input class="form-control" type="text" name="to">
+      </div>
+      <div class="col-md-12">
+        <button type="submit" class="btn btn-primary btn-block">Filtrar</button>
+      </div>
+  </form>
 </div>
 <table class="table table-bordered table-striped">
   <thead>
@@ -24,7 +33,7 @@
       <th>Nombre</th>
       <th>Email</th>
       <th>Telefono</th>
-      <th>Descuento</th>
+      <th>Horario de entrega</th>*
       <th>Costo entrega</th>
       <th>Nombre entrega</th>
       <th>De</th>
@@ -49,7 +58,7 @@
         <td><%= pedido.nombre %></td>
         <td><%= pedido.email %></td>
         <td><%= pedido.telefono %></td>
-        <td><%= pedido.descuento %></td>
+        <td><%= pedido.horario_entrega %></td>
         <td><%= pedido.costo_entrega %></td>
         <td><%= pedido.nombre_entrega %></td>
         <td><%= pedido.de %></td>
