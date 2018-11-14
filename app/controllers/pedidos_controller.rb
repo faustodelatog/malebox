@@ -4,8 +4,8 @@ class PedidosController < AdminController
   # GET /pedidos
   # GET /pedidos.json
   def index
-    @from = "#{params['from']}"&.to_date
-    @to = "#{params['to']}"&.to_date
+    @from = "#{params['from']}".to_date rescue nil
+    @to = "#{params['to']}".to_date rescue nil
     @estado = "#{params['estado']}"
    
     @pedidos = Pedido.all
