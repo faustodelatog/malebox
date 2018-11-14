@@ -15,11 +15,11 @@
       </div>
       <div class="col-md-4">
         <label class="col-form-label-sm">Desde</label>
-        <input class="form-control" type="text" name="from" value="<%= @from %>" />
+        <input class="form-control datepicker" type="text" name="from" value="<%= @from %>" />
       </div>
       <div class="col-md-4">
         <label class="col-form-label-sm">Hasta</label>
-        <input class="form-control" type="text" name="to" value="<%= @to %>" />
+        <input class="form-control datepicker" type="text" name="to" value="<%= @to %>" />
       </div>
       <div class="col-md-12">
           <label class="col-form-label-sm"></label>
@@ -30,24 +30,24 @@
 <table class="table table-bordered table-striped">
   <thead>
     <tr>
-      <th scope="col" class="col-md-1">Fecha</th>
-      <th scope="col" class="col-md-1">Nombre</th>
-      <th scope="col" class="col-md-1">Email</th>
-      <th scope="col" class="col-md-1">Telefono</th>
-      <th scope="col" class="col-md-1">Horario de entrega</th>*
-      <th scope="col" class="col-md-1">Costo entrega</th>
-      <th scope="col" class="col-md-1">Nombre entrega</th>
-      <th scope="col" class="col-md-1">De</th>
-      <th scope="col" class="col-md-1">Para</th>
-      <th scope="col" class="col-md-1">Mensaje</th>
-      <th scope="col" class="col-md-1">Sector entrega</th>
-      <th scope="col" class="col-md-1">Direccion entrega</th>
-      <th scope="col" class="col-md-1">Instrucciones entrega</th>
-      <th scope="col" class="col-md-1">Fecha entrega</th>
-      <th scope="col" class="col-md-1">Forma de Pago</th>
-      <th scope="col" class="col-md-1">Precio</th>
-      <th scope="col" class="col-md-1">Estado</th>
-      <th scope="col" class="col-md-1">Items</th>
+      <th scope="col">Fecha</th>
+      <th scope="col">Nombre</th>
+      <th scope="col">Email</th>
+      <th scope="col">Telefono</th>
+      <th scope="col">Horario de entrega</th>*
+      <th scope="col">Costo entrega</th>
+      <th scope="col">Nombre entrega</th>
+      <th scope="col">De</th>
+      <th scope="col">Para</th>
+      <th scope="col">Mensaje</th>
+      <th scope="col">Sector entrega</th>
+      <th scope="col">Direccion entrega</th>
+      <th scope="col">Instrucciones entrega</th>
+      <th scope="col">Fecha entrega</th>
+      <th scope="col">Forma de Pago</th>
+      <th scope="col">Precio</th>
+      <th scope="col">Estado</th>
+      <th scope="col">Items</th>
       <th colspan="3"></th>
     </tr>
   </thead>
@@ -55,36 +55,42 @@
   <tbody>
     <% @pedidos.each do |pedido| %>
       <tr>
-        <td><%= pedido.fecha %></td>
-        <td><%= pedido.nombre %></td>
-        <td><%= pedido.email %></td>
-        <td><%= pedido.telefono %></td>
-        <td><%= pedido.horario_entrega %></td>
-        <td><%= pedido.costo_entrega %></td>
-        <td><%= pedido.nombre_entrega %></td>
-        <td><%= pedido.de %></td>
-        <td><%= pedido.para %></td>
-        <td><%= pedido.mensaje %></td>
-        <td><%= pedido.sector_entrega %></td>
-        <td><%= pedido.direccion_entrega %></td>
-        <td><%= pedido.instrucciones_entrega %></td>
-        <td><%= pedido.fecha_entrega.to_s %></td>
-        <td><%= pedido.forma_pago_str %></td>
-        <td><%= pedido.total %></td>
-        <td><span class="<%= pedido.estado.downcase %>_label"><%= pedido.estado %></span></td>
-        <td>
+        <td class="col-md-1"><%= pedido.fecha %></td>
+        <td class="col-md-1"><%= pedido.nombre %></td>
+        <td class="col-md-1"><%= pedido.email %></td>
+        <td class="col-md-1"><%= pedido.telefono %></td>
+        <td class="col-md-1"><%= pedido.horario_entrega %></td>
+        <td class="col-md-1"><%= pedido.costo_entrega %></td>
+        <td class="col-md-1"><%= pedido.nombre_entrega %></td>
+        <td class="col-md-1"><%= pedido.de %></td>
+        <td class="col-md-1"><%= pedido.para %></td>
+        <td class="col-md-1"><%= pedido.mensaje %></td>
+        <td class="col-md-1"><%= pedido.sector_entrega %></td>
+        <td class="col-md-1"><%= pedido.direccion_entrega %></td>
+        <td class="col-md-1"><%= pedido.instrucciones_entrega %></td>
+        <td class="col-md-1"><%= pedido.fecha_entrega.to_s %></td>
+        <td class="col-md-1"><%= pedido.forma_pago_str %></td>
+        <td class="col-md-1"><%= pedido.total %></td>
+        <td class="col-md-1"><span class="<%= pedido.estado.downcase %>_label"><%= pedido.estado %></span></td>
+        <td class="col-md-1">
           <% pedido.items_json.each do |item| %>
           <div>
             <img src="<%= item.producto.foto_url %>" width="100" /> <%= item.cantidad %> - <%= item.producto.nombre %>
           </div>
           <% end %>
         </td>
-        <td><%= link_to 'Show', pedido, :class => 'btn btn-info' %></td>
-        <td><%= link_to 'Edit', edit_pedido_path(pedido), :class => 'btn btn-info' %></td>
-        <td><%= link_to 'Destroy', pedido, method: :delete, data: { confirm: 'Are you sure?' }, :class => 'btn btn-danger' %></td>
+        <td class="col-md-1"><%= link_to 'Show', pedido, :class => 'btn btn-info' %></td>
+        <td class="col-md-1"><%= link_to 'Edit', edit_pedido_path(pedido), :class => 'btn btn-info' %></td>
+        <td class="col-md-1"><%= link_to 'Destroy', pedido, method: :delete, data: { confirm: 'Are you sure?' }, :class => 'btn btn-danger' %></td>
       </tr>
     <% end %>
   </tbody>
 </table>
 <br />
 <!--<%= link_to 'New Pedido', new_pedido_path, :class => 'btn btn-primary' %>-->
+
+<script>
+  $('.datepicker').datepicker({
+    dateFormat: 'yyyy-mm-dd'
+  });
+</script>
