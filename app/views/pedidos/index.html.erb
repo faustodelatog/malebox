@@ -31,8 +31,7 @@
   <thead>
     <tr>
       <th scope="col">Fecha</th>
-      <th scope="col">Fecha entrega</th>
-      <th scope="col">Horario de entrega</th>*
+      
       <th scope="col">Nombre</th>
       <th scope="col">Email</th>
       <th scope="col">Telefono</th>
@@ -46,6 +45,8 @@
       <th scope="col">Instrucciones entrega</th>
       <th scope="col">Forma de Pago</th>
       <th scope="col">Precio</th>
+      <th scope="col">Fecha entrega</th>
+      <th scope="col">Horario de entrega</th>*
       <th scope="col">Estado</th>
       <th scope="col">Items</th>
       <th colspan="3"></th>
@@ -56,8 +57,7 @@
     <% @pedidos.each do |pedido| %>
       <tr>
         <td class="col-md-1"><%= pedido.fecha %></td>
-        <td class="col-md-1"><%= pedido.fecha_entrega.to_s %></td>
-        <td class="col-md-1"><%= HorarioEntrega.find(pedido.horario_entrega).nombre %></td>
+        
         <td class="col-md-1"><%= pedido.nombre %></td>
         <td class="col-md-1"><%= pedido.email %></td>
         <td class="col-md-1"><%= pedido.telefono %></td>
@@ -69,8 +69,10 @@
         <td class="col-md-1"><%= pedido.sector_entrega %></td>
         <td class="col-md-1"><%= pedido.direccion_entrega %></td>
         <td class="col-md-1"><%= pedido.instrucciones_entrega %></td>
-        <td class="col-md-1"><%= pedido.forma_pago_str %></td>
+        <td class="col-md-1"><%= pedido.forma_pago %></td>
         <td class="col-md-1"><%= pedido.total %></td>
+        <td class="col-md-1"><%= pedido.fecha_entrega.to_s %></td>
+        <td class="col-md-1"><%= HorarioEntrega.find(pedido.horario_entrega).nombre %></td>
         <td class="col-md-1"><span class="<%= pedido.estado.downcase %>_label"><%= pedido.estado %></span></td>
         <td class="col-md-1">
           <% pedido.items_json.each do |item| %>
