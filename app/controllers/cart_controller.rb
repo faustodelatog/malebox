@@ -9,7 +9,7 @@ class CartController < ApplicationController
   def add_product (product_id)
     cart = session[:cart_id] || {}
     quantity = cart[product_id] || 0
-    cart[product_id] = quantity + 1 if quantity < 10
+    cart[product_id] = quantity + 1 if quantity < 1
 
     session[:cart_id] = cart
   end
@@ -42,7 +42,7 @@ class CartController < ApplicationController
   end
 
   def index
-    @cart = Cart.new(session[:cart_id]) if session[:cart_id]
+    @cart = Cart.new(session[:cart_id], session[:tapas]) if session[:cart_id]
     @cart = nil if @cart && (!@cart.items || @cart.items.empty?)
     pedido = Pedido.find(session[:pedido_id]) if session[:pedido_id]
     @fe = pedido ? pedido.fecha_entrega: params['fecha_entrega'] ||= 'Fecha Entrega'
@@ -61,8 +61,15 @@ class CartController < ApplicationController
     @ubicacion = pedido ? pedido.punto_entrega: params['punto_entrega'] ||= ''
   end
 
+  def add_tapa_personalizada
+    tapas = session[:tapas] || {}
+    tapas[params['product_id']] = OpenStruct.new({tapa_id: params['tapa_id'], variables: params['tapa_variables']})
+
+    session[:tapas] = tapas
+  end
+
   def checkout
-    cart = Cart.new(session[:cart_id])
+    cart = Cart.new(session[:cart_id], session[:tapas])
     email = params['email']
     nombre = params['nombre']
     telefono = params['telefono']

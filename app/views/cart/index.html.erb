@@ -4,32 +4,28 @@
       <% if @cart %>
         <div style="float: left; max-width: 700px">
           <div class="row" style="margin-bottom: 20px; height: 20px; color: gray; font-weight: bold; font-size: smaller">
-            <div style="float: left; width: 15%; margin: 0 5% 0 20%">
+            <div style="float: left; width: 20%; margin: 0 5% 0 25%">
               Producto
             </div>
 
-            <div style="float: left; width: 15%; margin: 0 5% 0 0; text-align: center">
-              Cantidad
+            <div style="float: left; width: 20%; margin: 0 5% 0 0; text-align: center">
+              Tapa Personalizada
             </div>
 
-            <div style="float: left; width: 15%; margin-right: 5%; text-align: center;">
+            <div style="float: left; width: 20%; margin-right: 5%; text-align: center;">
               Precio
-            </div>
-
-            <div style="float: left; width: 15%; margin-right: 5%; text-align: center; color: #E25050">
-              Total
             </div>
           </div>
           <% @cart.items.each do |item| %>
             <div class="row" style="margin-bottom: 5px; padding-bottom: 5px">
 
-              <div style="width:15%; float: left;  margin-right: 5%;  border: solid gray 1px; padding: 3px; color: black">
+              <div style="width:20%; float: left;  margin-right: 5%;  border: solid gray 1px; padding: 3px; color: black">
                 <a href="productos/<%= item.producto.id %>">
                       <img src="<%= item.producto.foto_url %>" class="img-responsive" alt=""/>
                     </a>
               </div>
 
-              <div style="float: left; width: 15%; margin-right: 5%; margin-top: 2%">
+              <div style="float: left; width: 20%; margin-right: 5%; margin-top: 2%">
                 <a href="productos/<%= item.producto.id %>" style="color: black; font-size: smaller">
                   <%= item.producto.nombre %>
                 </a>
@@ -39,31 +35,13 @@
                   <% end %>
               </div>
 
-              <div style="float: left; width: 15%; margin-right: 5%; text-align: center; margin-top: 2%">
-                <% if item.cantidad > 1 %>
-                  <%= link_to remove_from_cart_path(:product_id => item.producto.id), :method => :post do %>
-                    <img src="/images/minus.png" style="width: 15px">
-                    <% end %>
-                      <% end %>
-
-                        <%= item.cantidad %>
-
-                          <% if item.cantidad < 10 %>
-                            <%= link_to add_to_cart_path(:product_id => item.producto.id), :method => :post do %>
-                              <img src="/images/plus.png" style="width: 15px">
-                              <% end %>
-                                <% end %>
-
+              <div style="float: left; width: 20%; margin-right: 5%; text-align: center; margin-top: 2%">
+                  <button class="btn btn-warning" data-toggle="modal" data-target="#tapasModal">Ver Opciones </button>
               </div>
 
-              <div style="float: left; width: 15%; margin-right: 5%; text-align: center; margin-top: 2%">
+              <div style="float: left; width: 20%; margin-right: 5%; text-align: center; margin-top: 2%">
                 <span style="margin-left:10px" class="reducedfrom"><%= item.producto.precio_original %></span>
                 <%= item.producto.precio %>
-              </div>
-
-              <div style="float: left; width: 15%; margin-right: 5%; text-align: center; margin-top: 2%; font-weight: bold">
-                <span style="margin-left:10px" class="reducedfrom"><%= item.total_original %></span>
-                <%= item.total %>
               </div>
             </div>
             <% end %>
@@ -162,6 +140,100 @@
 
   </div>
 </div>
+
+<style type="text/css">
+  .input-hidden {
+  position: absolute;
+  left: -9999px;
+}
+
+input[type=radio]:checked + label>img {
+  border: 1px solid #fff;
+  box-shadow: 0 0 3px 3px #090;
+}
+
+/* Stuff after this is only to make things more pretty */
+input[type=radio] + label>img {
+  border: 1px dashed #444;
+  width: 150px;
+  height: 150px;
+  transition: 500ms all;
+}
+
+input[type=radio]:checked + label>img {
+  transform: 
+    rotateZ(-10deg) 
+    rotateX(10deg);
+}
+
+/*
+ | //lea.verou.me/css3patterns
+ | Because white bgs are boring.
+*/
+html {
+  background-color: #fff;
+  background-size: 100% 1.2em;
+  background-image: 
+    linear-gradient(
+      90deg, 
+      transparent 79px, 
+      #abced4 79px, 
+      #abced4 81px, 
+      transparent 81px
+    ),
+    linear-gradient(
+      #eee .1em, 
+      transparent .1em
+    );
+}
+</style>
+
+<div class="modal fade" id="tapasModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <form>
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+          <h4 class="modal-title" id="myModalLabel">Escoje tu tapa</h4>
+        </div>
+        <div class="modal-body">
+          <div class="row">
+            <% Tapa.all.each do |tapa| %>
+              <div class="col-md-4 col-xs-6">
+                <input value="<%= tapa.id %>"
+                  type="radio" name="tapa_id" 
+                  id="tapa<%= tapa.id %>" class="input-hidden" />
+                <label for="tapa<%= tapa.id %>"
+                    onclick="changeVariables('<%= tapa.variables %>');">
+                  <img
+                    src="<%= tapa.url %>" 
+                    alt="<%= tapa.nombre %>" />
+                </label>
+              </div>
+            <% end %>
+          </div>
+        </div>
+
+          <div class="form-group" style="padding:10px">
+            <span>Escribe aquí la personalizacion </span><label id="variablesTapa"></label>
+            <textarea id="variablesTapaInput" style="height:100px" name="variables" class="form-control"></textarea>
+          </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-default" data-dismiss="modal">Cancelar</button>
+          <button type="submit" class="btn btn-primary">Guardar</button>
+        </div>
+      </div>
+    </form>
+  </div>
+</div>
+
+<script type="text/javascript">
+  function changeVariables(variables){
+    $('#variablesTapa').html(variables);
+    text = variables.split(',').join(':\n')
+    $('#variablesTapaInput').val(text + ':');
+  }
+</script>
 
 <style>
   #map {
