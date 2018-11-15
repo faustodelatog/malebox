@@ -2,7 +2,7 @@ class Cart
   attr_reader :items
 
   def initialize (cart, tapas)
-    @items = cart.map { |producto_id, cantidad| Item.new(producto_id, cantidad, tapas[producto_id])}
+    @items = cart.map { |producto_id, cantidad| Item.new(producto_id, cantidad, tapas&[producto_id])}
   end
 
   def total
