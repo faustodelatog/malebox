@@ -21,13 +21,14 @@
 		<%= link_to 'Salir', destroy_usuario_session_path %>
 	
 		<br /><br />
-		<%= link_to 'Pedidos', pedidos_path %>
+    <%= link_to 'Pedidos', pedidos_path %>
 		<%= link_to 'Productos', admin_productos_path %>
 		<%= link_to 'Fotos', fotos_path %>
 		<%= link_to 'Usuarios', usuarios_path %>
 		<%= link_to 'Categorias', categoria_path %>
 		<%= link_to 'Categoria-Productos', categoria_productos_path %>
 		<%= link_to 'Cambiar Datos', edit_usuario_registration_path %>
+    <%= link_to 'Tapas', tapas_path %>
 
 	<% else %>
 		<%= link_to 'Ingresar', new_usuario_session_path %>

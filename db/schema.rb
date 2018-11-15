@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20171116204144) do
+ActiveRecord::Schema.define(version: 20181115142450) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -55,16 +55,17 @@ ActiveRecord::Schema.define(version: 20171116204144) do
     t.date     "fecha_entrega"
     t.text     "items"
     t.string   "estado"
-    t.datetime "created_at",                          null: false
-    t.datetime "updated_at",                          null: false
+    t.datetime "created_at",                             null: false
+    t.datetime "updated_at",                             null: false
     t.text     "mensaje"
-    t.string   "forma_pago",            default: "T"
+    t.string   "forma_pago",             default: "T"
     t.text     "instrucciones_entrega"
     t.string   "sector_entrega"
     t.text     "de"
     t.text     "para"
     t.string   "horario_entrega"
-    t.string   "punto_entrega", default:"0;0"
+    t.string   "punto_entrega"
+    t.boolean  "con_tapa_personalizada", default: false
   end
 
   create_table "productos", force: :cascade do |t|
@@ -87,6 +88,16 @@ ActiveRecord::Schema.define(version: 20171116204144) do
 
   add_index "sessions", ["session_id"], name: "index_sessions_on_session_id", unique: true, using: :btree
   add_index "sessions", ["updated_at"], name: "index_sessions_on_updated_at", using: :btree
+
+  create_table "tapas", force: :cascade do |t|
+    t.string   "nombre"
+    t.string   "url"
+    t.string   "categoria"
+    t.string   "descripcion"
+    t.string   "variables"
+    t.datetime "created_at",  null: false
+    t.datetime "updated_at",  null: false
+  end
 
   create_table "usuarios", force: :cascade do |t|
     t.string   "email",                  default: "",    null: false

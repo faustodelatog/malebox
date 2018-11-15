@@ -1,0 +1,29 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Nombre:</strong>
+  <%= @tapa.nombre %>
+</p>
+
+<p>
+  <strong>Categoria:</strong>
+  <%= @tapa.categoria %>
+</p>
+
+<p>
+  <strong>Descripcion:</strong>
+  <%= @tapa.descripcion %>
+</p>
+
+<p>
+  <strong>Variables:</strong>
+  <%= @tapa.variables %>
+</p>
+
+<p>
+  <strong>Url:</strong>
+  <img width="300px" src="<%= @tapa.url %>" />
+</p>
+
+<%= link_to 'Edit', edit_tapa_path(@tapa) %> |
+<%= link_to 'Back', tapas_path %>
