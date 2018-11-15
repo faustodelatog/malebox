@@ -17,12 +17,24 @@
         <% end %>
     </div>
 
-    <div style="float: left; width: 20%; margin-right: 5%; text-align: center; margin-top: 2%">
-        <button class="btn btn-warning" data-toggle="modal" data-target="#tapasModal"
+    
+	<% if item.tapa_personalizada %>
+	  <div style="float: left; width: 20%; margin-right: 5%; text-align: center;">
+		<button class="btn" data-toggle="modal" data-target="#tapasModal"
           onclick="setInputFieldsForTapa(<%= item.producto.id %>, <%= item.tapa_personalizada.tapa.id %>, '<%= j item.tapa_personalizada.variables %>')">
+          <div style="border: solid gray 1px; padding: 3px; color: black">
+          	<img class="img-responsive" style="width:10" src="<%= item.tapa_personalizada.tapa.url %>" />
+  		  </div>
+        </button>
+	  </div>
+	<% else %>
+	  <div style="float: left; width: 20%; margin-right: 5%; text-align: center; margin-top: 2%">
+  		<button class="btn btn-warning" data-toggle="modal" data-target="#tapasModal"
+          onclick="setInputFieldsForTapa(<%= item.producto.id %>)">
           Ver Opciones
         </button>
-    </div>
+      </div>
+  	<% end %>
 
     <div style="float: left; width: 20%; margin-right: 5%; text-align: center; margin-top: 2%">
       <span style="margin-left:10px" class="reducedfrom"><%= item.producto.precio_original %></span>
@@ -30,3 +42,11 @@
     </div>
   </div>
 <% end %>
+
+<script type="text/javascript">
+  function setInputFieldsForTapa(productId, tapaId, variables){
+    $('#productIdHidden').val(productId);
+    $('#tapa' + tapaId).prop("checked", true);
+    $('#variablesTapaInput').val(variables);
+  }
+</script>

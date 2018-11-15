@@ -111,6 +111,12 @@
               </a>
             </div>
 
+            <% if item.tapa_personalizada %>
+              <div style="float: left; width: 15%;">
+                <img src="<%= item.tapa_personalizada.tapa.url %>" style="width: 60%;/> 
+              </div>
+            <% end %>
+
             <div style="float: left; margin-top: 10px">
               <div>
                 <a href="/productos/<%= item.producto.id %>">
