@@ -3,9 +3,10 @@ class Item
   attr_reader :cantidad
   attr_accessor :tapa_personalizada
 
-  def initialize(producto_id, cantidad)
+  def initialize(producto_id, cantidad, tapa)
     @producto = Producto.find(producto_id)
     @cantidad = cantidad
+    @tapa_personalizada = TapaPersonalizada.new(tapa.tapa_id, tapa.variables) if tapa
   end
 
   def total
@@ -14,9 +15,5 @@ class Item
 
   def total_original
     producto.precio_original*cantidad
-  end
-
-  def add_tapa(tapa_id, variables)
-    tapa_personalizada = TapaPersonalizada.new(tapa_id, variables)
   end
 end

@@ -1,0 +1,32 @@
+<% cart.items.each do |item| %>
+  <div class="row" style="margin-bottom: 5px; padding-bottom: 5px">
+
+    <div style="width:20%; float: left;  margin-right: 5%;  border: solid gray 1px; padding: 3px; color: black">
+      <a href="productos/<%= item.producto.id %>">
+            <img src="<%= item.producto.foto_url %>" class="img-responsive" alt=""/>
+          </a>
+    </div>
+
+    <div style="float: left; width: 20%; margin-right: 5%; margin-top: 2%">
+      <a href="productos/<%= item.producto.id %>" style="color: black; font-size: smaller">
+        <%= item.producto.nombre %>
+      </a>
+      <br/>
+      <%= link_to remove_all_from_cart_path(:product_id => item.producto.id), :style=>'color: gray; font-size: small', :method => :post,  data: { confirm: 'Se eliminirá el producto de su pedido' } do%>
+        <span style="font-size:x-small; color:red">eliminar</span>
+        <% end %>
+    </div>
+
+    <div style="float: left; width: 20%; margin-right: 5%; text-align: center; margin-top: 2%">
+        <button class="btn btn-warning" data-toggle="modal" data-target="#tapasModal"
+          onclick="setInputFieldsForTapa(<%= item.producto.id %>, <%= item.tapa_personalizada.tapa.id %>, '<%= j item.tapa_personalizada.variables %>')">
+          Ver Opciones
+        </button>
+    </div>
+
+    <div style="float: left; width: 20%; margin-right: 5%; text-align: center; margin-top: 2%">
+      <span style="margin-left:10px" class="reducedfrom"><%= item.producto.precio_original %></span>
+      <%= item.producto.precio %>
+    </div>
+  </div>
+<% end %>

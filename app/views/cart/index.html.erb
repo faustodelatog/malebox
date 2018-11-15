@@ -16,35 +16,9 @@
               Precio
             </div>
           </div>
-          <% @cart.items.each do |item| %>
-            <div class="row" style="margin-bottom: 5px; padding-bottom: 5px">
-
-              <div style="width:20%; float: left;  margin-right: 5%;  border: solid gray 1px; padding: 3px; color: black">
-                <a href="productos/<%= item.producto.id %>">
-                      <img src="<%= item.producto.foto_url %>" class="img-responsive" alt=""/>
-                    </a>
-              </div>
-
-              <div style="float: left; width: 20%; margin-right: 5%; margin-top: 2%">
-                <a href="productos/<%= item.producto.id %>" style="color: black; font-size: smaller">
-                  <%= item.producto.nombre %>
-                </a>
-                <br/>
-                <%= link_to remove_all_from_cart_path(:product_id => item.producto.id), :style=>'color: gray; font-size: small', :method => :post,  data: { confirm: 'Se eliminirá el producto de su pedido' } do%>
-                  <span style="font-size:x-small; color:red">eliminar</span>
-                  <% end %>
-              </div>
-
-              <div style="float: left; width: 20%; margin-right: 5%; text-align: center; margin-top: 2%">
-                  <button class="btn btn-warning" data-toggle="modal" data-target="#tapasModal">Ver Opciones </button>
-              </div>
-
-              <div style="float: left; width: 20%; margin-right: 5%; text-align: center; margin-top: 2%">
-                <span style="margin-left:10px" class="reducedfrom"><%= item.producto.precio_original %></span>
-                <%= item.producto.precio %>
-              </div>
-            </div>
-            <% end %>
+          <div id="itemsCart">
+            <%= render partial: 'items', locals: {cart: @cart} %>
+          </div>
         </div>
 
         <div style="float: left; max-width:400px">
@@ -188,9 +162,18 @@ html {
 }
 </style>
 
+<script type="text/javascript">
+  function setInputFieldsForTapa(productId, tapaId, variables){
+    $('#productIdHidden').val(productId);
+    $('#tapa' + tapaId).prop("checked", true);
+    $('#variablesTapaInput').val(variables);
+  }
+</script>
+
 <div class="modal fade" id="tapasModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
   <div class="modal-dialog">
-    <form>
+    <%= form_for(@tapa, remote: true, url: add_tapa_personalizada_path) do |f| %>
+      <input id="productIdHidden" type="hidden" name="product_id" />
       <div class="modal-content">
         <div class="modal-header">
           <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
@@ -216,22 +199,22 @@ html {
 
           <div class="form-group" style="padding:10px">
             <span>Escribe aquí la personalizacion </span><label id="variablesTapa"></label>
-            <textarea id="variablesTapaInput" style="height:100px" name="variables" class="form-control"></textarea>
+            <textarea id="variablesTapaInput" name="tapa_variables" style="height:100px" name="variables" class="form-control"></textarea>
           </div>
         <div class="modal-footer">
           <button type="button" class="btn btn-default" data-dismiss="modal">Cancelar</button>
           <button type="submit" class="btn btn-primary">Guardar</button>
         </div>
       </div>
-    </form>
+    <% end %>
   </div>
 </div>
 
 <script type="text/javascript">
   function changeVariables(variables){
     $('#variablesTapa').html(variables);
-    text = variables.split(',').join(':\n')
-    $('#variablesTapaInput').val(text + ':');
+    text = variables.split(',').map(v => v + ': ').join('\n');
+    $('#variablesTapaInput').val(text);
   }
 </script>
 

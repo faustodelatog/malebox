@@ -20,6 +20,7 @@ class CheckoutController < ApplicationController
     @pedido = Pedido.find(confirm_pedido_id) if confirm_pedido_id
     if @pedido
       session[:cart_id] = nil
+      session[:tapas] = nil
       session[:pedido_id] = nil
     end
     redirect_to controller: 'checkout', action: 'index' if !@pedido

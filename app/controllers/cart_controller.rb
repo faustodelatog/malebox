@@ -59,6 +59,7 @@ class CartController < ApplicationController
     @telefono = pedido ? pedido.telefono: params['telefono'] ||= 'Teléfono'
     @tapa = pedido ? pedido.con_tapa_personalizada: 'on'.eql?(params['con_tapa_personalizada']) ? true : false
     @ubicacion = pedido ? pedido.punto_entrega: params['punto_entrega'] ||= ''
+    @tapa = ""
   end
 
   def add_tapa_personalizada
@@ -66,6 +67,8 @@ class CartController < ApplicationController
     tapas[params['product_id']] = OpenStruct.new({tapa_id: params['tapa_id'], variables: params['tapa_variables']})
 
     session[:tapas] = tapas
+    @cart = Cart.new(session[:cart_id], session[:tapas])
+    render 'tapa'
   end
 
   def checkout

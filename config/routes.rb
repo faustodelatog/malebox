@@ -62,6 +62,8 @@ Rails.application.routes.draw do
   get 'city' => 'city#index'
   post 'city' => 'city#select'
 
+  post 'tapa_personalizada' => 'cart#add_tapa_personalizada', :as => 'add_tapa_personalizada'
+
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 
