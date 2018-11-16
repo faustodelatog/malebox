@@ -1,0 +1,31 @@
+<p id="notice"><%= notice %></p>
+
+<h1>Listing Inventario Cosas</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Cosa</th>
+      <th>Inventario</th>
+      <th>Cantidad</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @inventario_cosas.each do |inventario_cosa| %>
+      <tr>
+        <td><%= inventario_cosa.cosa %></td>
+        <td><%= inventario_cosa.inventario %></td>
+        <td><%= inventario_cosa.cantidad %></td>
+        <td><%= link_to 'Show', inventario_cosa %></td>
+        <td><%= link_to 'Edit', edit_inventario_cosa_path(inventario_cosa) %></td>
+        <td><%= link_to 'Destroy', inventario_cosa, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Inventario cosa', new_inventario_cosa_path %>

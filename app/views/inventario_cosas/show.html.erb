@@ -1,0 +1,19 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Cosa:</strong>
+  <%= @inventario_cosa.cosa %>
+</p>
+
+<p>
+  <strong>Inventario:</strong>
+  <%= @inventario_cosa.inventario %>
+</p>
+
+<p>
+  <strong>Cantidad:</strong>
+  <%= @inventario_cosa.cantidad %>
+</p>
+
+<%= link_to 'Edit', edit_inventario_cosa_path(@inventario_cosa) %> |
+<%= link_to 'Back', inventario_cosas_path %>

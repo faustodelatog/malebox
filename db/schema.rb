@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20181116011226) do
+ActiveRecord::Schema.define(version: 20181116031642) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -34,6 +34,13 @@ ActiveRecord::Schema.define(version: 20181116011226) do
   add_index "categoria_productos", ["categorium_id"], name: "index_categoria_productos_on_categorium_id", using: :btree
   add_index "categoria_productos", ["producto_id"], name: "index_categoria_productos_on_producto_id", using: :btree
 
+  create_table "cosas", force: :cascade do |t|
+    t.string   "nombre"
+    t.string   "url"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
   create_table "empaques", force: :cascade do |t|
     t.string   "nombre"
     t.string   "url"
@@ -49,6 +56,16 @@ ActiveRecord::Schema.define(version: 20181116011226) do
   end
 
   add_index "fotos", ["producto_id"], name: "index_fotos_on_producto_id", using: :btree
+
+  create_table "inventario_cosas", force: :cascade do |t|
+    t.integer  "cosa_id"
+    t.integer  "inventario"
+    t.integer  "cantidad"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  add_index "inventario_cosas", ["cosa_id"], name: "index_inventario_cosas_on_cosa_id", using: :btree
 
   create_table "pedidos", force: :cascade do |t|
     t.date     "fecha"
@@ -74,6 +91,17 @@ ActiveRecord::Schema.define(version: 20181116011226) do
     t.string   "punto_entrega"
     t.boolean  "con_tapa_personalizada", default: false
   end
+
+  create_table "producto_cosas", force: :cascade do |t|
+    t.integer  "cosa_id"
+    t.integer  "producto_id"
+    t.integer  "cantidad"
+    t.datetime "created_at",  null: false
+    t.datetime "updated_at",  null: false
+  end
+
+  add_index "producto_cosas", ["cosa_id"], name: "index_producto_cosas_on_cosa_id", using: :btree
+  add_index "producto_cosas", ["producto_id"], name: "index_producto_cosas_on_producto_id", using: :btree
 
   create_table "productos", force: :cascade do |t|
     t.string   "nombre"
@@ -141,6 +169,9 @@ ActiveRecord::Schema.define(version: 20181116011226) do
   add_foreign_key "categoria_productos", "categoria"
   add_foreign_key "categoria_productos", "productos"
   add_foreign_key "fotos", "productos"
+  add_foreign_key "inventario_cosas", "cosas"
+  add_foreign_key "producto_cosas", "cosas"
+  add_foreign_key "producto_cosas", "productos"
   add_foreign_key "productos", "empaques"
   add_foreign_key "tapas", "empaques"
 end
