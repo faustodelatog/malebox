@@ -53,7 +53,10 @@
         <td class="col-md-1"><%= pedido.nombre %></td>
         <td class="col-md-1"><%= pedido.telefono %></td>
         <td class="col-md-1"><%= pedido.sector_entrega %></td>
-        <td class="col-md-1"><%= pedido.direccion_entrega %></td>
+        <td class="col-md-1">
+          <%= pedido.direccion_entrega %>
+          <a href="https://www.google.com/maps/search/<%= pedido.direccion_entrega %>" target="_blank">Ver Mapa</a>
+        </td>
         <td class="col-md-1"><%= pedido.instrucciones_entrega %></td>
         <td class="col-md-1"><%= pedido.fecha_entrega.to_s %></td>
         <td class="col-md-1"><%= HorarioEntrega.find(pedido.horario_entrega).nombre %></td>
@@ -61,7 +64,9 @@
         <td class="col-md-1">
           <% pedido.items_json.each do |item| %>
           <div>
-            <img src="<%= item.producto.foto_url %>" width="100" /> <%= item.cantidad %> - <%= item.producto.nombre %>
+            <a href="/productos/<%= item.producto.id %>" target="_blank">
+              <img src="<%= item.producto.foto_url %>" width="100" /> <%= item.cantidad %> - <%= item.producto.nombre %>
+            </a>
           </div>
           <% end %>
         </td>

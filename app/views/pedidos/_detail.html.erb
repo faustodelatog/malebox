@@ -15,8 +15,10 @@
 			  	<% pedido.items_json.each do |item| %>
 			  		<div class="row panel">
 				  		<div class="col-xs-6">
-				  			<img src="<%= item.producto.foto_url %>" width="100" />
-				  			<strong><%= item.producto.nombre %></strong>
+				  			<a href="/productos/<%= item.producto.id %>" target="_blank">
+					            <img src="<%= item.producto.foto_url %>" width="100" />
+					            <strong><%= item.producto.nombre %></strong>
+				            </a>
 				  		</div>
 				  		<% if item.tapa_personalizada %>
 				  			<div class="col-xs-6">
@@ -53,7 +55,10 @@
 			    <div class="col-xs-6">
 			    	<p>Sector: <%= Sector.find(pedido.sector_entrega).nombre %></p>
 			    	<p>Costo: <%= pedido.costo_entrega %></p>
-			    	<p>Dirección: <%= pedido.direccion_entrega %></p>
+			    	<p>
+			    		Dirección: <%= pedido.direccion_entrega %>
+			    		<a href="https://www.google.com/maps/search/<%= pedido.direccion_entrega %>" target="_blank">Ver Mapa</a>
+			    	</p>
 			    	<p>Instrucciones: <%= pedido.instrucciones_entrega %></p>
 			    </div>
 			  </div>
