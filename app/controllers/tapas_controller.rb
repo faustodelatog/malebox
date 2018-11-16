@@ -69,6 +69,6 @@ class TapasController < AdminController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def tapa_params
-      params.require(:tapa).permit(:nombre, :url, :categoria, :descripcion, :variables)
+      params.require(:tapa).permit(:nombre, :url, :categoria, :descripcion, :variables, :empaque_id)
     end
 end

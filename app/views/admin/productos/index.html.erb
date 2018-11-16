@@ -14,6 +14,7 @@
       <th>Foto</th>
       <th>Precio</th>
       <th>Ciudades mismo día</th>
+      <th>Empaque</th>
       <th colspan="3"></th>
     </tr>
   </thead>
@@ -27,6 +28,7 @@
         <td><img src="<%= producto.foto_url %>" width="100" /></td>
         <td><%= producto.precio %></td>
         <td><%= producto.ciudadesMismoDia %></td>
+        <td><%= producto.empaque ? producto.empaque.nombre : '' %></td>
         <td><%= link_to 'Show', admin_producto_path(producto), :class => 'btn btn-info' %></td>
         <td><%= link_to 'Edit', edit_admin_producto_path(producto), :class => 'btn btn-info' %></td>
         <td><%= link_to 'Destroy', admin_producto_path(producto), :class => 'btn btn-danger', method: :delete, data: { confirm: 'Are you sure?' } %></td>

@@ -35,6 +35,10 @@
     <%= f.label :ciudadesMismoDia, :class => 'form-control-label' %><br>
     <%= f.text_field :ciudadesMismoDia, :class => 'form-control' %>
   </div>
+  <div class="field">
+    <%= f.label :empaque, :class => 'form-control-label' %><br>
+    <%= f.collection_select(:empaque_id, Empaque.all, :id, :nombre, {}, :class => 'form-control') %>
+  </div>
   <div class="actions">
     <%= f.submit :class => 'btn btn-primary' %>
   </div>

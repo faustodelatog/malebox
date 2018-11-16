@@ -3,6 +3,8 @@ class Producto < ActiveRecord::Base
   has_many :categoria_productos, :dependent => :delete_all
   has_many :categoria, :through => :categoria_productos
 
+  belongs_to :empaque, required: false
+
   def precio_original
   	(precio * 1.06).round(2)
   end

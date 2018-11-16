@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20181116004625) do
+ActiveRecord::Schema.define(version: 20181116011226) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -84,7 +84,10 @@ ActiveRecord::Schema.define(version: 20181116004625) do
     t.datetime "updated_at",                       null: false
     t.integer  "orden",            default: 10000
     t.string   "ciudadesMismoDia", default: "UIO"
+    t.integer  "empaque_id"
   end
+
+  add_index "productos", ["empaque_id"], name: "index_productos_on_empaque_id", using: :btree
 
   create_table "sessions", force: :cascade do |t|
     t.string   "session_id", null: false
@@ -104,7 +107,10 @@ ActiveRecord::Schema.define(version: 20181116004625) do
     t.string   "variables"
     t.datetime "created_at",  null: false
     t.datetime "updated_at",  null: false
+    t.integer  "empaque_id"
   end
+
+  add_index "tapas", ["empaque_id"], name: "index_tapas_on_empaque_id", using: :btree
 
   create_table "usuarios", force: :cascade do |t|
     t.string   "email",                  default: "",    null: false
@@ -135,4 +141,6 @@ ActiveRecord::Schema.define(version: 20181116004625) do
   add_foreign_key "categoria_productos", "categoria"
   add_foreign_key "categoria_productos", "productos"
   add_foreign_key "fotos", "productos"
+  add_foreign_key "productos", "empaques"
+  add_foreign_key "tapas", "empaques"
 end

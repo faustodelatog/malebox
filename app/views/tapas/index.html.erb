@@ -10,6 +10,7 @@
       <th>Categoria</th>
       <th>Descripcion</th>
       <th>Variables</th>
+      <th>Empaque</th>
       <th colspan="3"></th>
     </tr>
   </thead>
@@ -18,10 +19,11 @@
     <% @tapas.each do |tapa| %>
       <tr>
         <td><%= tapa.nombre %></td>
-        <td><%= tapa.url %></td>
+        <td><img width="100px" src="<%= tapa.url %>" /></td>
         <td><%= tapa.categoria %></td>
         <td><%= tapa.descripcion %></td>
         <td><%= tapa.variables %></td>
+        <td><%= tapa.empaque ? tapa.empaque.nombre : '' %></td>
         <td><%= link_to 'Show', tapa %></td>
         <td><%= link_to 'Edit', edit_tapa_path(tapa) %></td>
         <td><%= link_to 'Destroy', tapa, method: :delete, data: { confirm: 'Are you sure?' } %></td>
