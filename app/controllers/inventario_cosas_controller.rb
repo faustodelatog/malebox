@@ -5,6 +5,12 @@ class InventarioCosasController < AdminController
   # GET /inventario_cosas.json
   def index
     @inventario_cosas = InventarioCosa.all
+    @inventario = params[:inventario]
+    @nombre = params[:nombre]
+
+    @inventario_cosas = @inventario_cosas.where(inventario: @inventario) if @inventario
+    @inventario_cosas = @inventario_cosas.joins(:cosa).where("cosas.nombre ilike ?", "%#{@nombre}%") if @nombre
+    # @inventario_cosas = @inventario_cosas.joinswhere('nombre ilike ?', '%#{@nombre}%') if @nombre && !nombre.empty?
   end
 
   # GET /inventario_cosas/1

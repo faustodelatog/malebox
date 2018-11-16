@@ -1,6 +1,26 @@
 <p id="notice"><%= notice %></p>
 
-<h1>Listing Inventario Cosas</h1>
+<div class="container">
+<h1>Inventario de Cosas</h1>
+
+<div id="filtros" class="panel panel-default">
+  <div class=panel-body>
+    <%= form_for('', url: inventario_cosas_path, html: { method: 'GET' }) do |f| %>
+        <div class="col-md-4">
+          <label class="col-form-label-sm">Inventario</label>
+          <%= f.select(:inventario, InventarioCosa.inventarios.keys.map { |w| [w.humanize, w]}, {}, class: "form-control") %>
+        </div>
+        <div class="col-md-4">
+          <label class="col-form-label-sm">Nombre</label>
+          <%= f.text_field :nombre, :class => 'form-control' %>
+        </div>
+        <div class="col-md-4">
+            <label class="col-form-label-sm bg-green"></label>
+          <button type="submit" class="btn btn-success btn-block">VER</button>
+        </div>
+    <% end %>
+  </div>
+</div>
 
 <table class="table table-bordered table-striped">
   <thead>
@@ -29,3 +49,4 @@
 <br>
 
 <%= link_to 'New Inventario cosa', new_inventario_cosa_path %>
+</div>
