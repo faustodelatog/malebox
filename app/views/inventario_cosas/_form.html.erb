@@ -13,15 +13,15 @@
 
   <div class="field">
     <%= f.label :cosa_id %><br>
-    <%= f.text_field :cosa_id %>
+    <%= f.collection_select(:cosa_id, Cosa.all, :id, :nombre, {},  class: "form-control") %>
   </div>
   <div class="field">
     <%= f.label :inventario %><br>
-    <%= f.number_field :inventario %>
+    <%= f.select(:inventario, InventarioCosa.inventarios.keys.map { |w| [w.humanize, w]}, {}, class: "form-control") %>
   </div>
   <div class="field">
     <%= f.label :cantidad %><br>
-    <%= f.number_field :cantidad %>
+    <%= f.number_field :cantidad, class: "form-control" %>
   </div>
   <div class="actions">
     <%= f.submit %>

@@ -1,0 +1,13 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  inventario_cosa_id: 
+  tipo: 1
+  cantidad: 1
+  notas: MyText
+
+two:
+  inventario_cosa_id: 
+  tipo: 1
+  cantidad: 1
+  notas: MyText

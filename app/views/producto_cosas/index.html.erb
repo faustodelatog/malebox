@@ -2,7 +2,7 @@
 
 <h1>Listing Producto Cosas</h1>
 
-<table>
+<table class="table table-bordered table-striped">
   <thead>
     <tr>
       <th>Cosa</th>
@@ -15,8 +15,8 @@
   <tbody>
     <% @producto_cosas.each do |producto_cosa| %>
       <tr>
-        <td><%= producto_cosa.cosa %></td>
-        <td><%= producto_cosa.producto %></td>
+        <td><%= producto_cosa.cosa.nombre %></td>
+        <td><%= producto_cosa.producto.nombre %></td>
         <td><%= producto_cosa.cantidad %></td>
         <td><%= link_to 'Show', producto_cosa %></td>
         <td><%= link_to 'Edit', edit_producto_cosa_path(producto_cosa) %></td>

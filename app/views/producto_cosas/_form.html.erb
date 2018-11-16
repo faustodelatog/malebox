@@ -12,16 +12,16 @@
   <% end %>
 
   <div class="field">
-    <%= f.label :cosa_id %><br>
-    <%= f.text_field :cosa_id %>
+    <%= f.label :producto_id %><br>
+    <%= f.collection_select(:producto_id, Producto.all, :id, :nombre, {},  class: "form-control") %>
   </div>
   <div class="field">
-    <%= f.label :producto_id %><br>
-    <%= f.text_field :producto_id %>
+    <%= f.label :cosa_id %><br>
+    <%= f.collection_select(:cosa_id, Cosa.all, :id, :nombre, {},  class: "form-control") %>
   </div>
   <div class="field">
     <%= f.label :cantidad %><br>
-    <%= f.number_field :cantidad %>
+    <%= f.number_field :cantidad, class: "form-control" %>
   </div>
   <div class="actions">
     <%= f.submit %>

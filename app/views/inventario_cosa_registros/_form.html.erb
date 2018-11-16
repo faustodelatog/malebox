@@ -1,0 +1,33 @@
+<%= form_for(@inventario_cosa_registro) do |f| %>
+  <% if @inventario_cosa_registro.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@inventario_cosa_registro.errors.count, "error") %> prohibited this inventario_cosa_registro from being saved:</h2>
+
+      <ul>
+      <% @inventario_cosa_registro.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= f.label :inventario_cosa_id %><br>
+    <%= f.collection_select(:inventario_cosa_id, InventarioCosa.all, :id, :nombre, {}, class: "form-control") %>
+  </div>
+  <div class="field">
+    <%= f.label :tipo %><br>
+    <%= f.select(:tipo, InventarioCosaRegistro.tipos.keys.map { |w| [w.humanize, w]}, {}, class: "form-control") %>
+  </div>
+  <div class="field">
+    <%= f.label :cantidad %><br>
+    <%= f.number_field :cantidad, class: "form-control" %>
+  </div>
+  <div class="field">
+    <%= f.label :notas %><br>
+    <%= f.text_area :notas, class: "form-control" %>
+  </div>
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>

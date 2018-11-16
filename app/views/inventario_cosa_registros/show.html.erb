@@ -1,0 +1,24 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Inventario cosa:</strong>
+  <%= @inventario_cosa_registro.inventario_cosa.nombre %>
+</p>
+
+<p>
+  <strong>Tipo:</strong>
+  <%= @inventario_cosa_registro.tipo %>
+</p>
+
+<p>
+  <strong>Cantidad:</strong>
+  <%= @inventario_cosa_registro.cantidad %>
+</p>
+
+<p>
+  <strong>Notas:</strong>
+  <%= @inventario_cosa_registro.notas %>
+</p>
+
+<%= link_to 'Edit', edit_inventario_cosa_registro_path(@inventario_cosa_registro) %> |
+<%= link_to 'Back', inventario_cosa_registros_path %>

@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20181116031642) do
+ActiveRecord::Schema.define(version: 20181116032624) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -56,6 +56,17 @@ ActiveRecord::Schema.define(version: 20181116031642) do
   end
 
   add_index "fotos", ["producto_id"], name: "index_fotos_on_producto_id", using: :btree
+
+  create_table "inventario_cosa_registros", force: :cascade do |t|
+    t.integer  "inventario_cosa_id"
+    t.integer  "tipo"
+    t.integer  "cantidad"
+    t.text     "notas"
+    t.datetime "created_at",         null: false
+    t.datetime "updated_at",         null: false
+  end
+
+  add_index "inventario_cosa_registros", ["inventario_cosa_id"], name: "index_inventario_cosa_registros_on_inventario_cosa_id", using: :btree
 
   create_table "inventario_cosas", force: :cascade do |t|
     t.integer  "cosa_id"
@@ -169,6 +180,7 @@ ActiveRecord::Schema.define(version: 20181116031642) do
   add_foreign_key "categoria_productos", "categoria"
   add_foreign_key "categoria_productos", "productos"
   add_foreign_key "fotos", "productos"
+  add_foreign_key "inventario_cosa_registros", "inventario_cosas"
   add_foreign_key "inventario_cosas", "cosas"
   add_foreign_key "producto_cosas", "cosas"
   add_foreign_key "producto_cosas", "productos"

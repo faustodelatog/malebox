@@ -1,5 +1,6 @@
 Rails.application.routes.draw do
 
+  resources :inventario_cosa_registros
   get 'categorias' => 'lista_categorias#index', :as => 'lista_categorias'
 
   get 'pedidos' => 'pedidos_usuario#index', :as => 'pedidos_usuario'

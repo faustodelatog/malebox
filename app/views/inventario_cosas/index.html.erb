@@ -2,7 +2,7 @@
 
 <h1>Listing Inventario Cosas</h1>
 
-<table>
+<table class="table table-bordered table-striped">
   <thead>
     <tr>
       <th>Cosa</th>
@@ -15,7 +15,7 @@
   <tbody>
     <% @inventario_cosas.each do |inventario_cosa| %>
       <tr>
-        <td><%= inventario_cosa.cosa %></td>
+        <td><%= inventario_cosa.cosa.nombre %></td>
         <td><%= inventario_cosa.inventario %></td>
         <td><%= inventario_cosa.cantidad %></td>
         <td><%= link_to 'Show', inventario_cosa %></td>
