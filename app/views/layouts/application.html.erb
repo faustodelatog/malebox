@@ -131,7 +131,7 @@ License URL: http://creativecommons.org/licenses/by/3.0/
                 <div class="login_buttons">
                   <% if usuario_signed_in? %>
                       <div class="login_button"><%= link_to 'Salir', destroy_usuario_session_path %></div>
-                  <% else %>
+                  <% elsif false %>
                       <div class="login_button"><%= link_to 'Ingresar', new_usuario_session_path %></div>
                   <% end %>
                   <div style="float: right; margin: 10px 10px 0 0;">
