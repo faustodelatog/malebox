@@ -28,6 +28,7 @@ class CosasController < AdminController
 
     respond_to do |format|
       if @cosa.save
+        inventario_cosa = InventarioCosa.create({cosa: @cosa, inventario: 0, cantidad:0})
         format.html { redirect_to @cosa, notice: 'Cosa was successfully created.' }
         format.json { render :show, status: :created, location: @cosa }
       else
