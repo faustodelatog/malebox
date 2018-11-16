@@ -14,7 +14,7 @@ class Pedido < ActiveRecord::Base
 
   def total_descuento
     total_con_descuento = total_items
-    total_con_descuento = total_items_con_descuento unless "TC".eql?(forma_pago)
+    total_con_descuento = total_items_con_descuento unless "TC".eql?(forma_pago) || "PP".eql?(forma_pago)
     ((total_items - total_con_descuento) + descuento.to_f).round(2) 
   end
 
