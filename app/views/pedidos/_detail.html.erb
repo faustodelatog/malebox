@@ -87,6 +87,9 @@
 			    </div>
 			    <div class="col-xs-6">
 			    	<p>TOTAL: <%= pedido.total %></p>
+			    	<% if pedido.forma_pago.casecmp("TC") == 0 %> 
+			    		<p>SIN IVA: <%= pedido.sin_iva %></p>
+		    		<% end %>
 			    </div>
 			  </div>
 			</div>

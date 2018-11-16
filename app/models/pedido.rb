@@ -26,6 +26,10 @@ class Pedido < ActiveRecord::Base
     (total_items + total_tapas + costo_entrega.to_f - total_descuento).round(2)
   end
 
+  def sin_iva
+    (total / 1.12).round(2)
+  end
+
   def numero_items
     items_json.reduce(0) {|sum, item| sum + item.cantidad.to_i }
   end
