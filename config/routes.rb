@@ -10,6 +10,7 @@ Rails.application.routes.draw do
   post 'checkout' => 'checkout#purchase'
   post '/checkout/paypal' => 'checkout#confirm_paypal', :as => 'confirm_paypal'
 
+  post '/inventario_cosas/addRemove' => 'inventario_cosas#add_remove', :as => 'add_remove_cosas'
 
   scope "/admin" do
     resources :tapas
@@ -68,6 +69,8 @@ Rails.application.routes.draw do
   post 'city' => 'city#select'
 
   post 'tapa_personalizada' => 'cart#add_tapa_personalizada', :as => 'add_tapa_personalizada'
+
+  post '/armar_pedido/:id' => 'pedidos#armar', :as => 'armar_pedido'
 
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".

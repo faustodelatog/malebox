@@ -16,6 +16,25 @@ class InventarioCosasController < AdminController
   # GET /inventario_cosas/1
   # GET /inventario_cosas/1.json
   def show
+    accion = params[:accion]
+    render 'add' and return if accion == 'add'
+    render 'remove' and return if accion == 'remove'
+  end
+
+  def add_remove
+    inventario_cosa = InventarioCosa.find(params[:id])
+    cantidad = params[:cantidad]
+    notas = params[:notas]
+    case params[:accion]
+    when 'A'
+      inventario_cosa.agregar(cantidad, notas)
+    when 'R'
+      inventario_cosa.quitar(cantidad, notas)
+    else
+      p 'No hay ninguna accion'
+    end
+
+    redirect_to inventario_cosas_path
   end
 
   # GET /inventario_cosas/new

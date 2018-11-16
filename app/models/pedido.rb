@@ -70,4 +70,18 @@ class Pedido < ActiveRecord::Base
     return "https://www.google.com/maps/search/#{punto_entrega.gsub(';', ',')}" if punto_entrega
     "https://www.google.com/maps/search/0,0"
   end
+
+  # Pedido armado y listo para la entrega
+  def armar(inventario_id)
+    items_json.each{|i| quitar_de_inventario(inventario_id, i.producto.id, i.cantidad.to_i)}
+    self.estado = 'LISTO'
+    self.save!
+  end
+
+  def quitar_de_inventario (inventario_id, producto_id, cantidad)
+    producto = Producto.find(producto_id)
+    cantidad.times do
+       producto.quitar_de_inventario(inventario_id, id)
+    end 
+  end
 end

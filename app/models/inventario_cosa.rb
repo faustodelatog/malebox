@@ -10,7 +10,7 @@ class InventarioCosa < ActiveRecord::Base
 
   	registro.save!
 
-  	self.cantidad += cantidad
+  	self.cantidad += cantidad.to_i
   	self.save!
   end
 
@@ -20,7 +20,7 @@ class InventarioCosa < ActiveRecord::Base
 
   	registro.save!
 
-  	self.cantidad -= cantidad
+  	self.cantidad -= cantidad.to_i
   	self.save!
   end
 

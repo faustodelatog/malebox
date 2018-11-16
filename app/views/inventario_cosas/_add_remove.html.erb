@@ -1,0 +1,36 @@
+<div class="modal fade" id="addRemoveModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-lg">
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+          <h4 class="modal-title" id="myModalLabel">
+            <%= accion_str %>
+            <span><%= inventario_cosa.cosa.nombre %></span>
+          </h4>
+        </div>
+        <%= form_for('', url: add_remove_cosas_path) do |f| %>
+          <div class="modal-body">
+              <div class="row">
+                <%= f.hidden_field :accion, value: accion %>
+                <%= f.hidden_field :id, value: inventario_cosa.id %>
+                <div class="col-md-6">
+                  <label class="col-form-label-sm">Cantidad</label>
+                  <%= f.number_field :cantidad, class: "form-control" %>
+                </div>
+                <div class="col-md-6">
+                  <label class="col-form-label-sm">Notas</label>
+                  <%= f.text_area :notas, class: "form-control" %>
+                </div>
+              </div>
+          </div>
+          <div class="modal-footer">
+            <% if accion == 'A' %>
+              <%= f.submit accion_str, class: 'btn btn-primary btn-block' %>
+            <% elsif accion == 'R' %>  
+            <%= f.submit accion_str, class: 'btn btn-danger btn-block' %>
+              <% end %>
+          </div>
+        <% end %>
+      </div>
+  </div>
+</div>
