@@ -88,7 +88,15 @@
         </div>
         <div class="modal-footer">
           <button type="button" class="btn btn-default" data-dismiss="modal">Cerrar</button>
-          <%= link_to "Armar Regalo", armar_pedido_path(:id => pedido.id), :method => :post, class: 'btn btn-primary', remote: true %></li>
+          <% if pedido.estado.casecmp("pendiente") == 0 %> 
+          	<%= link_to "Armar Regalo", armar_pedido_path(:id => pedido.id), :method => :post, class: 'btn btn-primary', remote: true %></li>
+          <% end %>
+          <% if pedido.estado.casecmp("armado") == 0 %> 
+          	<%= link_to "Entregar Regalo", entregar_pedido_path(:id => pedido.id), :method => :post, class: 'btn btn-success', remote: true %></li>
+          <% end %>
+          <% if pedido.estado.casecmp("cancelado") != 0 %> 
+      	  	<%= link_to "Cancelar Regalo", cancelar_pedido_path(:id => pedido.id), :method => :post, class: 'btn btn-danger', remote: true %></li>
+      	  	<% end %>
         </div>
       </div>
   </div>

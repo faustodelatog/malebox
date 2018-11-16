@@ -57,7 +57,7 @@
         <td class="col-md-1"><%= pedido.instrucciones_entrega %></td>
         <td class="col-md-1"><%= pedido.fecha_entrega.to_s %></td>
         <td class="col-md-1"><%= HorarioEntrega.find(pedido.horario_entrega).nombre %></td>
-        <td class="col-md-1"><span class="<%= pedido.estado.downcase %>_label"><%= pedido.estado %></span></td>
+        <td class="col-md-1"><span class="<%= pedido.estado.downcase %>_label"><%= pedido.estado.upcase %></span></td>
         <td class="col-md-1">
           <% pedido.items_json.each do |item| %>
           <div>

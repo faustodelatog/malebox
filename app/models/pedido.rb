@@ -71,10 +71,19 @@ class Pedido < ActiveRecord::Base
     "https://www.google.com/maps/search/0,0"
   end
 
-  # Pedido armado y listo para la entrega
   def armar(inventario_id)
     items_json.each{|i| quitar_de_inventario(inventario_id, i.producto.id, i.cantidad.to_i)}
-    self.estado = 'LISTO'
+    self.estado = 'Armado'
+    self.save!
+  end
+
+  def entregar
+    self.estado = 'Entregado'
+    self.save!
+  end
+
+  def cancelar
+    self.estado = 'Cancelado'
     self.save!
   end
 

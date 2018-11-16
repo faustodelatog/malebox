@@ -71,6 +71,8 @@ Rails.application.routes.draw do
   post 'tapa_personalizada' => 'cart#add_tapa_personalizada', :as => 'add_tapa_personalizada'
 
   post '/armar_pedido/:id' => 'pedidos#armar', :as => 'armar_pedido'
+  post '/entregar_pedido/:id' => 'pedidos#entregar', :as => 'entregar_pedido'
+  post '/cancelar_pedido/:id' => 'pedidos#cancelar', :as => 'cancelar_pedido'
 
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".

@@ -59,10 +59,10 @@ a:hover{
     background-color: orange;
 }
 .pagado{
-    background-color: #0AA5E2;
+    background-color: green;
 }
-.despachado{
-    background-color: #4cae4c;
+.armado{
+    background-color: blue;
 }
 .entregado{
     background-color: darkgray;
@@ -75,10 +75,10 @@ a:hover{
     color: orange;
 }
 .pagado_label{
-    color: #0AA5E2;
+    color: green;
 }
-.despachado_label{
-    color: #4cae4c;
+.armado_label{
+    color: blue;
 }
 .entregado_label{
     color: darkgray;

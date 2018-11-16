@@ -81,6 +81,18 @@ class PedidosController < AdminController
     render 'armado'
   end
 
+  def entregar
+    pedido = Pedido.find(params[:id])
+    pedido.entregar
+    render 'entregado'
+  end
+
+  def cancelar
+    pedido = Pedido.find(params[:id])
+    pedido.cancelar
+    render 'cancelado'
+  end
+
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_pedido
