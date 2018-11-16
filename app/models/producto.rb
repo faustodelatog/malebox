@@ -2,7 +2,7 @@ class Producto < ActiveRecord::Base
   has_many :fotos, :dependent => :delete_all
   has_many :categoria_productos, :dependent => :delete_all
   has_many :categoria, :through => :categoria_productos
-  has_many :producto_cosas
+  has_many :producto_cosas, :dependent => :delete_all
 
   belongs_to :empaque, required: false
 

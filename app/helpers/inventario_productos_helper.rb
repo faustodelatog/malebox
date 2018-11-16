@@ -1,0 +1,2 @@
+module InventarioProductosHelper
+end

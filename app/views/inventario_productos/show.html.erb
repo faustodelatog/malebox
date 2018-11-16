@@ -1,0 +1,28 @@
+<div class="container">
+	<%= form_for('', url: inventario_producto_path) do |f| %>
+		<table class="table table-bordered table-striped">	
+			<thead>
+			    <tr>
+			      <th>Cosa</th>
+			      <th>Cantidad</th>
+			    </tr>
+		  	</thead>
+
+		  	<tbody>
+			<% @cosas.each do |cosa| %>
+			
+				<tr>
+					<td width="70%"><%= cosa.cosa.nombre %></td>
+					<td width="30%">
+						<input type="text" 
+							class="form-control input-sm text-center spinner" 
+							name="cosa<%= cosa.cosa.id %>"
+							value="<%= cosa.cantidad %>">
+					</td>
+				</tr>
+			<% end %>
+		</tbody>
+		</table>
+		<button type="submit" class="btn btn-info btn-block">GUARDAR</button>
+	<% end %>
+</div>

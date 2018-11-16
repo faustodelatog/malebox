@@ -20,6 +20,10 @@ Rails.application.routes.draw do
     resources :inventario_cosas
     resources :producto_cosas
     resources :cosas
+
+    get 'inventario_productos' => 'inventario_productos#index', :as => 'inventario_productos'
+    get 'inventario_productos/:id' => 'inventario_productos#show', :as => 'inventario_producto'
+    post 'inventario_productos/:id' => 'inventario_productos#update', :as => 'update_inventario_producto'
   end
 
   scope "/admin" do
