@@ -21,7 +21,7 @@
 		<%= link_to 'Salir', destroy_usuario_session_path %>
 	
 		<br /><br />
-    <%= link_to 'Pedidos', pedidos_path %>
+    <%= link_to 'Pedidos', pedidos_path(from: (Date.today - 1.month).to_s) %>
 		<%= link_to 'Productos', admin_productos_path %>
 		<%= link_to 'Fotos', fotos_path %>
 		<%= link_to 'Usuarios', usuarios_path %>
