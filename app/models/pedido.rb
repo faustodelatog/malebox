@@ -75,6 +75,31 @@ class Pedido < ActiveRecord::Base
     "https://www.google.com/maps/search/0,0"
   end
 
+  def realizar
+    self.estado = 'Pendiente'
+    self.fecha = DateTime.now
+    self.save
+
+    PedidosMailer.checkout_email(self.id).deliver_later
+    PedidosMailer.checkout_user_email(self.id).deliver_later
+  end
+
+  def pagar_paypal (tx)
+    self.realizar
+    self.pagar
+
+    self.estado = "Pagado Paypal"
+    self.paypal_tx = tx
+    self.save!
+
+    p "Pago con paypal confirmado para pedido #{self.id} - #{self.estado}"
+  end
+
+  def pagar
+    self.estado = "Pagado"
+    self.save!
+  end
+
   def armar(inventario_id)
     items_json.each{|i| quitar_de_inventario(inventario_id, i.producto.id, i.cantidad.to_i)}
     self.estado = 'Armado'
@@ -89,6 +114,22 @@ class Pedido < ActiveRecord::Base
   def cancelar
     self.estado = 'Cancelado'
     self.save!
+  end
+
+  def pendiente?
+    self.estado.casecmp('pendiente') == 0
+  end
+
+  def pagado?
+    self.estado.downcase.include?('pagado')
+  end
+
+  def armado?
+    self.estado.casecmp('armado') == 0
+  end
+
+  def cancelado?
+    self.estado.casecmp('cancelado') == 0
   end
 
   def quitar_de_inventario (inventario_id, producto_id, cantidad)

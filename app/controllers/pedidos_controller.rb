@@ -75,6 +75,12 @@ class PedidosController < AdminController
     end
   end
 
+  def pagar
+    pedido = Pedido.find(params[:id])
+    pedido.pagar
+    render 'pagado'
+  end
+
   def armar
     pedido = Pedido.find(params[:id])
     pedido.armar(0)

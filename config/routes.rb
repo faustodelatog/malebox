@@ -73,6 +73,7 @@ Rails.application.routes.draw do
   post '/armar_pedido/:id' => 'pedidos#armar', :as => 'armar_pedido'
   post '/entregar_pedido/:id' => 'pedidos#entregar', :as => 'entregar_pedido'
   post '/cancelar_pedido/:id' => 'pedidos#cancelar', :as => 'cancelar_pedido'
+  post '/pagar_pedido/:id' => 'pedidos#pagar', :as => 'pagar_pedido'
 
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
