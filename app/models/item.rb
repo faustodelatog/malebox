@@ -6,7 +6,7 @@ class Item
   def initialize(producto_id, cantidad, tapa)
     @producto = Producto.find(producto_id)
     @cantidad = cantidad
-    @tapa_personalizada = TapaPersonalizada.new(tapa.tapa_id, tapa.variables) if tapa
+    @tapa_personalizada = TapaPersonalizada.new(tapa.tapa_id, tapa.variables) if tapa && tapa.tapa_id
   end
 
   def total

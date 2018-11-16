@@ -166,7 +166,7 @@ html {
         </div>
         <div class="modal-body">
             <% Tapa.all.each do |tapa| %>
-              <div class="col-md-6">
+              <div class="col-md-6 tapa" id="divTapa<%= tapa.id %>">
                 <input value="<%= tapa.id %>"
                   type="radio" name="tapa_id" 
                   id="tapa<%= tapa.id %>" class="input-hidden" />

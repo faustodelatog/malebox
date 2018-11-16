@@ -67,6 +67,11 @@ class CartController < ApplicationController
     tapas[params['product_id']] = OpenStruct.new({tapa_id: params['tapa_id'], variables: params['tapa_variables']})
 
     session[:tapas] = tapas
+    if params['tapa_id'].nil?
+      @error = 'Selecciona un diseño personalizado'
+      render 'tapa'
+      return
+    end
     @cart = Cart.new(session[:cart_id], session[:tapas])
     render 'tapa'
   end

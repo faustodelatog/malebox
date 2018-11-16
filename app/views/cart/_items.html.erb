@@ -17,24 +17,27 @@
         <% end %>
     </div>
 
-    
-	<% if item.tapa_personalizada %>
-	  <div style="float: left; width: 20%; margin-right: 5%; text-align: center;">
-		<button class="btn" data-toggle="modal" data-target="#tapasModal"
-          onclick="setInputFieldsForTapa(<%= item.producto.id %>, <%= item.tapa_personalizada.tapa.id %>, '<%= j item.tapa_personalizada.variables %>')">
-          <div style="border: solid gray 1px; padding: 3px; color: black">
-          	<img class="img-responsive" style="width:10" src="<%= item.tapa_personalizada.tapa.url %>" />
-  		  </div>
-        </button>
-	  </div>
-	<% else %>
-	  <div style="float: left; width: 20%; margin-right: 5%; text-align: center; margin-top: 2%">
-  		<button class="btn btn-warning" data-toggle="modal" data-target="#tapasModal"
-          onclick="setInputFieldsForTapa(<%= item.producto.id %>)">
-          Ver Opciones
+  <% if item.producto.empaque && item.producto.empaque.tapa_ids %>
+  	<% if item.tapa_personalizada %>
+  	  <div style="float: left; width: 20%; margin-right: 5%; text-align: center;">
+  		<button class="btn" data-toggle="modal" data-target="#tapasModal"
+            onclick="setInputFieldsForTapa(<%= item.producto.id %>, <%= item.tapa_personalizada.tapa.id %>, '<%= j item.tapa_personalizada.variables %>'); filterTapas('<%= item.producto.empaque.tapa_ids %>')">
+            <div style="border: solid gray 1px; padding: 3px; color: black">
+            	<img class="img-responsive" style="width:10" src="<%= item.tapa_personalizada.tapa.url %>" />
+    		  </div>
+          </button>
+  	  </div>
+  	<% else %>
+  	  <div style="float: left; width: 20%; margin-right: 5%; text-align: center; margin-top: 2%">
+    		<button class="btn btn-warning" data-toggle="modal" data-target="#tapasModal"
+            onclick="setInputFieldsForTapa(<%= item.producto.id %>); filterTapas('<%= item.producto.empaque.tapa_ids %>')">
+            Ver Opciones
         </button>
       </div>
-  	<% end %>
+    <% end %>
+  <% else %> 
+    <div style="float: left; width: 20%; margin-right: 5%; text-align: center;">&nbsp;</div>
+  <% end %> 
 
     <div style="float: left; width: 20%; margin-right: 5%; text-align: center; margin-top: 2%">
       <span style="margin-left:10px" class="reducedfrom"><%= item.producto.precio_original %></span>
@@ -48,5 +51,11 @@
     $('#productIdHidden').val(productId);
     $('#tapa' + tapaId).prop("checked", true);
     $('#variablesTapaInput').val(variables);
+  }
+
+  function filterTapas(tapaIds){
+    toShow = tapaIds.split(',').map(id => '#divTapa' + id).join(',');
+    $('.tapa').hide();
+    $(toShow).show();
   }
 </script>

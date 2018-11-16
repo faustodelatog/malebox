@@ -1,3 +1,7 @@
-$('#tapasModal').modal('hide');
-content = '<%= j render partial: "items", locals: {cart: @cart} %>'
-$('#itemsCart').html(content);
+<% if @error %>
+	alert('<%= @error %>')
+<% else %>
+	$('#tapasModal').modal('hide');
+	content = '<%= j render partial: "items", locals: {cart: @cart} %>'
+	$('#itemsCart').html(content);
+<% end %>
