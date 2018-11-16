@@ -14,11 +14,12 @@ class PedidosController < AdminController
     @pedidos = @pedidos.where("fecha_entrega >= (?)", @from) if @from
     @pedidos = @pedidos.where("fecha_entrega <= (?)", @to) if @to
     @pedidos = @pedidos.where("estado ilike ? ", "%#{@estado}%") if @estado
-    
+    @pedidos = @pedidos.order(fecha: :desc, id: :desc)
+
     @estados = Pedido.select('distinct lower(estado) estado').map(&:estado)
     @estados = @estados.select{|e| !e.include?('pagado paypal')}
     @estados.push('pagado paypal')
-    @pedidos = @pedidos.sort_by { |p| [p.fecha]}.reverse
+    
   end
 
   # GET /pedidos/1
