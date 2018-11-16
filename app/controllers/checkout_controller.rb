@@ -32,6 +32,7 @@ class CheckoutController < ApplicationController
 
   def update_pedido pedido
     pedido.estado = 'Pendiente'
+    pedido.fecha = DateTime.now
     pedido.save
   end
 

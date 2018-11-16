@@ -2,36 +2,49 @@
 
 <h1>Listado de Pedidos</h1>
 
-<div id="filtros">
-  <form action="<%= pedidos_path %>" autocomplete="off">
-      <div class="col-md-4">
-        <label class="col-form-label-sm">Estado</label>
-        <select class="form-control" name="estado">
-            <option value="">TODOS</option>
-          <% @estados.each do |estado| %>
-            <option <% if @estado.eql?(estado)%> selected <% end %> value="<%= estado.upcase %>"><%= estado.upcase %></option>
-          <% end %>
-          </select>
-      </div>
-      <div class="col-md-4">
-        <label class="col-form-label-sm">Desde</label>
-        <input class="form-control datepicker" type="text" name="from" value="<%= @from %>" />
-      </div>
-      <div class="col-md-4">
-        <label class="col-form-label-sm">Hasta</label>
-        <input class="form-control datepicker" type="text" name="to" value="<%= @to %>" />
-      </div>
-      <div class="col-md-12">
-          <label class="col-form-label-sm bg-green"></label>
-        <button type="submit" class="btn btn-success btn-block">VER</button>
-      </div>
-  </form>
+<div id="filtros" class="panel panel-default">
+  <div class="panel-body">
+    <div class="col-md-4">
+      <%= link_to 'HOY', pedidos_path(from: (Date.today).to_s, to: (Date.today + 1.days).to_s), class:'btn btn-success btn-block' %>
+    </div>
+    <div class="col-md-4">
+      <%= link_to 'Mañana', pedidos_path(from: (Date.today + 1.days).to_s, to: (Date.today + 2.days).to_s), class:'btn btn-warning btn-block' %>
+    </div>
+    <div class="col-md-4">
+      <%= link_to '7 Días', pedidos_path(from: (Date.today).to_s, to: (Date.today + 7.days).to_s), class:'btn btn-info btn-block' %>
+    </div>
+  </div>
+  <div class="panel-body">
+      <form action="<%= pedidos_path %>" autocomplete="off">
+          <div class="col-md-3">
+            <label class="col-form-label-sm">Estado</label>
+            <select class="form-control" name="estado">
+                <option value="">TODOS</option>
+              <% @estados.each do |estado| %>
+                <option <% if @estado.eql?(estado)%> selected <% end %> value="<%= estado.upcase %>"><%= estado.upcase %></option>
+              <% end %>
+              </select>
+          </div>
+          <div class="col-md-3">
+            <label class="col-form-label-sm">Desde</label>
+            <input class="form-control datepicker" type="text" name="from" value="<%= @from %>" />
+          </div>
+          <div class="col-md-3">
+            <label class="col-form-label-sm">Hasta</label>
+            <input class="form-control datepicker" type="text" name="to" value="<%= @to %>" />
+          </div>
+          <div class="col-md-3">
+            <label class="col-form-label-sm"></label>
+            <button type="submit" class="btn btn-block" style="background-color:lightgrey">Buscar</button>
+          </div>
+      </form>
+  </div>
 </div>
 <table class="table table-bordered table-striped">
   <thead>
     <tr>
+      <th scope="col">ID</th>
       <th scope="col">Fecha</th>
-      
       <th scope="col">Nombre</th>
       <th scope="col">Telefono</th>
       <th scope="col">Sector entrega</th>
@@ -48,8 +61,8 @@
   <tbody>
     <% @pedidos.each do |pedido| %>
       <tr>
+        <td class="col-md-1"><%= pedido.id %></td>
         <td class="col-md-1"><%= pedido.fecha %></td>
-        
         <td class="col-md-1"><%= pedido.nombre %></td>
         <td class="col-md-1"><%= pedido.telefono %></td>
         <td class="col-md-1"><%= pedido.sector_entrega %></td>
