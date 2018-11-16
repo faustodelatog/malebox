@@ -18,7 +18,7 @@ class PedidosController < AdminController
     @estados = Pedido.select('distinct lower(estado) estado').map(&:estado)
     @estados = @estados.select{|e| !e.include?('pagado paypal')}
     @estados.push('pagado paypal')
-    @pedidos = @pedidos.sort_by { |p| [p.fecha_entrega ? 0 : 1, p.fecha_entrega || 0]}.reverse
+    @pedidos = @pedidos.sort_by { |p| [p.id]}.reverse
   end
 
   # GET /pedidos/1

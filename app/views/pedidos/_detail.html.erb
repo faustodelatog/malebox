@@ -1,0 +1,94 @@
+<div class="modal fade" id="pedidoModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-lg">
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+          <h4 class="modal-title" id="myModalLabel">
+          	<span class="<%= pedido.estado.downcase %>_label"><%= pedido.estado.upcase %></span>
+          	<span><%= pedido.fecha_entrega.to_s %></span>
+          </h4>
+        </div>
+        <div class="modal-body">
+
+        	<div class="panel panel-default">
+			  <div class="panel-body">
+			  	<% pedido.items_json.each do |item| %>
+			  		<div class="row panel">
+				  		<div class="col-xs-6">
+				  			<img src="<%= item.producto.foto_url %>" width="100" />
+				  			<strong><%= item.producto.nombre %></strong>
+				  		</div>
+				  		<% if item.tapa_personalizada %>
+				  			<div class="col-xs-6">
+				  				<img src="<%= item.tapa_personalizada.tapa.url %>" width="100" />
+				  				<strong><%= item.tapa_personalizada.tapa.nombre %><br /></strong>
+				  				<%= item.tapa_personalizada.variables %>
+				  			</div>
+			  			<% end %>
+			  		</div>
+		        <% end %>	
+				
+			  </div>
+			</div>
+
+        	<div class="panel panel-default">
+			  <div class="panel-body">
+			    <div class="col-xs-6">
+			    	<p>De: <%= pedido.de %></p>
+			    	<p>Para: <%= pedido.para %></p>
+			    </div>
+			    <div class="col-xs-6">
+			    	<p><%= pedido.mensaje %></p>
+			    </div>
+			  </div>
+			</div>
+
+        	<div class="panel panel-default">
+			  <div class="panel-body">
+			    <div class="col-xs-6">
+			    	<p>Entregar a: <%= pedido.nombre_entrega %></p>
+			    	<p>Fecha Entrega: <%= pedido.fecha_entrega.to_s %></p>
+			    	<p>Horario: <%= HorarioEntrega.find(pedido.horario_entrega).nombre %></p>
+			    </div>
+			    <div class="col-xs-6">
+			    	<p>Sector: <%= Sector.find(pedido.sector_entrega).nombre %></p>
+			    	<p>Costo: <%= pedido.costo_entrega %></p>
+			    	<p>Dirección: <%= pedido.direccion_entrega %></p>
+			    	<p>Instrucciones: <%= pedido.instrucciones_entrega %></p>
+			    </div>
+			  </div>
+			</div>
+
+        	<div class="panel panel-default">
+			  <div class="panel-heading">Cliente</div>
+			  <div class="panel-body">
+			    <div class="col-xs-6">
+			    	<p>Nombre: <%= pedido.nombre %></p>
+					<p>Email: <%= pedido.email %></p>
+			    </div>
+			    <div class="col-xs-6">
+			    	<p>Teléfono: <%= pedido.telefono %></p>
+			    </div>
+			  </div>
+			</div>
+
+        	<div class="panel panel-default">
+			  <div class="panel-body">
+			    <div class="col-xs-6">
+	    	        <p>Forma de Pago: <%= pedido.forma_pago_str %></p>
+	    	        <p>Subtotal $ <%= @pedido.total_items.to_f %><br /></p>
+	    	        <p>Descuento: <span style="color:orange">- $ <%= @pedido.total_descuento.to_f %></span></p>
+	    	        <p>Entrega: $ <%= @pedido.costo_entrega.to_f %><br /></p>
+			    </div>
+			    <div class="col-xs-6">
+			    	<p>TOTAL: <%= pedido.total %></p>
+			    </div>
+			  </div>
+			</div>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-default" data-dismiss="modal">Cerrar</button>
+        </div>
+      </div>
+  </div>
+</div>
