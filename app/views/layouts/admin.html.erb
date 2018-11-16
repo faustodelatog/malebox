@@ -2,7 +2,7 @@
 <html>
 <head>
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>El Baúl - Administrador</title>
+  <title>Malebox - Administrador</title>
   <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true %>
   <link href="/css/bootstrap.css" rel='stylesheet' type='text/css' />
   <link href="/css/general.css" rel='stylesheet' type='text/css' />
@@ -14,26 +14,79 @@
   <script src="/js/jquery-ui.min.js"></script>
 </head>
 <body>
-	<p class="notice"><%= notice %></p>
-    <p class="alert"><%= alert %></p>
 	
 	<% if usuario_signed_in? %>
-		<%= link_to 'Salir', destroy_usuario_session_path %>
-	
-		<br /><br />
-    <%= link_to 'Pedidos', pedidos_path(from: (Date.today - 1.month).to_s) %>
-		<%= link_to 'Productos', admin_productos_path %>
-		<%= link_to 'Fotos', fotos_path %>
-		<%= link_to 'Usuarios', usuarios_path %>
-		<%= link_to 'Categorias', categoria_path %>
-		<%= link_to 'Categoria-Productos', categoria_productos_path %>
-    <%= link_to 'Tapas', tapas_path %>
-    <%= link_to 'Empaques', empaques_path %>
-    <%= link_to 'Cosas', cosas_path %>
-    <%= link_to 'Inventario', inventario_cosas_path %>
-    <%= link_to 'Productos-Cosas', producto_cosas_path %>
-    <%= link_to 'Registros-Inventario', inventario_cosa_registros_path %>
-		<%= link_to 'Cambiar Datos', edit_usuario_registration_path %>
+<nav class="navbar navbar-inverse">
+    <div class="container-fluid">
+      <!-- Brand and toggle get grouped for better mobile display -->
+      <div class="navbar-header">
+        <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+          <span class="sr-only">Toggle navigation</span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+        </button>
+        <span class="navbar-brand"><img src="/images/malebox.jpg" width="30"> </span>
+      </div>
+
+      <!-- Collect the nav links, forms, and other content for toggling -->
+      <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+        <ul class="nav navbar-nav">
+          <li><%= link_to 'PEDIDOS', pedidos_path(from: (Date.today - 1.month).to_s) %></li>
+          <li><%= link_to 'PRODUCTOS', admin_productos_path %></li>
+          <li><%= link_to 'INVENTARIO', inventario_cosas_path %></li>
+        </ul>
+        
+        <ul class="nav navbar-nav navbar-right">
+          <li class="dropdown">
+            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">PRODUCTOS<span class="caret"></span></a>
+            <ul class="dropdown-menu">
+              <li><%= link_to 'Catalogo', admin_productos_path %></li>
+              <li role="separator" class="divider"></li>
+              <li><%= link_to 'Composición', inventario_productos_path %></li>
+              <li role="separator" class="divider"></li>
+              <li><%= link_to 'Categorias', categoria_path %></li>
+              <li role="separator" class="divider"></li>
+              <li><%= link_to 'Categoria-Productos', categoria_productos_path %></li>
+              <li role="separator" class="divider"></li>
+              <li><%= link_to 'Productos-Cosas', producto_cosas_path %></li>
+              <li role="separator" class="divider"></li>
+              <li><%= link_to 'Fotos', fotos_path %></li>
+
+            </ul>
+          </li>
+          <li class="dropdown">
+            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">INVENTARIO<span class="caret"></span></a>
+            <ul class="dropdown-menu">
+              <li><%= link_to 'Stock', inventario_cosas_path %></li>
+              <li role="separator" class="divider"></li>
+              <li><%= link_to 'Catalogo', cosas_path %></li>
+              <li role="separator" class="divider"></li>
+              <li><%= link_to 'Registros', inventario_cosa_registros_path %></li>
+            </ul>
+          </li>
+          <li class="dropdown">
+            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">EMPAQUES<span class="caret"></span></a>
+            <ul class="dropdown-menu">
+              <li><%= link_to 'Empaques', empaques_path %></li>
+              <li role="separator" class="divider"></li>
+              <li><%= link_to 'Tapas', tapas_path %></li>
+            </ul>
+          </li>
+          <li class="dropdown">
+            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">USUARIOS<span class="caret"></span></a>
+            <ul class="dropdown-menu">
+              <li><%= link_to 'Usuarios', usuarios_path %></li>
+              <li role="separator" class="divider"></li>
+              <li><%= link_to 'Cambiar Datos', edit_usuario_registration_path %></li>
+            </ul>
+          </li>
+          <li><%= link_to 'Salir', destroy_usuario_session_path %></li>
+        </ul>
+      </div><!-- /.navbar-collapse -->
+    </div><!-- /.container-fluid -->
+  </nav>
+
 
 	<% else %>
 		<%= link_to 'Ingresar', new_usuario_session_path %>
