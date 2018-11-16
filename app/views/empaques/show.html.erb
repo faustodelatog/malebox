@@ -1,0 +1,14 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Nombre:</strong>
+  <%= @empaque.nombre %>
+</p>
+
+<p>
+  <strong>Url:</strong>
+  <%= @empaque.url %>
+</p>
+
+<%= link_to 'Edit', edit_empaque_path(@empaque) %> |
+<%= link_to 'Back', empaques_path %>

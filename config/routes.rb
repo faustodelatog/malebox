@@ -14,6 +14,7 @@ Rails.application.routes.draw do
   scope "/admin" do
     resources :tapas
     resources :pedidos
+    resources :empaques
   end
 
   scope "/admin" do
