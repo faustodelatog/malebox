@@ -1,0 +1,13 @@
+<table class="table table-bordered table-striped">
+  <tbody>
+    <% inventario_cosas.each do |inventario_cosa| %>
+	    <% if inventario_cosa.salud_i <= 0 %>
+	      <tr>
+	        <td> <div class="dot" style="background-color:<%= inventario_cosa.salud %>;"></div></td>
+	        <td><%= inventario_cosa.cosa.nombre %></td>
+	        <td><%= inventario_cosa.salud_i.abs + 1 %></td>
+	      </tr>
+	    <% end %>
+    <% end %>
+  </tbody>
+</table>

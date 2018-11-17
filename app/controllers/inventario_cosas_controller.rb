@@ -10,7 +10,9 @@ class InventarioCosasController < AdminController
 
     @inventario_cosas = @inventario_cosas.where(inventario: @inventario) if @inventario
     @inventario_cosas = @inventario_cosas.joins(:cosa).where("cosas.nombre ilike ?", "%#{@nombre}%") if @nombre
-    # @inventario_cosas = @inventario_cosas.joinswhere('nombre ilike ?', '%#{@nombre}%') if @nombre && !nombre.empty?
+
+    @inventario_cosas = @inventario_cosas.sort{|x,y| x.salud_i <=> y.salud_i}
+
   end
 
   # GET /inventario_cosas/1

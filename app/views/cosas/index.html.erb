@@ -6,6 +6,7 @@
   <thead>
     <tr>
       <th>Nombre</th>
+      <th>Cantidad Mínima</th>
       <th>Url</th>
       <th colspan="3"></th>
     </tr>
@@ -15,6 +16,7 @@
     <% @cosas.each do |cosa| %>
       <tr>
         <td><%= cosa.nombre %></td>
+        <td><%= cosa.cantidad_minima %></td>
         <td><%= cosa.url %></td>
         <td><%= link_to 'Show', cosa %></td>
         <td><%= link_to 'Edit', edit_cosa_path(cosa) %></td>

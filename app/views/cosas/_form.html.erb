@@ -13,11 +13,15 @@
 
   <div class="field">
     <%= f.label :nombre %><br>
-    <%= f.text_field :nombre %>
+    <%= f.text_field :nombre, class: "form-control" %>
+  </div>
+  <div class="field">
+    <%= f.label :cantidad_minima %><br>
+    <%= f.number_field :cantidad_minima, class: "form-control" %>
   </div>
   <div class="field">
     <%= f.label :url %><br>
-    <%= f.text_field :url %>
+    <%= f.text_field :url, class: "form-control" %>
   </div>
   <div class="actions">
     <%= f.submit %>

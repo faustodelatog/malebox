@@ -70,6 +70,6 @@ class CosasController < AdminController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def cosa_params
-      params.require(:cosa).permit(:nombre, :url)
+      params.require(:cosa).permit(:nombre, :cantidad_minima,  :url)
     end
 end

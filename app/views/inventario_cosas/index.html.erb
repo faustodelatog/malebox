@@ -1,3 +1,14 @@
+<style type="text/css">
+  .dot {
+      height: 25px;
+      width: 25px;
+      background-color: #bbb;
+      border-radius: 50%;
+      display: inline-block;
+    }
+</style>
+
+
 <p id="notice"><%= notice %></p>
 
 <div class="container">
@@ -25,9 +36,11 @@
 <table class="table table-bordered table-striped">
   <thead>
     <tr>
+      <th></th>
       <th>Inventario</th>
       <th>Cosa</th>
       <th>Cantidad</th>
+      <th>Mínimo Recomendado</th>
       <th colspan="4"></th>
     </tr>
   </thead>
@@ -35,9 +48,11 @@
   <tbody>
     <% @inventario_cosas.each do |inventario_cosa| %>
       <tr>
+        <td> <div class="dot" style="background-color:<%= inventario_cosa.salud %>;"></div></td>
         <td><%= inventario_cosa.inventario %></td>
         <td><%= inventario_cosa.cosa.nombre %></td>
         <td><%= inventario_cosa.cantidad %></td>
+        <td><%= inventario_cosa.cosa.cantidad_minima || 0 %></td>
         <td><%= link_to 'Agregar', inventario_cosa_path(inventario_cosa, accion: 'add'), class: "btn btn-primary", remote: true %></td>
         <td><%= link_to 'Quitar', inventario_cosa_path(inventario_cosa, accion: 'remove'), class: "btn btn-primary", remote:true %></td>
         <td><%= link_to 'Editar', edit_inventario_cosa_path(inventario_cosa), class: "btn btn-warning" %></td>
@@ -49,9 +64,38 @@
 
 <br>
 
-<%= link_to 'Rgistrar Cosa en Inventario', new_inventario_cosa_path, class: "btn btn-primary btn-block" %>
+<%= link_to 'Registrar Cosa en Inventario', new_inventario_cosa_path, class: "btn btn-primary" %>
+<button class="btn btn-success" onclick="imprimirLista()">Imprimir Lista de Compra</button>
 </div>
 
 <div id="addRemoveDiv">
 
 </div>
+
+
+<script type="text/javascript">
+  function imprimirLista(){
+    content = '<%= j render partial: "lista_compra", locals: {inventario_cosas: @inventario_cosas} %>'
+    alert(content);
+    printElem(content);
+  }
+
+  function printElem(elem)
+{
+    var mywindow = window.open('', 'PRINT', 'height=400,width=600');
+
+    mywindow.document.write('<html><head><title>LISTA DE COMPRAS</title>');
+    mywindow.document.write('</head><body >');
+    mywindow.document.write('<h1>LISTA DE COMPRAS</h1>');
+    mywindow.document.write(elem);
+    mywindow.document.write('</body></html>');
+
+    mywindow.document.close();
+    mywindow.focus();
+
+    mywindow.print();
+    mywindow.close();
+
+    return true;
+}
+</script>

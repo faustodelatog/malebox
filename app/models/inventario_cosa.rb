@@ -27,4 +27,17 @@ class InventarioCosa < ActiveRecord::Base
   def nombre
   	"(#{inventario}) #{cosa.nombre}"
   end
+
+  def salud_i
+    cantidad_minima = cosa.cantidad_minima || 0
+    self.cantidad - cantidad_minima
+  end
+
+  def salud
+    cantidad_minima = cosa.cantidad_minima || 0
+    return 'green' if cantidad > cantidad_minima
+    return 'orange' if cantidad <= cantidad_minima && cantidad > 0
+    return 'red' if cantidad == 0
+    return 'black' if cantidad < 0
+  end
 end
