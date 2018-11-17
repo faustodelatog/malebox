@@ -1,14 +1,14 @@
 <div class="container">
 	<div id="filtros" class="panel panel-default">
 	<div class=panel-healding>
-		<img src="<%= @producto.foto_url %>" />
+		<img width="100" src="<%= @producto.foto_url %>" />
 		<span><%= @producto.nombre %></span>
 	</div>
 		<div class=panel-body>
 			<form>
 				<div class="col-md-6">
 				<label class="col-form-label-sm">Nombre</label>
-				<%= f.text_field :nombre, value: @nombre, :class => 'form-control' %>
+				<input type="text" name="nombre" value="<%= @nombre %>" class="form-control" /> 
 				</div>
 				<div class="col-md-6">
 					<label class="col-form-label-sm bg-green"></label>
