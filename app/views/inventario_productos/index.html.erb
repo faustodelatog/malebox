@@ -1,33 +1,33 @@
 <p id="notice"><%= notice %></p>
-
-<h1>Listado de Productos</h1>
-
-<table class="table table-bordered table-striped">
-  <thead>
-    <tr>
-      <th>Nombre</th>
-      <th>Foto</th>
-      <th>Precio</th>
-      <th>Cosas</th>
-      <th colspan="1"></th>
-    </tr>
-  </thead>
-
-  <tbody>
-    <% @productos.each do |producto| %>
+<div class="container">
+  <h1>Listado de Productos</h1>
+  <table class="table table-bordered table-striped">
+    <thead>
       <tr>
-        <td><%= producto.nombre %></td>
-        <td><img src="<%= producto.foto_url %>" width="100" /></td>
-        <td><%= producto.precio %></td>
-        <td>
-        	<ul>
-	        	<% producto.producto_cosas.each do |cosa| %>
-	        		<li><%= cosa.cantidad %> <%= cosa.cosa.nombre %></li>
-	        	<% end %>
-        	</ul>
-        </td>
-        <td><%= link_to 'Editar', inventario_producto_path(id: producto.id), :class => 'btn btn-info' %></td>
+        <th>Nombre</th>
+        <th>Foto</th>
+        <th>Precio</th>
+        <th>Cosas</th>
+        <th colspan="1"></th>
       </tr>
-    <% end %>
-  </tbody>
-</table>
+    </thead>
+
+    <tbody>
+      <% @productos.each do |producto| %>
+        <tr>
+          <td><%= producto.nombre %></td>
+          <td><img src="<%= producto.foto_url %>" width="100" /></td>
+          <td><%= producto.precio %></td>
+          <td>
+            <ul>
+              <% producto.producto_cosas.each do |cosa| %>
+                <li><%= cosa.cantidad %> <%= cosa.cosa.nombre %></li>
+              <% end %>
+            </ul>
+          </td>
+          <td><%= link_to 'Editar', inventario_producto_path(id: producto.id), :class => 'btn btn-info' %></td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+</div>

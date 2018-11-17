@@ -1,4 +1,18 @@
 <div class="container">
+	<div id="filtros" class="panel panel-default">
+		<div class=panel-body>
+			<form>
+				<div class="col-md-6">
+				<label class="col-form-label-sm">Nombre</label>
+				<%= f.text_field :nombre, value: @nombre, :class => 'form-control' %>
+				</div>
+				<div class="col-md-6">
+					<label class="col-form-label-sm bg-green"></label>
+				<button type="submit" class="btn btn-success btn-block">VER</button>
+				</div>
+			</form>
+		</div>
+	</div>
 	<%= form_for('', url: inventario_producto_path) do |f| %>
 		<table class="table table-bordered table-striped">	
 			<thead>

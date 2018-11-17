@@ -4,10 +4,13 @@ class InventarioProductosController < AdminController
   end
 
   def show
-  	@producto = Producto.find(params[:id])
+	@producto = Producto.find(params[:id])
+	@nombre = params[:nombre]
   	@cosas = @producto.producto_cosas
-  	cosas_ids = @cosas.map{|c| c.cosa.id}
-  	@cosas += Cosa.where.not(id: cosas_ids).map{|c| ProductoCosa.new({cosa: c})}
+	cosas_ids = @cosas.map{|c| c.cosa.id}
+	cosas_db = Cosa.where.not(id: cosas_ids)
+	cosas_db = cosas_db.where("cosas.nombre ilike ?", "%#{@nombre}%") if @nombre
+  	@cosas += cosas_db.map{|c| ProductoCosa.new({cosa: c})}
   end
 
   def update
