@@ -17,7 +17,7 @@
         <% end %>
     </div>
 
-  <% if item.producto.empaque && item.producto.empaque.tapa_ids %>
+  <% if item.producto.empaque && !item.producto.empaque.tapa_ids.empty? %>
   	<% if item.tapa_personalizada %>
   	  <div style="float: left; width: 20%; margin-right: 5%; text-align: center;">
   		<button class="btn" data-toggle="modal" data-target="#tapasModal"
