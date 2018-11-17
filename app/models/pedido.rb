@@ -100,8 +100,8 @@ class Pedido < ActiveRecord::Base
     self.save!
   end
 
-  def armar(inventario_id)
-    items_json.each{|i| quitar_de_inventario(inventario_id, i.producto.id, i.cantidad.to_i)}
+  def armar(inventario_id, producto_cosas_ids)
+    items_json.each{|i| quitar_de_inventario(inventario_id, i.producto.id, i.cantidad.to_i, producto_cosas_ids)}
     self.estado = 'Armado'
     self.save!
   end
@@ -132,10 +132,10 @@ class Pedido < ActiveRecord::Base
     self.estado.casecmp('cancelado') == 0
   end
 
-  def quitar_de_inventario (inventario_id, producto_id, cantidad)
+  def quitar_de_inventario (inventario_id, producto_id, cantidad, producto_cosas_ids)
     producto = Producto.find(producto_id)
     cantidad.times do
-       producto.quitar_de_inventario(inventario_id, id)
+       producto.quitar_de_inventario(inventario_id, id, producto_cosas_ids)
     end 
   end
 end

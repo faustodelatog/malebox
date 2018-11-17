@@ -1,3 +1,3 @@
-content = '<%= j render partial: "detail", locals: {pedido: @pedido} %>'
+content = '<%= j render partial: "detail", locals: {pedido: @pedido, productos: @pedido.items_json.map{|i| Producto.find(i.producto.id)}} %>'
 $('#detallePedido').html(content);
 $('#pedidoModal').modal();

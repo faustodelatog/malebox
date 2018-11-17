@@ -20,7 +20,9 @@ class Producto < ActiveRecord::Base
     return categorias.any?{|c| c.id == 4} && ![249, 114, 149, 69, 244, 216].include?(id)
   end
 
-  def quitar_de_inventario (inventario_id, pedido_id)
-    producto_cosas.each{|c| c.quitar_de_inventario(inventario_id, pedido_id)}
+  def quitar_de_inventario (inventario_id, pedido_id, producto_cosas_ids)
+    producto_cosas.
+      select{|pc| producto_cosas_ids.include?(pc.id)}.
+      each{|c| c.quitar_de_inventario(inventario_id, pedido_id)}
   end
 end

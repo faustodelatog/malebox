@@ -8,107 +8,124 @@
           	<span><%= pedido.fecha_entrega.to_s %></span>
           </h4>
         </div>
-        <div class="modal-body">
+        <%= form_for('', url: armar_pedido_path(:id => pedido.id), remote: true) do |f| %>
+	        <div class="modal-body">
 
-        	<div class="panel panel-default">
-			  <div class="panel-body">
-			  	<% pedido.items_json.each do |item| %>
-			  		<div class="row panel">
-				  		<div class="col-xs-6">
-				  			<a href="/productos/<%= item.producto.id %>" target="_blank">
-					            <img src="<%= item.producto.foto_url %>" width="100" />
-					            <strong><%= item.producto.nombre %></strong>
-				            </a>
+	        	<div class="panel panel-default">
+				  <div class="panel-body">
+				  	<% pedido.items_json.each do |item| %>
+				  		<div class="row panel">
+					  		<div class="col-xs-6">
+					  			<a href="/productos/<%= item.producto.id %>" target="_blank">
+						            <img src="<%= item.producto.foto_url %>" width="100" />
+						            <strong><%= item.producto.nombre %></strong>
+					            </a>
+					  		</div>
+					  		<% if item.tapa_personalizada %>
+					  			<div class="col-xs-6">
+					  				<img src="<%= item.tapa_personalizada.tapa.url %>" width="100" />
+					  				<strong><%= item.tapa_personalizada.tapa.nombre %><br /></strong>
+					  				<%= item.tapa_personalizada.variables %>
+					  			</div>
+				  			<% end %>
 				  		</div>
-				  		<% if item.tapa_personalizada %>
-				  			<div class="col-xs-6">
-				  				<img src="<%= item.tapa_personalizada.tapa.url %>" width="100" />
-				  				<strong><%= item.tapa_personalizada.tapa.nombre %><br /></strong>
-				  				<%= item.tapa_personalizada.variables %>
-				  			</div>
-			  			<% end %>
-			  		</div>
-		        <% end %>	
-				
-			  </div>
-			</div>
+			        <% end %>	
+					
+				  </div>
+				</div>
 
-        	<div class="panel panel-default">
-			  <div class="panel-body">
-			    <div class="col-xs-6">
-			    	<p>De: <%= pedido.de %></p>
-			    	<p>Para: <%= pedido.para %></p>
-			    </div>
-			    <div class="col-xs-6">
-			    	<p><%= pedido.mensaje %></p>
-			    </div>
-			  </div>
-			</div>
+	        	<div class="panel panel-default">
+				  <div class="panel-body">
+				    <div class="col-xs-6">
+				    	<p>De: <%= pedido.de %></p>
+				    	<p>Para: <%= pedido.para %></p>
+				    </div>
+				    <div class="col-xs-6">
+				    	<p><%= pedido.mensaje %></p>
+				    </div>
+				  </div>
+				</div>
 
-        	<div class="panel panel-default">
-			  <div class="panel-body">
-			    <div class="col-xs-6">
-			    	<p>Entregar a: <%= pedido.nombre_entrega %></p>
-			    	<p>Fecha Entrega: <%= pedido.fecha_entrega.to_s %></p>
-			    	<p>Horario: <%= HorarioEntrega.find(pedido.horario_entrega).nombre %></p>
-			    </div>
-			    <div class="col-xs-6">
-			    	<p>Sector: <%= Sector.find(pedido.sector_entrega).nombre %></p>
-			    	<p>Costo: <%= pedido.costo_entrega %></p>
-			    	<p>
-			    		Dirección: <%= pedido.direccion_entrega %>
-			    		<a href="https://www.google.com/maps/search/<%= pedido.direccion_entrega %>" target="_blank">Ver Mapa</a>
-			    	</p>
-			    	<p>Instrucciones: <%= pedido.instrucciones_entrega %></p>
-			    </div>
-			  </div>
-			</div>
+	        	<div class="panel panel-default">
+				  <div class="panel-body">
+				    <div class="col-xs-6">
+				    	<p>Entregar a: <%= pedido.nombre_entrega %></p>
+				    	<p>Fecha Entrega: <%= pedido.fecha_entrega.to_s %></p>
+				    	<p>Horario: <%= HorarioEntrega.find(pedido.horario_entrega).nombre %></p>
+				    </div>
+				    <div class="col-xs-6">
+				    	<p>Sector: <%= Sector.find(pedido.sector_entrega).nombre %></p>
+				    	<p>Costo: <%= pedido.costo_entrega %></p>
+				    	<p>
+				    		Dirección: <%= pedido.direccion_entrega %>
+				    		<a href="https://www.google.com/maps/search/<%= pedido.direccion_entrega %>" target="_blank">Ver Mapa</a>
+				    	</p>
+				    	<p>Instrucciones: <%= pedido.instrucciones_entrega %></p>
+				    </div>
+				  </div>
+				</div>
 
-        	<div class="panel panel-default">
-			  <div class="panel-heading">Cliente</div>
-			  <div class="panel-body">
-			    <div class="col-xs-6">
-			    	<p>Nombre: <%= pedido.nombre %></p>
-					<p>Email: <%= pedido.email %></p>
-			    </div>
-			    <div class="col-xs-6">
-			    	<p>Teléfono: <%= pedido.telefono %></p>
-			    </div>
-			  </div>
-			</div>
+	        	<div class="panel panel-default">
+				  <div class="panel-heading">Cliente</div>
+				  <div class="panel-body">
+				    <div class="col-xs-6">
+				    	<p>Nombre: <%= pedido.nombre %></p>
+						<p>Email: <%= pedido.email %></p>
+				    </div>
+				    <div class="col-xs-6">
+				    	<p>Teléfono: <%= pedido.telefono %></p>
+				    </div>
+				  </div>
+				</div>
 
-        	<div class="panel panel-default">
-			  <div class="panel-body">
-			    <div class="col-xs-6">
-	    	        <p>Forma de Pago: <%= pedido.forma_pago_str %></p>
-	    	        <p>Subtotal $ <%= @pedido.total_items.to_f %><br /></p>
-	    	        <p>Descuento: <span style="color:orange">- $ <%= @pedido.total_descuento.to_f %></span></p>
-	    	        <p>Entrega: $ <%= @pedido.costo_entrega.to_f %><br /></p>
-			    </div>
-			    <div class="col-xs-6">
-			    	<p>TOTAL: <%= pedido.total %></p>
-			    	<% if pedido.forma_pago.casecmp("TC") == 0 %> 
-			    		<p>SIN IVA: <%= pedido.sin_iva %></p>
-		    		<% end %>
-			    </div>
-			  </div>
-			</div>
-        </div>
-        <div class="modal-footer">
-          <button type="button" class="btn btn-default" data-dismiss="modal">Cerrar</button>
-          <% if pedido.pendiente? %> 
-          	<%= link_to "Pagar", pagar_pedido_path(:id => pedido.id), :method => :post, class: 'btn btn-primary', remote: true %></li>
-          <% end %>
-           <% if pedido.pagado? %> 
-          	<%= link_to "Armar Regalo", armar_pedido_path(:id => pedido.id), :method => :post, class: 'btn btn-primary', remote: true %></li>
-          <% end %>
-          <% if pedido.armado? %> 
-          	<%= link_to "Entregar Regalo", entregar_pedido_path(:id => pedido.id), :method => :post, class: 'btn btn-success', remote: true %></li>
-          <% end %>
-          <% if !pedido.cancelado? %> 
-      	  	<%= link_to "Cancelar Regalo", cancelar_pedido_path(:id => pedido.id), :method => :post, class: 'btn btn-danger', remote: true %></li>
-      	  	<% end %>
-        </div>
+	        	<div class="panel panel-default">
+				  <div class="panel-body">
+				    <div class="col-xs-6">
+		    	        <p>Forma de Pago: <%= pedido.forma_pago_str %></p>
+		    	        <p>Subtotal $ <%= @pedido.total_items.to_f %><br /></p>
+		    	        <p>Descuento: <span style="color:orange">- $ <%= @pedido.total_descuento.to_f %></span></p>
+		    	        <p>Entrega: $ <%= @pedido.costo_entrega.to_f %><br /></p>
+				    </div>
+				    <div class="col-xs-6">
+				    	<p>TOTAL: <%= pedido.total %></p>
+				    	<% if pedido.forma_pago.casecmp("TC") == 0 %> 
+				    		<p>SIN IVA: <%= pedido.sin_iva %></p>
+			    		<% end %>
+				    </div>
+				  </div>
+				</div>
+
+				<% if pedido.pendiente? || pedido.pagado? %> 
+					<% productos.each do |producto| %>
+						<input type="hidden" name="p<%= producto.id %>" value="<%= producto.id %>">
+			        	<div class="panel panel-default">
+						  <div class="panel-heading">Cosas que contiene el regalo: <%= producto.nombre %></div>
+						  <div class="panel-body">
+						  	<% if producto.producto_cosas %>
+							  	<% producto.producto_cosas.each do |producto_cosa| %> 
+							  	<div class="col-lg-3 col-md-4 col-xs-6">
+							  		<label class="checkbox-inline"><input type="checkbox" name="pc<%= producto_cosa.id %>" checked>(<%=producto_cosa.cantidad %>) <%= producto_cosa.cosa.nombre %></label>
+							  	</div>
+							  	<% end %>
+						  	<% end %>
+						  </div>
+						</div>
+					<% end %>
+				<% end %>
+	        </div>
+	        <div class="modal-footer">
+	          <button type="button" class="btn btn-default" data-dismiss="modal">Cerrar</button>
+	           <% if pedido.pendiente? || pedido.pagado? %> 
+	          	<button type="submit" class="btn btn-primary">Armar Regalo</button>
+	          <% end %>
+	          <% if pedido.armado? %> 
+	          	<%= link_to "Entregar Regalo", entregar_pedido_path(:id => pedido.id), :method => :post, class: 'btn btn-success', remote: true %>
+	          <% end %>
+	          <% if !pedido.cancelado? %> 
+	      	  	<%= link_to "Cancelar Regalo", cancelar_pedido_path(:id => pedido.id), :method => :post, class: 'btn btn-danger', remote: true %>
+	      	  	<% end %>
+	        </div>
+        <% end %>
       </div>
   </div>
 </div>

@@ -84,7 +84,8 @@ class PedidosController < AdminController
 
   def armar
     pedido = Pedido.find(params[:id])
-    pedido.armar(0)
+    producto_cosas_ids = params.select{|k,v| k.include?('pc') && v == 'on'}.map{|k,v| k.gsub('pc','').to_i}
+    pedido.armar(0, producto_cosas_ids)
     render 'armado'
   end
 
