@@ -32,7 +32,7 @@
       <!-- Collect the nav links, forms, and other content for toggling -->
       <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
         <ul class="nav navbar-nav">
-          <li><%= link_to 'PEDIDOS', pedidos_path(from: (Date.today - 1.month).to_s) %></li>
+          <li><%= link_to 'PEDIDOS', pedidos_path(from: (@today - 1.month).to_s) %></li>
           <li><%= link_to 'PRODUCTOS', admin_productos_path %></li>
           <li><%= link_to 'INVENTARIO', inventario_cosas_path %></li>
         </ul>

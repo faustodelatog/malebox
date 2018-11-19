@@ -5,16 +5,16 @@
 <div id="filtros" class="panel panel-default">
   <div class="panel-body">
     <div class="col-md-3">
-      <%= link_to 'Desde hoy', pedidos_path(from: (Date.today).to_s), class:'btn btn-primary btn-block' %>
+      <%= link_to 'Desde hoy', pedidos_path(from: (@today).to_s), class:'btn btn-primary btn-block' %>
     </div>
     <div class="col-md-3">
-      <%= link_to 'Para HOY', pedidos_path(from: (Date.today).to_s, to: (Date.today + 1.days).to_s), class:'btn btn-success btn-block' %>
+      <%= link_to 'Para HOY', pedidos_path(from: (@today).to_s, to: (@today).to_s), class:'btn btn-success btn-block' %>
     </div>
     <div class="col-md-3">
-      <%= link_to 'Para Mañana', pedidos_path(from: (Date.today + 1.days).to_s, to: (Date.today + 2.days).to_s), class:'btn btn-warning btn-block' %>
+      <%= link_to 'Para Mañana', pedidos_path(from: (@tomorrow).to_s, to: (@tomorrow).to_s), class:'btn btn-warning btn-block' %>
     </div>
     <div class="col-md-3">
-      <%= link_to 'Para los prox. 7 Días', pedidos_path(from: (Date.today).to_s, to: (Date.today + 7.days).to_s), class:'btn btn-info btn-block' %>
+      <%= link_to 'Para los prox. 7 Días', pedidos_path(from: (@today).to_s, to: (@today + 7.days).to_s), class:'btn btn-info btn-block' %>
     </div>
   </div>
   <div class="panel-body">

@@ -9,6 +9,8 @@ class ApplicationController < ActionController::Base
 
   def set_locale
     I18n.locale = params[:locale] || :es
+    @today = Time.now.in_time_zone('Quito').to_date
+    @tomorrow = @today + 1.day
   end
 
   def verify_selected_city
