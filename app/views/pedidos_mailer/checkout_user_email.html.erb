@@ -110,14 +110,19 @@
               <div>
                 <a href="/productos/<%= item.producto.id %>">
                   <%= item.cantidad %> caja<%if item.cantidad > 1 %>s<% end %> de <%= item.producto.nombre %>
-                </a>
+                </a><br>
+                <% if item.tapa_personalizada %>
+                  <div style="color: grey; font-size: smaller">
+                    Diseño: <%= item.tapa_personalizada.tapa.nombre %> <br/><i>(<%= item.tapa_personalizada.variables %>)</i>
+                  </div>
+                <% end %>
               </div>
               <div style="color: grey; font-size: smaller">
                 precio: $ <%= ((item.producto.precio.to_f * 1.06).round(0) * item.cantidad.to_i).round(2) %>
               </div>
               <% if !@pedido.forma_pago.eql?('TC') %>
                   <div style="color: black">
-                    con descuento: $ <%= item.producto.precio.to_f * item.cantidad.to_i %>
+                    con descuento: $ <%= '%.2f' % (item.producto.precio.to_f * item.cantidad.to_i).round(2) %>
                   </div>
               <% end %>
               <div>
