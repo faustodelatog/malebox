@@ -9,9 +9,11 @@
         <%= form_tag("/cart", method: "post") do %>
           <div class="col-md-1"></div>
           <div class="col-md-5">
-            <h4>Datos de entrega</h4>
+            <h5>Completa tu orden</h5>
             <div class="to" style="width: 100%">
-              <input type="text" autocomplete="off" name="fecha_entrega" class="text datepicker" value="<%= @fe %>" onfocus="this.value = '';" onblur="if (this.value == '') {this.value = 'Fecha Entrega';}">
+              <span style="font-size:xx-small;color:grey">Fecha entrega</span>
+              <input type="text" autocomplete="off" name="fecha_entrega" class="text datepicker" value="<%= @fe %>" onfocus="this.value = '';" onblur="if (this.value == '') {this.value = 'Fecha Entrega';}"><br />
+              <span style="font-size:xx-small;color:grey">Destinatario</span>
               <input type="text" name="nombre_entrega" class="text" value="<%= @ea %>" onfocus="this.value = '';" onblur="if (this.value == '') {this.value = 'Entregar a';}">
             </div>
             <div class="text" style="width: 95%">
@@ -32,48 +34,67 @@
                     <% end %>
                   </select>
 
+              <span style="font-size:xx-small;color:grey">Dirección de entrega</span>
               <textarea name="direccion" value="<%= @de %>" onfocus="if(this.value == 'Dirección de entrega')this.value = '';" onblur="if (this.value == '') {this.value = 'Dirección de entrega';}"><%= @de %></textarea>
+              <span style="font-size:xx-small;color:grey">Instrucciones de entrega</span>
               <textarea name="instrucciones" value="<%= @ie %>" onfocus="if(this.value == 'Instrucciones de entrega')this.value = '';"
                 onblur="if (this.value == '') {this.value = 'Instrucciones de entrega';}"><%= @ie %></textarea>
             </div>
           </div>
           
           <div class="col-md-5">
-            <h4>Información para la tarjeta</h4>
+            <h5>Información para la tarjeta del regalo</h5>
             <div class="to" style="width: 100%">
-              <input type="text" name="nombre_de" class="text" value="<%= @nde %>" onfocus="this.value = '';" onblur="if (this.value == '') {this.value = 'De parte de';}">
+              <span style="font-size:xx-small;color:grey">De:</span><br>
+              <input type="text" name="nombre_de" class="text" value="<%= @nde %>" onfocus="this.value = '';" onblur="if (
+              this.value == '') {this.value = 'De parte de';}">
+            </div>
+            <div class="to" style="width: 100%">  
+              <span style="font-size:xx-small;color:grey">Para:</span><br>
               <input type="text" name="nombre_para" class="text" value="<%= @npara %>" onfocus="this.value = '';" onblur="if (this.value == '') {this.value = 'Para';}">
             </div>
             <div class="text" style="width: 95%">
+              <span style="font-size:xx-small;color:grey">Mensaje</span>
               <textarea name="mensaje" value="<%= @mt %>" onfocus="if(this.value == 'Mensaje de tarjeta')this.value = '';" onblur="if (this.value == '') {this.value = 'Mensaje de tarjeta';}"><%= @mt %></textarea>
               </div>
-            <h4>Tus datos</h4>
+            <h5>Tus datos</h5>
             <div class="to" style="width: 100%;margin-bottom: 15px">
               <% if current_usuario %>
-                <input type="text" class="text" value="<%= current_usuario.email %>" disabled>
-                <input type="hidden" name="email" value="<%= current_usuario.email %>">
+                <span style="font-size:xx-small;color:grey">Email</span>
+                <input type="text" class="text" value="<%= current_usuario.email %>" disabled><br>
+                <span style="font-size:xx-small;color:grey">Nombre</span>
+                <input type="hidden" name="email" value="<%= current_usuario.email %>"><br>
+                <span style="font-size:xx-small;color:grey">Celular</span>
                 <input type="text" name="nombre" class="text" value="<%= current_usuario.nombre_completo %>" onfocus="this.value = '';" onblur="if (this.value == '') {this.value = '<%= current_usuario.nombre_completo %>';}">
                 <% else %>
-                  <input type="text" name="email" class="text" value="<%= @email %>" onfocus="this.value = '';" onblur="if (this.value == '') {this.value = 'Email';}">
-                  <input type="text" name="nombre" class="text" value="<%= @nombre %>" onfocus="this.value = '';" onblur="if (this.value == '') {this.value = 'Nombre';}">
+                <span style="font-size:xx-small;color:grey">Email</span>
+                  <input type="text" name="email" class="text" value="<%= @email %>" onfocus="this.value = '';" onblur="if (this.value == '') {this.value = 'Email';}"><br>
+                  <span style="font-size:xx-small;color:grey">Nombre</span>
+                  <input type="text" name="nombre" class="text" value="<%= @nombre %>" onfocus="this.value = '';" onblur="if (this.value == '') {this.value = 'Nombre';}"><br>
                   <% end %>
+                  <span style="font-size:xx-small;color:grey">Celular</span>
                     <input type="text" name="telefono" class="text" value="<%= @telefono %>" onfocus="this.value = '';" onblur="if (this.value == '') {this.value = 'Teléfono';}">
             </div>
-            <h4>Forma de Pago</h4>
-            <div class="to" style="width: 100%; margin-bottom: 15px; font-size: smaller">
-              <label class="radio-inline"><input type="radio" name="forma_pago" value="T" checked="checked">Transferencia</label>
-              <label class="radio-inline"><input type="radio" name="forma_pago" value="D">Depósito</label>
-              <label class="radio-inline"><input type="radio" name="forma_pago" value="E">Efectivo</label>
-              <label class="radio-inline"><input type="radio" name="forma_pago" value="PP">PayPal</label>
-              <label class="radio-inline"><input type="radio" name="forma_pago" value="TC">Tarjeta de Crédito</label>
+            <h5>Forma de Pago</h5>
+              <div class="text" style="width: 95%">
+              <select class="form-control" name="forma_pago">
+                <option value="T">Transferencia</option>
+                <option value="D">Depósito</option>
+                <option value="E">Efectivo</option>
+                <option value="PP">PayPal</option>
+                <option value="TC">Tarjeta de Crédito</option>
+              </select>
             </div>
-            <div class="form-submit">
+            <br>
+            
+          </div>
+          <div>
               <script>
                 submited = false
               </script>
-              <input name="submit" type="submit" id="submit" value="Continuar" onclick="if(submited)return false; {this.value='Enviando pedido...'; submited=true};"><br>
+
+              <button class="btn btn-block btn-primary" name="submit" type="submit" id="submit" value="Continuar" onclick="if(submited)return false; {this.value='Enviando pedido...'; submited=true};">CONTINUAR</button><br>
             </div>
-          </div>
         <% end %>
 
         <div class="col-md-1"></div>
