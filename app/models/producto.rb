@@ -7,7 +7,12 @@ class Producto < ActiveRecord::Base
   belongs_to :empaque, required: false
 
   def precio_original
-  	(precio * 1.06).round(2)
+  	(precio * 1.06).round(0)
+  end
+
+
+  def precio_d
+    '%.2f' % self.precio
   end
 
   def nombreCiudadesMismoDia

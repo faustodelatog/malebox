@@ -2,7 +2,7 @@
   <div class="shop_top" style="padding: 1% 0">
     <div class="container">
       <% if @cart %>
-        <div id="itemsCart" class="container" style="margin-bottom:20px;">
+        <div id="itemsCart" class="container" style="margin:20px 2px;">
           <%= render partial: 'items', locals: {cart: @cart} %>
         </div>
 
@@ -76,7 +76,7 @@
                     <input type="text" name="telefono" class="text" value="<%= @telefono %>" onfocus="this.value = '';" onblur="if (this.value == '') {this.value = 'Teléfono';}">
             </div>
             <h5>Forma de Pago</h5>
-              <div class="text" style="width: 95%">
+              <div class="text" style="width: 95%; margin-bottom:15px">
               <select class="form-control" name="forma_pago">
                 <option value="T">Transferencia</option>
                 <option value="D">Depósito</option>
@@ -85,16 +85,16 @@
                 <option value="TC">Tarjeta de Crédito</option>
               </select>
             </div>
-            <br>
-            
-          </div>
-          <div>
+            <div style="width: 95%; margin-bottom:15px">
               <script>
                 submited = false
               </script>
 
-              <button class="btn btn-block btn-primary" name="submit" type="submit" id="submit" value="Continuar" onclick="if(submited)return false; {this.value='Enviando pedido...'; submited=true};">CONTINUAR</button><br>
+              <button class="btn btn-block btn-primary btn-lg" name="submit" type="submit" id="submit" value="Continuar" onclick="if(submited)return false; {this.value='Enviando pedido...'; submited=true};">REALIZAR PEDIDO</button>
+              <br>
             </div>
+            
+          </div>
         <% end %>
 
         <div class="col-md-1"></div>

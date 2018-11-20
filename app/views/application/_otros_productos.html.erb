@@ -1,5 +1,5 @@
 <div class="row">
-  <h4 class="m_11"><b>Productos que te podrían interesar</b></h4>
+  <h5 style="margin:10px"><b>MIRA TAMBIÉN</b></h5>
   <% Producto.all.sample(3).each do |producto| %>
       <div class="col-md-4 product1">
         <a href="/productos/<%= producto.id %>">
@@ -10,7 +10,7 @@
           <p><%= producto.descripcion[0..35].html_safe %> ...</p>
           <br />
           <span class="reducedfrom">$<%= (producto.precio_original).round %></span>
-          <span class="actual">$<%= producto.precio %></span><br>
+          <span class="actual">$<%= producto.precio_d %></span><br>
           <ul class="buttons">
             <li class="cart"><%= link_to "Agregar", add_to_cart_path(:product_id => producto.id), :method => :post %></li>
             <li class="shop_btn"><a href="/productos<%= producto.id %>">Más <%= ENV['config.add.to.cart'] %></a></li>

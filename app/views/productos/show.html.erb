@@ -2,7 +2,7 @@
   <div class="shop_top">
     <div class="container">
       <div class="row">
-        <div class="col-md-9 single_left">
+        <div class="col-md-11 single_left">
           <div class="single_image">
             <ul id="etalage">
               <li>
@@ -23,6 +23,19 @@
           </div>
           <!-- end product_slider -->
           <div class="single_right" style="padding-left:15px">
+            
+            <div class="">
+              <div class="box-info-product">
+                <div style="text-align:right;margin-bottom:15px; ">
+                  <span class="reducedfrom">$<%= @producto.precio_original %></span>
+                  <p style="margin-top:15px" class="price2">$<%= @producto.precio_d %></p>
+                </div>
+                    <%= link_to add_to_cart_path(:product_id => @producto.id), :method => :post, :class => 'exclusive' do %>
+                    <span style="text-align:center; background-color:orange">Agregar</span>
+                    <% end %>
+                
+              </div>
+            </div>
             <h3><%= @producto.nombre %> </h3>
             <p class="m_10"><%= @producto.descripcion.html_safe %></p>
             <div class="social_buttons">
@@ -68,28 +81,7 @@
           </div>
           <div class="clear"> </div>
         </div>
-        <div class="col-md-3">
-          <div class="box-info-product">
-            <span class="reducedfrom">$<%= @producto.precio_original %></span>
-            <p style="margin-top:15px" class="price2">$<%= @producto.precio %></p>
-            <ul class="prosuct-qty">
-              <% if false %>
-              <span>Quantity:</span>
-              <select>
-                <option>1</option>
-                <option>2</option>
-                <option>3</option>
-                <option>4</option>
-                <option>5</option>
-                <option>6</option>
-              </select>
-            <% end %>
-            </ul>
-              <%= link_to add_to_cart_path(:product_id => @producto.id), :method => :post, :class => 'exclusive' do %>
-              <span>Agregar</span>
-              <% end %>
-          </div>
-        </div>
+
       </div>
 
       <%= render 'otros_productos' %>

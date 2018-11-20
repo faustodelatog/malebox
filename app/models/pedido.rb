@@ -5,7 +5,7 @@ class Pedido < ActiveRecord::Base
 
   def total_items
     # items_json.reduce(0) {|sum, item| sum + item.producto.precio_original.to_f*item.cantidad.to_i }.round(2)
-    (total_items_con_descuento*1.06).round(2)
+    (total_items_con_descuento*1.06).round(0)
   end
 
   def total_items_con_descuento
