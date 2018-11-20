@@ -64,7 +64,6 @@
                 <input type="text" class="text" value="<%= current_usuario.email %>" disabled><br>
                 <span style="font-size:xx-small;color:grey">Nombre</span>
                 <input type="hidden" name="email" value="<%= current_usuario.email %>"><br>
-                <span style="font-size:xx-small;color:grey">Celular</span>
                 <input type="text" name="nombre" class="text" value="<%= current_usuario.nombre_completo %>" onfocus="this.value = '';" onblur="if (this.value == '') {this.value = '<%= current_usuario.nombre_completo %>';}">
                 <% else %>
                 <span style="font-size:xx-small;color:grey">Email</span>
