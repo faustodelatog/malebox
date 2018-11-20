@@ -2,12 +2,10 @@
   <div class="shop_top" style="padding-top: 10px">
     <div class="container">
       <%= render 'pedido' %>
-      <div class="form-submit">
-        <div style="float: left">
-          <a href="/cart" style="margin-right:20px">Regresar</a>
-
-        </div>
-        <div style="float: left">
+      <div class="col-md-8">
+      </div>
+      <div class="col-md-4">
+        <div class="col-md-12">
           <% if @pedido.forma_pago.eql?('PP') %>
               <form action="<%= Rails.application.config.paypal_server %>/cgi-bin/webscr" method="post" target="_top">
                 <input type="hidden" name="cmd" value="_xclick">
@@ -28,10 +26,15 @@
           <% else %>
               <script>submited=false</script>
               <%= form_tag("/checkout", method: "post") do %>
-                  <input name="submit" type="submit" id="submit" value="Confirmar" onclick="if(submited)return false; {this.value='Confirmando pedido...'; submited=true};"><br>
+                  <button name="submit" class="btn btn-primary btn-block btn-lg" type="submit" id="submit" value="Confirmar" onclick="if(submited)return false; {this.value='Confirmando pedido...'; submited=true};">Confirmar</button><br>
+                
               <% end %>
           <% end %>
         </div>
+        <div class="col-md-12" style="text-align:right">
+            <a href="/cart" style="font-size:small; color:grey">Regresar</a>
+        </div>
+
       </div>
     </div>
   </div>
