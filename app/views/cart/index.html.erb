@@ -2,41 +2,13 @@
   <div class="shop_top" style="padding: 1% 0">
     <div class="container">
       <% if @cart %>
-        <div style="float: left; max-width: 700px">
-          <div class="row" style="margin-bottom: 20px; height: 20px; color: gray; font-weight: bold; font-size: smaller">
-            <div style="float: left; width: 20%; margin: 0 5% 0 25%">
-              Producto
-            </div>
-
-            <div style="float: left; width: 20%; margin: 0 5% 0 0; text-align: center">
-              Tapa Personalizada
-            </div>
-
-            <div style="float: left; width: 20%; margin-right: 5%; text-align: center;">
-              Precio
-            </div>
-          </div>
-          <div id="itemsCart">
-            <%= render partial: 'items', locals: {cart: @cart} %>
-          </div>
+        <div id="itemsCart" class="container" style="margin-bottom:20px;">
+          <%= render partial: 'items', locals: {cart: @cart} %>
         </div>
-
-        <div style="float: left; max-width:400px">
-          <div style="margin-bottom: 20px">
-            <div class="box-info-product" style="margin-bottom:0px">
-              <p class="price2">
-                <label style="font-size: 0.7em; font-weight: 100; margin-right: 10px">Total: </label>
-                <span style="margin-left:10px" class="reducedfrom">$<%= @cart.total_original %></span> $
-                <%= @cart.total %>
-              </p>
-            </div>
-          </div>
-          <%= link_to '¿Quieres más productos?', productos_path %>
-        </div>
-        <div class="clear"> </div>
 
         <%= form_tag("/cart", method: "post") do %>
-          <div style="float:left; max-width:500px; margin-top:30px">
+          <div class="col-md-1"></div>
+          <div class="col-md-5">
             <h4>Datos de entrega</h4>
             <div class="to" style="width: 100%">
               <input type="text" autocomplete="off" name="fecha_entrega" class="text datepicker" value="<%= @fe %>" onfocus="this.value = '';" onblur="if (this.value == '') {this.value = 'Fecha Entrega';}">
@@ -64,10 +36,9 @@
               <textarea name="instrucciones" value="<%= @ie %>" onfocus="if(this.value == 'Instrucciones de entrega')this.value = '';"
                 onblur="if (this.value == '') {this.value = 'Instrucciones de entrega';}"><%= @ie %></textarea>
             </div>
-
           </div>
-
-          <div style="float:left; max-width:500px; margin-top:30px">
+          
+          <div class="col-md-5">
             <h4>Información para la tarjeta</h4>
             <div class="to" style="width: 100%">
               <input type="text" name="nombre_de" class="text" value="<%= @nde %>" onfocus="this.value = '';" onblur="if (this.value == '') {this.value = 'De parte de';}">
@@ -103,8 +74,9 @@
               <input name="submit" type="submit" id="submit" value="Continuar" onclick="if(submited)return false; {this.value='Enviando pedido...'; submited=true};"><br>
             </div>
           </div>
+        <% end %>
 
-          <% end %>
+        <div class="col-md-1"></div>
             <% else %>
               No has añadido ningún producto
               <% end %>
@@ -123,7 +95,7 @@
 
 input[type=radio]:checked + label>img {
   border: 1px solid #fff;
-  box-shadow: 0 0 3px 3px gray;
+  box-shadow: 0 0 3px 3px orange;
 }
 
 /* Stuff after this is only to make things more pretty */
@@ -162,11 +134,12 @@ html {
       <div class="modal-content">
         <div class="modal-header">
          
-          <h4 class="modal-title" id="myModalLabel">Escoge un diseño y da click en Guardar</h4>
+          <h5 class="modal-title" id="myModalLabel">Escoge un diseño y da click en Guardar</h5>
         </div>
         <div class="modal-body">
+          <div class="row">
             <% Tapa.all.each do |tapa| %>
-              <div class="col-md-6 tapa" id="divTapa<%= tapa.id %>">
+              <div class="col-sm-6 tapa" id="divTapa<%= tapa.id %>">
                 <input value="<%= tapa.id %>"
                   type="radio" name="tapa_id" 
                   id="tapa<%= tapa.id %>" class="input-hidden" />
@@ -178,12 +151,14 @@ html {
                 </label>
               </div>
             <% end %>
+            </div>
+            <div class="form-group">
+              <span style="font-size:small; color:grey">Escribe aquí como personalizamos tu empaque: </span><label id="variablesTapa"></label>
+              <textarea id="variablesTapaInput" name="tapa_variables" style="height:100px" name="variables" class="form-control"></textarea>
+            </div>
         </div>
 
-          <div class="form-group" style="padding:10px">
-            <span>Escribe aquí como personalizamos tu empaque</span><label id="variablesTapa"></label>
-            <textarea id="variablesTapaInput" name="tapa_variables" style="height:100px" name="variables" class="form-control"></textarea>
-          </div>
+
         <div class="modal-footer">
           <button type="button" class="btn btn-default" data-dismiss="modal">Cancelar</button>
           <button type="submit" class="btn btn-primary">Guardar</button>
