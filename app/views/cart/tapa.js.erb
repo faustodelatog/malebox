@@ -3,5 +3,5 @@
 <% else %>
 	$('#tapasModal').modal('hide');
 	content = '<%= j render partial: "items", locals: {cart: @cart} %>'
-	$('#itemsCart').html(content);
+	$('.itemsCart').html(content);
 <% end %>

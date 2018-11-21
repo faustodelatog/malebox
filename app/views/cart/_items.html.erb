@@ -17,9 +17,13 @@
         <%= item.producto.nombre %>
        </span><br />
        <% if item.producto.empaque && !item.producto.empaque.tapa_ids.empty? %>
-         <button class="btn btn-primary btn-xs btn-personalizar" data-toggle="modal" data-target="#tapasModal"
+         <button type="button" class="btn btn-primary btn-xs btn-personalizar" data-toggle="modal" data-target="#tapasModal"
                   onclick="setInputFieldsForTapa(<%= item.producto.id %>); filterTapas('<%= item.producto.empaque.tapa_ids %>')">
-                  ELEGIR DISEÑO DE REGALO <i class="fas fa-pencil-alt"></i>
+                  <% if item.tapa_personalizada %>
+                    CAMBIAR DISEÑO <i class="fas fa-pencil-alt"></i>
+                  <% else %>  
+                    ELEGIR DISEÑO DE REGALO <i class="fas fa-pencil-alt"></i>
+                  <% end %>  
           </button>
         <% end %>
        <div>

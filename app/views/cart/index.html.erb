@@ -2,7 +2,7 @@
   <div class="shop_top" style="padding: 1% 0">
     <div class="container">
       <% if @cart %>
-        <div id="itemsCart" class="container" style="margin:20px 2px;">
+        <div class="container itemsCart" style="margin:20px 2px;">
           <%= render partial: 'items', locals: {cart: @cart} %>
         </div>
 
@@ -84,25 +84,32 @@
                 <option value="TC">Tarjeta de Crédito</option>
               </select>
             </div>
+            
+          </div>
+          <br>
+          <div class="col-md-12" style="border-top:1px solid grey; padding-top:10px;">
+           <h5>Personaliza tu regalo</h5>
+         </div>
+          <div class="container itemsCart" style="margin:20px 2px;">
+            <%= render partial: 'items', locals: {cart: @cart} %>
+          </div>
+
             <div style="width: 95%; margin-bottom:15px">
               <script>
                 submited = false
               </script>
 
-              <button class="btn btn-block btn-primary btn-lg" name="submit" type="submit" id="submit" value="Continuar" onclick="if(submited)return false; {this.value='Enviando pedido...'; submited=true};">REALIZAR PEDIDO</button>
-              <br>
+              <button class="btn btn-block btn-primary btn-lg" name="submit" type="submit" id="submit" value="REALIZAR PEDIDO" onclick="if(submited)return false; {this.value='Enviando pedido...'; submited=true};">REALIZAR PEDIDO</button>
             </div>
-            
-          </div>
         <% end %>
 
         <div class="col-md-1"></div>
             <% else %>
               No has añadido ningún producto
-              <% end %>
                 <div style="width: 100%; clear: both" />
                 <%= render 'otros_productos' %>
     </div>
+              <% end %>
 
   </div>
 </div>
