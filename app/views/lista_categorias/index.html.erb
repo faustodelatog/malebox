@@ -1,9 +1,7 @@
 <div class="main">
   <div class="features">
     <div class="container">
-      <h3 class="m_3">El regalo que buscas está aquí</h3>
-
-      <div style="padding:0 25% 40px"><p style="font-size:medium; text-align:justify;">Identifícate con una Male Box y regala una excelente experiencia!</p></div>
+      
       <div class="row">
         <% @categorias.each do |categoria| %>
             <div class="col-md-3 top_box">
@@ -16,7 +14,7 @@
                   <p><%= categoria.nombre %></p>
                 </div>
               </a> </div>
-              <h4 class="m_4"><a href="productos?categoria=<%= categoria.id %>"><%= categoria.nombre %></a></h4>
+              <h5 class="m_4"><a href="productos?categoria=<%= categoria.id %>"><%= categoria.nombre %></a></h4>
             </div>
         <% end %>
       </div>
