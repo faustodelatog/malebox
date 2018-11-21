@@ -13,7 +13,7 @@
           <span class="actual">$<%= producto.precio_d %></span><br>
           <ul class="buttons">
             <li class="cart"><%= link_to "Agregar", add_to_cart_path(:product_id => producto.id), :method => :post %></li>
-            <li class="shop_btn"><a href="/productos<%= producto.id %>">Más <%= ENV['config.add.to.cart'] %></a></li>
+            <li class="shop_btn"><a href="/productos/<%= producto.id %>">Más <%= ENV['config.add.to.cart'] %></a></li>
             <div class="clear"> </div>
           </ul>
         </div>
