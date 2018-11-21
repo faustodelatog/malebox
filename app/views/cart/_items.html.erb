@@ -1,3 +1,9 @@
+<style type="text/css">
+  .btn-personalizar:hover {
+    background-color: blue;
+  }
+</style>
+
 <div class="row">
   <% cart.items.each do |item| %>
   <div class="row" style="border-bottom: 1px solid lightgrey; margin-bottom:10px; padding-bottom:10px">
@@ -11,9 +17,9 @@
         <%= item.producto.nombre %>
        </span><br />
        <% if item.producto.empaque && !item.producto.empaque.tapa_ids.empty? %>
-         <button class="btn btn-primary btn-xs" data-toggle="modal" data-target="#tapasModal"
+         <button class="btn btn-primary btn-xs btn-personalizar" data-toggle="modal" data-target="#tapasModal"
                   onclick="setInputFieldsForTapa(<%= item.producto.id %>); filterTapas('<%= item.producto.empaque.tapa_ids %>')">
-                  Personaliza tu regalo GRATIS
+                  ELEGIR DISEÑO DE REGALO <i class="fas fa-pencil-alt"></i>
           </button>
         <% end %>
        <div>
