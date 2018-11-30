@@ -59,7 +59,7 @@ Rails.application.routes.draw do
 
   get 'page/comocomprar'
 
-  get 'page/somos'
+  get 'page/politicas'
 
   post 'page/contactos' => 'page#send_email'
 
