@@ -2,7 +2,7 @@
 
 <h1>Listing Fotos</h1>
 
-<table>
+<table class="table table-bordered table-striped">
   <thead>
     <tr>
       <th>Url</th>
@@ -15,7 +15,7 @@
     <% @fotos.each do |foto| %>
       <tr>
         <td><%= foto.producto.nombre %></td>
-        <td><%= foto.url %></td>
+        <td><img src="<%= foto.url %>" width="100" /></td>
         <td><%= link_to 'Show', foto %></td>
         <td><%= link_to 'Edit', edit_foto_path(foto) %></td>
         <td><%= link_to 'Destroy', foto, method: :delete, data: { confirm: 'Are you sure?' } %></td>
