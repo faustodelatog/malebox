@@ -16,4 +16,16 @@ class Item
   def total_original
     producto.precio_original*cantidad
   end
+
+  def personalizado?
+    !tapa_personalizada.nil?
+  end
+
+  def personalizable?
+    producto.empaque && producto.empaque.tapa_ids
+  end
+
+  def requiere_personalizacion?
+    personalizable? && !personalizado?
+  end
 end

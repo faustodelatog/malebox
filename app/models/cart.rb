@@ -16,4 +16,8 @@ class Cart
   def permite_tapa_personalizada
     items.any? { |item| item.producto.permite_tapa_personalizada}
   end
+
+  def requiere_personalizacion?
+    items.any? { |i| i.requiere_personalizacion? }
+  end
 end

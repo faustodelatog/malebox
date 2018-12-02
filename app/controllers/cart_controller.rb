@@ -97,6 +97,7 @@ class CartController < ApplicationController
     con_tapa_personalizada = 'on'.eql?(params['con_tapa_personalizada']) ? true : false
 
     error = validate(email, nombre, telefono, nombre_entrega, direccion, mensaje, fecha_entrega, sector, de, para, punto_entrega, telefono_receptor)
+    error = 'Olvidaste personalizar tu regalo. Puedes hacerlo, es GRATIS' if error.empty? && cart.requiere_personalizacion?
     if error.empty?
       pedido_id = create_pedido(cart.items, nombre, email, telefono, direccion, nombre_entrega, mensaje, fecha_entrega, forma_pago, instrucciones, sector, de, para, horario_entrega, punto_entrega, con_tapa_personalizada, telefono_receptor)
       session[:pedido_id] = pedido_id
