@@ -22,7 +22,7 @@ class Item
   end
 
   def personalizable?
-    producto.empaque && producto.empaque.tapa_ids
+    producto.empaque && !producto.empaque.tapa_ids.empty?
   end
 
   def requiere_personalizacion?
