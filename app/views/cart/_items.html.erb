@@ -41,9 +41,6 @@
             onclick="setInputFieldsForTapa(<%= item.producto.id %>, <%= item.tapa_personalizada.tapa.id %>, '<%= j item.tapa_personalizada.variables %>'); filterTapas('<%= item.producto.empaque.tapa_ids %>')">
               <img class="img-responsive" src="<%= item.tapa_personalizada.tapa.url %>" />
           </a>
-          <span style="font-size:x-small; color:grey">
-            <%= item.tapa_personalizada.variables %>
-          </span>
         <% end %>
       <% else %>
       <% end %>  
