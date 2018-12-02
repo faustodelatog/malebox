@@ -168,7 +168,7 @@ html {
         <div class="modal-body">
           <div class="row">
             <% Tapa.all.each do |tapa| %>
-              <div class="col-sm-6 tapa" id="divTapa<%= tapa.id %>">
+              <div class="col-sm-12 tapa" id="divTapa<%= tapa.id %>" style="text-align:center">
                 <input value="<%= tapa.id %>"
                   type="radio" name="tapa_id" 
                   id="tapa<%= tapa.id %>" class="input-hidden" />
@@ -176,16 +176,24 @@ html {
                     onclick="selectTapa('<%= tapa.id %>')">
                   <img class="img-responsive" style="margin:auto;"
                     src="<%= tapa.url %>" 
+                    width="300"
                     alt="<%= tapa.nombre %>" />
-                </label>
-                <div id="tapaVariables_<%= tapa.id %>" class="form-group row tapa-variables">
-                  <span style="font-size:small; color:grey">Escribe aquí como personalizamos tu empaque: </span>
-                  <% tapa.variables.split(',').each do |variable| %>
-                    <div class="col-4" style="font-size:xx-small"><%= variable %></div>
-                    <div class="col-8">
-                      <input type="text" class="form-control" id="tapa_<%= tapa.id %>_<%= variable %>" name="tapa_<%= tapa.id %>_<%= variable %>">
+                </label> 
+                <div id="tapaVariables_<%= tapa.id %>" class="form-group row tapa-variables" style="text-align:left">
+                  <div class="col-md-3"></div>
+                  <div class="col-md-6">
+                    <span style="font-size:small; color:grey">Escribe aquí como personalizamos tu empaque: </span>
+                    <% tapa.variables.split(',').each do |variable| %>
+                      <div class="col-4" style="font-size:xx-small"><%= variable %></div>
+                      <div class="col-8">
+                        <input type="text" class="form-control" id="tapa_<%= tapa.id %>_<%= variable %>" name="tapa_<%= tapa.id %>_<%= variable %>">
+                      </div>
+                    <% end %>
+                    <div style="margin-top:10px">
+                      <button type="submit" class="btn btn-primary btn-block">Guardar</button>
                     </div>
-                  <% end %>
+                  </div>
+                  <div class="col-md-3"></div>
                 </div>
               </div>
             <% end %>
@@ -195,7 +203,6 @@ html {
 
         <div class="modal-footer">
           <button type="button" class="btn btn-default" data-dismiss="modal">Cancelar</button>
-          <button type="submit" class="btn btn-primary">Guardar</button>
         </div>
       </div>
     <% end %>
