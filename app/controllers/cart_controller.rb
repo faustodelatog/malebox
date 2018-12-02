@@ -65,7 +65,9 @@ class CartController < ApplicationController
 
   def add_tapa_personalizada
     tapas = session[:tapas] || {}
-    tapas[params['product_id']] = OpenStruct.new({tapa_id: params['tapa_id'], variables: params['tapa_variables']})
+    param_tapa_id = "tapa_#{params['tapa_id']}_"
+    variables = params.select{|k,v| k.include?(param_tapa_id)}.map{|k,v| "#{k.gsub(param_tapa_id,'')}:#{v}"}.join(', ')
+    tapas[params['product_id']] = OpenStruct.new({tapa_id: params['tapa_id'], variables: variables})
 
     session[:tapas] = tapas
     if params['tapa_id'].nil?

@@ -173,17 +173,22 @@ html {
                   type="radio" name="tapa_id" 
                   id="tapa<%= tapa.id %>" class="input-hidden" />
                 <label for="tapa<%= tapa.id %>"
-                    onclick="changeVariables('<%= tapa.variables %>');">
-                  <img class="img-responsive" style="width:80%; margin:auto;"
+                    onclick="selectTapa('<%= tapa.id %>')">
+                  <img class="img-responsive" style="margin:auto;"
                     src="<%= tapa.url %>" 
                     alt="<%= tapa.nombre %>" />
                 </label>
+                <div id="tapaVariables_<%= tapa.id %>" class="form-group row tapa-variables">
+                  <span style="font-size:small; color:grey">Escribe aquí como personalizamos tu empaque: </span>
+                  <% tapa.variables.split(',').each do |variable| %>
+                    <div class="col-4" style="font-size:xx-small"><%= variable %></div>
+                    <div class="col-8">
+                      <input type="text" class="form-control" id="tapa_<%= tapa.id %>_<%= variable %>" name="tapa_<%= tapa.id %>_<%= variable %>">
+                    </div>
+                  <% end %>
+                </div>
               </div>
             <% end %>
-            </div>
-            <div class="form-group">
-              <span style="font-size:small; color:grey">Escribe aquí como personalizamos tu empaque: </span><label id="variablesTapa"></label>
-              <textarea id="variablesTapaInput" name="tapa_variables" style="height:100px" name="variables" class="form-control"></textarea>
             </div>
         </div>
 
@@ -198,10 +203,9 @@ html {
 </div>
 
 <script type="text/javascript">
-  function changeVariables(variables){
-    $('#variablesTapa').html(variables);
-    text = variables.split(',').map(v => v + ': ').join('\n');
-    $('#variablesTapaInput').val(text);
+  function selectTapa(tapaId){
+    $('.tapa-variables').hide();
+    $('#tapaVariables_'+tapaId).show();
   }
 </script>
 

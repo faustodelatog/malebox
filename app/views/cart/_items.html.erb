@@ -17,14 +17,15 @@
         <%= item.producto.nombre %>
        </span><br />
        <% if item.producto.empaque && !item.producto.empaque.tapa_ids.empty? %>
-         <button type="button" class="btn btn-primary btn-xs btn-personalizar" data-toggle="modal" data-target="#tapasModal"
-                  onclick="setInputFieldsForTapa(<%= item.producto.id %>); filterTapas('<%= item.producto.empaque.tapa_ids %>')">
-                  <% if item.tapa_personalizada %>
-                    CAMBIAR DISEÑO <i class="fas fa-pencil-alt"></i>
-                  <% else %>  
-                    ELEGIR DISEÑO DE REGALO <i class="fas fa-pencil-alt"></i>
-                  <% end %>  
-          </button>
+          <% if item.tapa_personalizada %>
+            <button type="button" class="btn btn-primary btn-xs btn-personalizar" data-toggle="modal" data-target="#tapasModal"
+                  onclick="setInputFieldsForTapa(<%= item.producto.id %>, <%= item.tapa_personalizada.tapa.id %>, '<%= j item.tapa_personalizada.variables %>'); filterTapas('<%= item.producto.empaque.tapa_ids %>')">CAMBIAR DISEÑO
+            </button>
+          <% else %>
+            <button type="button" class="btn btn-primary btn-xs btn-personalizar" data-toggle="modal" data-target="#tapasModal"
+                  onclick="setInputFieldsForTapa(<%= item.producto.id %>); filterTapas('<%= item.producto.empaque.tapa_ids %>')">ELEGIR DISEÑO DE REGALO
+            </button>
+          <% end %>
         <% end %>
        <div>
         <%= link_to remove_all_from_cart_path(:product_id => item.producto.id), :style=>'color: gray; font-size: small', :method => :post,  data: { confirm: 'Se eliminará el producto de su pedido' } do%>
@@ -40,6 +41,9 @@
             onclick="setInputFieldsForTapa(<%= item.producto.id %>, <%= item.tapa_personalizada.tapa.id %>, '<%= j item.tapa_personalizada.variables %>'); filterTapas('<%= item.producto.empaque.tapa_ids %>')">
               <img class="img-responsive" src="<%= item.tapa_personalizada.tapa.url %>" />
           </a>
+          <span style="font-size:x-small; color:grey">
+            <%= item.tapa_personalizada.variables %>
+          </span>
         <% end %>
       <% else %>
       <% end %>  
@@ -53,7 +57,14 @@
   function setInputFieldsForTapa(productId, tapaId, variables){
     $('#productIdHidden').val(productId);
     $('#tapa' + tapaId).prop("checked", true);
-    $('#variablesTapaInput').val(variables);
+    $('.tapa-variables').hide();
+    $('#tapaVariables_'+tapaId).show();
+
+    sufix_id = '#tapa_' + tapaId + '_'
+    variables.split(',').forEach(function(v){
+      variable = v.split(':')
+      $(sufix_id+variable[0].trim()).val(variable[1].trim());
+    });
   }
 
   function filterTapas(tapaIds){
