@@ -49,7 +49,7 @@ class CartController < ApplicationController
     @ea = pedido ? pedido.nombre_entrega: params['nombre_entrega'] ||= 'Entregar a'
     @cd = pedido ? pedido.telefono_receptor: params['telefono_receptor'] ||= 'Celular Destinatario'
     @de = pedido ? pedido.direccion_entrega: params['direccion'] ||= 'Dirección de entrega'
-    @ie = pedido ? pedido.instrucciones_entrega: params['instrucciones'] ||= 'Instrucciones de entrega'
+    @ie = pedido ? pedido.instrucciones_entrega: params['instrucciones'] ||= 'ej.: Letra L para mi vaso personalizado (Depende de regalo). Dejar regalo en portería. Notificar entrega. etc.'
     @se = pedido ? pedido.sector_entrega: params['sector'] ||= ''
     @he = pedido ? pedido.horario_entrega: params['horario_entrega'] ||= ''
     @nde = pedido ? pedido.de: params['nombre_de'] ||= 'De parte de'
