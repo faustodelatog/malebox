@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20181117025109) do
+ActiveRecord::Schema.define(version: 20181202033448) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -104,6 +104,7 @@ ActiveRecord::Schema.define(version: 20181117025109) do
     t.string   "punto_entrega"
     t.boolean  "con_tapa_personalizada", default: false
     t.string   "paypal_tx"
+    t.string   "telefono_receptor"
   end
 
   create_table "producto_cosas", force: :cascade do |t|

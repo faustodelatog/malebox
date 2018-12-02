@@ -15,6 +15,8 @@
               <input type="text" autocomplete="off" name="fecha_entrega" class="text datepicker" value="<%= @fe %>" onfocus="this.value = '';" onblur="if (this.value == '') {this.value = 'Fecha Entrega';}"><br />
               <span style="font-size:xx-small;color:grey">Destinatario</span>
               <input type="text" name="nombre_entrega" class="text" value="<%= @ea %>" onfocus="this.value = '';" onblur="if (this.value == '') {this.value = 'Entregar a';}">
+              <div style="font-size:xx-small;color:grey;clear:both">Celular Destinatario</div>
+              <input type="text" name="telefono_receptor" class="text" value="<%= @cd %>" onfocus="this.value = '';" onblur="if (this.value == '') {this.value = 'Celular Destinatario';}">
             </div>
             <div class="text" style="width: 95%">
               <select id ="sectorSelect" name="sector" class="form-control" onchange="changeSector()">
@@ -87,7 +89,7 @@
             
           </div>
           <br>
-          <div class="col-md-12" style="border-top:1px solid grey; padding-top:10px;">
+          <div class="col-md-12" style="border-top:1px solid grey; padding-top:10px;clear:both">
            <h5>Personaliza tu regalo</h5>
          </div>
           <div class="container itemsCart" style="margin:20px 2px;">

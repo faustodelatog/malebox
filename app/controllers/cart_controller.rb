@@ -47,6 +47,7 @@ class CartController < ApplicationController
     pedido = Pedido.find(session[:pedido_id]) if session[:pedido_id]
     @fe = pedido ? pedido.fecha_entrega: params['fecha_entrega'] ||= 'Fecha Entrega'
     @ea = pedido ? pedido.nombre_entrega: params['nombre_entrega'] ||= 'Entregar a'
+    @cd = pedido ? pedido.telefono_receptor: params['telefono_receptor'] ||= 'Celular Destinatario'
     @de = pedido ? pedido.direccion_entrega: params['direccion'] ||= 'Dirección de entrega'
     @ie = pedido ? pedido.instrucciones_entrega: params['instrucciones'] ||= 'Instrucciones de entrega'
     @se = pedido ? pedido.sector_entrega: params['sector'] ||= ''
@@ -83,6 +84,7 @@ class CartController < ApplicationController
     telefono = params['telefono']
     direccion = params['direccion']
     nombre_entrega = params['nombre_entrega']
+    telefono_receptor = params['telefono_receptor']
     mensaje = params['mensaje']
     fecha_entrega = params['fecha_entrega']
     forma_pago = params['forma_pago']
@@ -94,9 +96,9 @@ class CartController < ApplicationController
     punto_entrega = params['punto_entrega']
     con_tapa_personalizada = 'on'.eql?(params['con_tapa_personalizada']) ? true : false
 
-    error = validate(email, nombre, telefono, nombre_entrega, direccion, mensaje, fecha_entrega, sector, de, para, punto_entrega)
+    error = validate(email, nombre, telefono, nombre_entrega, direccion, mensaje, fecha_entrega, sector, de, para, punto_entrega, telefono_receptor)
     if error.empty?
-      pedido_id = create_pedido(cart.items, nombre, email, telefono, direccion, nombre_entrega, mensaje, fecha_entrega, forma_pago, instrucciones, sector, de, para, horario_entrega, punto_entrega, con_tapa_personalizada)
+      pedido_id = create_pedido(cart.items, nombre, email, telefono, direccion, nombre_entrega, mensaje, fecha_entrega, forma_pago, instrucciones, sector, de, para, horario_entrega, punto_entrega, con_tapa_personalizada, telefono_receptor)
       session[:pedido_id] = pedido_id
 
       redirect_to controller: 'checkout', action: 'index'
@@ -107,7 +109,7 @@ class CartController < ApplicationController
 
   end
 
-  def validate(email, nombre, telefono, nombre_entrega, direccion, mensaje, fecha_entrega, sector, de, para, punto_entrega)
+  def validate(email, nombre, telefono, nombre_entrega, direccion, mensaje, fecha_entrega, sector, de, para, punto_entrega, telefono_receptor)
 
   day_names = ['domingo','lunes','martes','miercoles','jueves','viernes','sabado','domingo']
   month_names = [nil, 'Enero', 'Febrero', 'Marzo', 'Abril', 'Mayo', 'Junio', 'Julio', 'Agosto', 'Septiembre', 'Octubre', 'Noviembre', 'Diciembre']
@@ -135,7 +137,7 @@ class CartController < ApplicationController
     (email =~ /\A[\w+\-.]+@[a-z\d\-]+(\.[a-z]+)*\.[a-z]+\z/i)
   end
 
-  def create_pedido items, nombre, email, telefono, direccion, nombre_entrega, mensaje, fecha_entrega, forma_pago, instrucciones, sector, de, para, horarioEntrega, punto_entrega, con_tapa_personalizada
+  def create_pedido items, nombre, email, telefono, direccion, nombre_entrega, mensaje, fecha_entrega, forma_pago, instrucciones, sector, de, para, horarioEntrega, punto_entrega, con_tapa_personalizada, telefono_receptor
     pedido = Pedido.find(session[:pedido_id]) if session[:pedido_id]
     pedido = Pedido.new unless pedido
     pedido.fecha = Time.now.in_time_zone('Quito').to_date
@@ -148,6 +150,7 @@ class CartController < ApplicationController
 
     pedido.direccion_entrega = direccion
     pedido.nombre_entrega = nombre_entrega
+    pedido.telefono_receptor = telefono_receptor == 'Celular Destinatario' ? '' : telefono_receptor
     pedido.fecha_entrega = fecha_entrega
     pedido.forma_pago = forma_pago
     pedido.instrucciones_entrega = instrucciones

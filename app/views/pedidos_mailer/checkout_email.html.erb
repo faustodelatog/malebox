@@ -44,7 +44,8 @@
       <b><%= @pedido.telefono %></b><br />
       Forma de Pago: <b><%= @pedido.forma_pago_str %></b><br />
       <br />
-      Entregar el pedido a <b><%= @pedido.nombre_entrega %></b>
+      Entregar el pedido a <b><%= @pedido.nombre_entrega %></b><br />
+      Contacto: <b><%= @pedido.telefono_receptor %></b><br />
       el <b><%= @pedido.fecha_entrega %></b><br />
       en la dirección: <b><%= @pedido.direccion_entrega %> <a target="_blank" href="<%= @pedido.ubicacion %>" >Ver en mapa</a> </b>
       en el sector: <b><%= Sector.find(@pedido.sector_entrega).nombre %></b><br />

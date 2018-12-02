@@ -50,6 +50,7 @@
 				  <div class="panel-body">
 				    <div class="col-xs-6">
 				    	<p>Entregar a: <%= pedido.nombre_entrega %></p>
+				    	<p>Celular Contacto: <%= pedido.telefono_receptor %></p>
 				    	<p>Fecha Entrega: <%= pedido.fecha_entrega.to_s %></p>
 				    	<p>Horario: <%= HorarioEntrega.find(pedido.horario_entrega).nombre %></p>
 				    </div>
