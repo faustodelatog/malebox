@@ -60,11 +60,13 @@
     $('.tapa-variables').hide();
     $('#tapaVariables_'+tapaId).show();
 
-    sufix_id = '#tapa_' + tapaId + '_'
-    variables.split(',').forEach(function(v){
-      variable = v.split(':')
-      $(sufix_id+variable[0].trim()).val(variable[1].trim());
-    });
+    if(tapaId != null && variables != null){
+      sufix_id = '#tapa_' + tapaId + '_'
+      variables.split(',').forEach(function(v){
+        variable = v.split(':')
+        $(sufix_id+variable[0].trim()).val(variable[1].trim());
+      });
+    }
   }
 
   function filterTapas(tapaIds){
