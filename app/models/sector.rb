@@ -20,7 +20,7 @@ class Sector
       Sector.new('CQ', 'Centro Histórico', 5.98),
       Sector.new('CHQ', 'Sangolquí', 8.98),
       Sector.new('CBQ', 'Nayon - Cumbayá', 6.98),
-      Sector.new('CT', 'Tumbaco', 8.98),
+      Sector.new('CT', 'Tumbaco - Lumbisí', 8.98),
       Sector.new('CVQ', 'Conocoto - San Rafael', 6.98),
       Sector.new('AQ', 'Tababela', 15.98),
       Sector.new('AMG', 'Amaguaña', 15.98),
