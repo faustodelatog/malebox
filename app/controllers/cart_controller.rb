@@ -119,6 +119,7 @@ class CartController < ApplicationController
   return 'ingresa una fecha de entrega' if fecha_entrega.strip.empty? || fecha_entrega.eql?('Fecha Entrega')
     christmas = Date.new(2018, 12, 24)
     christmas = Date.new(2018, 12, 13)
+
     mensaje_fecha_entrega = "Oops! Nuestras entregas están copadas para la fecha requerida, elige otra fecha de entrega"
     return mensaje_fecha_entrega if (Date.parse(fecha_entrega) == christmas)
     return 'ingresa el nombre a quién debe ser entregada la caja' if (nombre_entrega.strip.empty? || nombre_entrega.eql?('Entregar a'))
