@@ -23,7 +23,7 @@ class ProductosController < ApplicationController
   # GET /productos/1
   # GET /productos/1.json
   def show
-  	@producto = Producto.find(params[:id])
+    @producto = Producto.find_by_id(params[:id])
     @related_productos = Producto.all.sample(3)
   end
 end

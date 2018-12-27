@@ -1,6 +1,7 @@
 <div class="main">
   <div class="shop_top">
     <div class="container">
+    <% if @producto %>
       <div class="row">
         <div class="col-md-11 single_left">
           <div class="single_image">
@@ -76,7 +77,13 @@
         </div>
 
       </div>
+      <% else %>
+        <p>
+          El producto que estás buscando se agotó.
+          Encuentra tu regalo <a href="http://www.regalosmalebox.com/categorias">aquí</a>
+        </p>
 
+      <% end %>
       <%= render 'otros_productos' %>
     </div>
   </div>
