@@ -30,7 +30,7 @@
                   <span class="reducedfrom">$<%= @producto.precio_original %></span>
                   <p style="margin-top:15px" class="price2">$<%= @producto.precio_d %></p>
                 </div>
-                    <%= link_to add_to_cart_path(:product_id => @producto.id), :method => :post, :class => 'exclusive' do %>
+                    <%= link_to add_to_cart_path(:product_id => @producto.id), :class => 'exclusive' do %>
                     <span style="text-align:center; background-color:orange">Agregar</span>
                     <% end %>
                 

@@ -29,7 +29,7 @@
                   <% end %> -->
                 </span><br>
                 <ul class="buttons">
-                  <li class="cart"><%= link_to "Agregar", add_to_cart_path(:product_id => producto.id), :method => :post %></li>
+                  <li class="cart"><%= link_to "Agregar", add_to_cart_path(:product_id => producto.id) %></li>
                   <li class="shop_btn"><a href="productos/<%= producto.id %>">Ver</a></li>
                   <div class="clear"> </div>
                 </ul>

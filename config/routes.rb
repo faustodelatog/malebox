@@ -65,7 +65,7 @@ Rails.application.routes.draw do
 
   get 'cart' => 'cart#index'
   post 'cart' => 'cart#checkout'
-  post '/add_to_cart/:product_id' => 'cart#add_to_cart', :as => 'add_to_cart'
+  get '/add_to_cart/:product_id' => 'cart#add_to_cart', :as => 'add_to_cart'
   post '/remove_from_cart/:product_id' => 'cart#remove_from_cart', :as => 'remove_from_cart'
   post '/remove_all_from_cart/:product_id' => 'cart#remove_all_from_cart', :as => 'remove_all_from_cart'
 
