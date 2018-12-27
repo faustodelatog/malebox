@@ -50,7 +50,7 @@ group :development do
 group :production, :development do
   gem "pg"
 end
-gem 'rails_12factor', group: :production
+
 
 end
 
