@@ -1,1 +1,1 @@
-release: rake db:migrate
+release: rake deploy:prepare[malebox]
