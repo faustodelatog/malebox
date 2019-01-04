@@ -1,0 +1,98 @@
+
+
+<div class="banner">
+  <!-- start slider -->
+
+  <div>
+    <img src="/images/sliderb.jpg?v=1" class="img-responsive" alt="" style="width:100%" />
+
+  </div>
+  <!--/slider -->
+</div>
+<div class="main">
+  
+  <div class="features">
+    <div class="container">
+      <h3 class="m_3">Categorías</h3>
+      
+      <div class="row">
+        <% @categorias.each do |categoria| %>
+            <div class="col-md-3 top_box">
+              <div class="view view-ninth"><a href="productos?categoria=<%= categoria.id %>">
+                <img src="<%= categoria.foto_url %>" class="img-responsive" alt=""/>
+                <div class="mask mask-1"> </div>
+                <div class="mask mask-2"> </div>
+                <div class="content">
+                  <h2><%= categoria.nombre %></h2>
+                  <p><%= categoria.nombre %></p>
+                </div>
+              </a> </div>
+              <h5 class="m_4"><a href="productos?categoria=<%= categoria.id %>"><%= categoria.nombre %></a></h4>
+            </div>
+        <% end %>
+      </div>
+    </div>
+  </div>
+
+  
+  <!-- <div class="content-bottom">
+    <div class="container">
+      <div class="row content_bottom-text">
+        <div class="col-md-7">
+
+        </div>
+      </div>
+    </div>
+  </div> -->
+
+  <div>
+    <img src="/images/bg_image.jpg" style="width:100%">
+  </div>
+
+  <div class="content-top">
+
+    <h2>Los más vendidos</h2>
+
+    <div class="close_but"></div>
+    <ul id="flexiselDemo3">
+      <% @productos.each do |producto| %>
+      <li>
+        <a href="productos/<%= producto.id %>">
+          <img src="<%= producto.foto_url %>" style="max-width: 210px" />
+        </a>
+      </li>
+      <% end %>
+    </ul>
+    <script type="text/javascript">
+      $(window).load(function() {
+        $("#flexiselDemo3").flexisel({
+          visibleItems: 5,
+          animationSpeed: 1000,
+          autoPlay: true,
+          autoPlaySpeed: 3000,
+          pauseOnHover: true,
+          enableResponsiveBreakpoints: true,
+          responsiveBreakpoints: {
+            portrait: {
+              changePoint:480,
+              visibleItems: 1
+            },
+            landscape: {
+              changePoint:640,
+              visibleItems: 2
+            },
+            tablet: {
+              changePoint:768,
+              visibleItems: 3
+            }
+          }
+        });
+
+      });
+    </script>
+    <script type="text/javascript" src="/js/jquery.flexisel.js"></script>
+  </div>
+
+</div>
+
+
