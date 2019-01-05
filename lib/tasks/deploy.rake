@@ -8,10 +8,10 @@ namespace :deploy do
     FileUtils.cp_r("app/views/_#{args[:site]}/.", 'app/views/')
   end
 
-  task :prepare do
-    Rake::Task["deploy:replace_views"].invoke('ellas')
+  task :prepare, [:site] do |task, args|
+    Rake::Task["deploy:replace_views"].invoke(args[:site])
   end
 
-  Rake::Task['assets:precompile'].enhance ['deploy:prepare']
+  # Rake::Task['assets:precompile'].enhance ['deploy:prepare']
 
 end
