@@ -36,16 +36,12 @@ trap 'error_message $LINENO' ERR
 set -o pipefail
 set -e
 
-echo "cambiando los archivos"
-rake deploy:prepare[${SITE}]
-echo "archivos cambiados"
-
 echo "CHANGING Directory to $APPLICATION_FOLDER"
 cd $APPLICATION_FOLDER
 pwd
 
 echo "cambiando los archivos"
-rake deploy:prepare[ellas]
+rake deploy:prepare[${SITE}]
 echo "archivos cambiados"
 
 #echo "CHECKING Access to Heroku application $HEROKU_APP_NAME"
