@@ -12,7 +12,9 @@
 # If you need to deploy multiple Heroku apps you can setup multiple app name variables like
 # HEROKU_APP_NAME_1 and HEROKU_APP_NAME_2 and then call the script twice passing in the different names
 
-HEROKU_APP_NAME=${HEROKU_APP_NAME:?'You need to provide your Heroku app name.'}
+SITE=${1:?'You need to provide your site to deploy.'}
+
+HEROKU_APP_NAME=${2:?'You need to provide your Heroku app name.'}
 HEROKU_API_KEY=${HEROKU_API_KEY:?'Set the HEROKU_API_KEY environment variable. Get the key from https://dashboard.heroku.com/account'}
 
 APPLICATION_FOLDER=$HOME/clone
@@ -35,7 +37,7 @@ set -o pipefail
 set -e
 
 echo "cambiando los archivos"
-rake deploy:prepare[ellas]
+rake deploy:prepare[${SITE}]
 echo "archivos cambiados"
 
 echo "CHANGING Directory to $APPLICATION_FOLDER"
