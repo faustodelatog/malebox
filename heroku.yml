@@ -14,5 +14,8 @@ setup:
 build:
   languages:
     - ruby
+  pre:
+    - echo 'siiiii'
+    - rake deploy:prepare[malebox]
 run:
   web: ruby-2.2.4/bin/ruby server.rb
