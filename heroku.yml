@@ -1,0 +1,18 @@
+setup:
+  addons:
+    - plan: 'heroku-postgresql:hobby-dev'
+      as: DATABASE
+  config:
+    LANG: en_US.UTF-8
+    log_level: DEBUG
+    LOG_LEVEL: DEBUG
+    RACK_ENV: test
+    RAILS_ENV: test
+    RAILS_SERVE_STATIC_FILES: enabled
+    SECRET_KEY_BASE: >-
+      338b5511412f11508b45ecfb64621ac45c0b9e077fe0630d6b9a05d05d836e54effd975e40069e69e07686723576c5c4242a9d6e4d80d3b15cc6673203834d5d
+build:
+  languages:
+    - ruby
+run:
+  web: ruby-2.2.4/bin/ruby server.rb
