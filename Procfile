@@ -1,1 +1,1 @@
-release: rake db:deploy
+release: rake db:migrate
